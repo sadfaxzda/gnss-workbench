@@ -33,6 +33,7 @@ test('run actual observations, inspect evidence, reload history and export', asy
   await expect(page.getByRole('button', { name: '查看卫星 G19', exact: true })).toBeVisible()
   await page.reload()
   await expect(page.getByText('600 / 600 历元')).toBeVisible()
+  await page.locator('.export-menu summary').click()
   const downloaded = page.waitForEvent('download')
   await page.getByRole('link', { name: '改进解', exact: true }).click()
   const file = await downloaded
@@ -159,6 +160,7 @@ test('TCP pause keeps old position stale until a new epoch is received', async (
     await expect(page.getByText('定位有效', { exact: true })).toBeVisible()
     socket.end('{"type":"end","epochs_sent":2}\n')
     await expect(page.getByText('已完成', { exact: true })).toBeVisible()
+    await page.locator('.export-menu summary').click()
     const downloaded = page.waitForEvent('download')
     await page.getByRole('link', { name: '改进解', exact: true }).click()
     const file = await downloaded

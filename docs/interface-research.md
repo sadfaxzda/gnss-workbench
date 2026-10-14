@@ -34,3 +34,16 @@
 主要前景/背景对比度：正文/白底13.19，辅助文字/浅灰6.05，弱化文字/浅灰4.82，白色按钮文字/蓝底6.85，控件边框/浅灰3.39，普通解灰线/白底4.33，剔除红色/白底5.99，警告文字/浅灰5.40。仅报告这些配对，不等同于整站无障碍认证。
 
 前端ESLint、7项Vitest、TypeScript/Vite构建、Chromium/WebKit共10项Playwright流程测试通过；布局检测前后均没有发现项。本轮未更改数值算法、运行生命周期、课程原始数据和解算规则。
+
+
+## 桌面工程软件交互适配（2026-10-14）
+
+用户明确以专业桌面软件的数据操作体验为参考。检查了以下官方资料及实际软件截图：
+
+- [ArcGIS Pro 界面](https://doc.esri.com/en/arcgis-pro/latest/get-started/introducing-arcgis-pro.html)与[属性表交互](https://doc.esri.com/en/arcgis-pro/latest/help/data/tables/interact-with-a-table.html)：工作视图、表头排序、行选择及独立数据区。
+- [ArcGIS 选择记录](https://doc.esri.com/en/arcgis-pro/latest/help/data/tables/view-all-or-only-the-selected-records.html)：选择状态与显示记录的明确区分。
+- Trimble Business Center [界面](https://help.fieldsystems.trimble.com/tbc/5455.htm)、[属性窗格](https://help.fieldsystems.trimble.com/tbc/259.htm)、[状态栏](https://help.fieldsystems.trimble.com/tbc/258.htm)和[电子表格](https://community.trimble.com/blogs/hannah-poon/2022/01/24/view-spreadsheets)：紧凑字段、网格化数值、工作区与全局状态分离。
+
+适配为四个现有工作视图、真实卫星网格操作、坐标/卫星属性表、双解检验对照、底部独立状态栏；保留原回放控制与全部导出。页签、网格线、行号、数值对齐和真实交互共同形成桌面工具感。不复制参考产品的菜单规模或品牌资产。
+
+同时完成残差时间趋势与三图缩放：时间窗共享、当前选择保留、全程纵轴参照、展开恢复。仍为浏览器应用，无需Windows运行环境。当前规范以DESIGN.md为准；上文旧配色记录为迭代历史。

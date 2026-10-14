@@ -4,17 +4,24 @@
     "viewport": "1440x1000",
     "scenario": "Single epoch G03 +85m, G20 -90m; adaptive_gnc",
     "date": "2026-10-14",
-    "theme": "Gray-white and single blue; concise diagnostic copy; anomaly red",
+    "theme": "Desktop engineering workbench; GNC dual-satellite result in formal grids",
     "method": "Browser screenshot; no image generation"
   },
   "workbench.png": {
-    "origin": "Actual local GNSS Workbench browser screenshot, CUA IAB",
-    "viewport": "1280x720",
+    "origin": "Actual Chromium Playwright screenshot, web/e2e/linked-inspection.spec.ts",
+    "viewport": "1600x900",
     "dataset": "D03_sim_demo",
-    "selected_epoch": 120,
-    "run_id": "e816e4876e5748d78d7ba4e7700865e8",
     "date": "2026-10-14",
-    "theme": "Gray-white, single blue; tall trajectory and stacked supporting plots",
+    "theme": "Desktop engineering workbench; compact metrics, linked time charts and separate status bar",
+    "method": "Browser screenshot; no image generation"
+  },
+  "desktop-diagnostics.png": {
+    "origin": "Actual Chromium Playwright screenshot, web/e2e/linked-inspection.spec.ts",
+    "viewport": "1440x1000",
+    "dataset": "D03_sim_demo",
+    "selected_epoch": 121,
+    "date": "2026-10-14",
+    "theme": "Sortable/resizable satellite grid, test comparison table and property grid",
     "method": "Browser screenshot; no image generation"
   }
 }
