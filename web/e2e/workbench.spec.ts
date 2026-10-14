@@ -68,7 +68,14 @@ test('controlled fault and ablation controls work on a narrow viewport', async (
   await page.getByRole('button', { name: '实验设计', exact: true }).click()
   await expect(page.getByRole('row').filter({ hasText: '强故障检出率' })).toContainText('100.00')
   await page.getByRole('checkbox', { name: /启用故障检测与剔除/ }).uncheck()
+  const ablationCreated = page.waitForResponse(
+    (response) => response.url().endsWith('/api/runs') && response.request().method() === 'POST',
+  )
   await page.getByRole('button', { name: '运行实验', exact: true }).click()
+  const ablation = await (await ablationCreated).json()
+  expect(ablation.configuration.enable_fde).toBe(false)
+  // The previous completed run may remain visible while the new request is pending.
+  await expect(page.locator('.trajectory-panel')).toContainText(ablation.id.slice(0, 8))
   await expect(page.getByText('已完成', { exact: true })).toBeVisible()
   await page.getByRole('button', { name: '实验设计', exact: true }).click()
   const row = page.getByRole('row').filter({ hasText: '水平误差 P95' })

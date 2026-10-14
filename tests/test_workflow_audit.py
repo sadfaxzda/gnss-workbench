@@ -39,9 +39,11 @@ def test_history_can_reach_records_older_than_one_hundred(tmp_path):
 
 
 def test_failed_worker_seals_partial_results_and_manifest(tmp_path):
-    frame = (COURSE_ROOT / "data/D01_real_excerpt.jsonl").read_text().splitlines()[1]
+    frame = (
+        (COURSE_ROOT / "data/D01_real_excerpt.jsonl").read_text(encoding="utf-8").splitlines()[1]
+    )
     source = tmp_path / "broken.jsonl"
-    source.write_text(frame + "\n{bad-json\n")
+    source.write_text(frame + "\n{bad-json\n", encoding="utf-8")
     output = tmp_path / "run"
     events = queue.Queue()
     run_worker(
@@ -56,7 +58,7 @@ def test_failed_worker_seals_partial_results_and_manifest(tmp_path):
     while not events.empty():
         messages.append(events.get_nowait())
     assert messages[-1]["status"] == "failed"
-    manifest = json.loads((output / "manifest.json").read_text())
+    manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["status"] == "failed"
     assert manifest["epoch_count"] == messages[-1]["epoch_count"] == 1
     assert manifest["error"] == messages[-1]["error"]
@@ -64,15 +66,17 @@ def test_failed_worker_seals_partial_results_and_manifest(tmp_path):
         manifest["input_sha256"]
         == hashlib.sha256((output / "input.jsonl").read_bytes()).hexdigest()
     )
-    assert len((output / "improved.csv").read_text().splitlines()) == 2
+    assert len((output / "improved.csv").read_text(encoding="utf-8").splitlines()) == 2
     assert len(manifest["git_revision"]) == 40
 
 
 def test_sealed_distribution_keeps_its_source_revision(tmp_path: Path):
     revision = "b" * 40
-    (tmp_path / "SUBMISSION.txt").write_text("GNSS Workbench\nSource revision: " + revision + "\n")
+    (tmp_path / "SUBMISSION.txt").write_text(
+        "GNSS Workbench\nSource revision: " + revision + "\n", encoding="utf-8"
+    )
     assert source_revision(tmp_path) == revision
-    (tmp_path / "SUBMISSION.txt").write_text("Source revision: unknown\n")
+    (tmp_path / "SUBMISSION.txt").write_text("Source revision: unknown\n", encoding="utf-8")
     assert source_revision(tmp_path) == "uncommitted"
 
 
@@ -86,7 +90,8 @@ def test_long_snapshot_restores_every_epoch_in_acquisition_order(tmp_path):
         output.mkdir(parents=True)
         ids = [*range(6000, -1, -1)]
         (output / "epochs.jsonl").write_text(
-            "".join(json.dumps({"type": "epoch", "epoch_id": value}) + "\n" for value in ids)
+            "".join(json.dumps({"type": "epoch", "epoch_id": value}) + "\n" for value in ids),
+            encoding="utf-8",
         )
         for status, count in [("completed", 6001), ("interrupted", 6000)]:
             # The last committed count can lag flushed epochs after a hard exit.
@@ -105,7 +110,10 @@ def test_long_snapshot_restores_every_epoch_in_acquisition_order(tmp_path):
 
 def test_import_errors_are_recoverable_and_bom_navigation_is_supported(tmp_path):
     navigation = tmp_path / "navigation.json"
-    navigation.write_text("\ufeff" + (COURSE_ROOT / "data/navigation.json").read_text())
+    navigation.write_text(
+        "\ufeff" + (COURSE_ROOT / "data/navigation.json").read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
     assert navigation_from(navigation)["schema"] == "GNSS-COURSE-NAV-1.0"
     with TestClient(create_app(tmp_path / "runtime")) as client:
         original = client.get("/api/datasets").json()
@@ -113,7 +121,7 @@ def test_import_errors_are_recoverable_and_bom_navigation_is_supported(tmp_path)
             response = client.post("/api/datasets", json={"name": "bad.jsonl", "jsonl": content})
             assert response.status_code == 422
         assert client.get("/api/datasets").json() == original
-        content = (COURSE_ROOT / "data/D01_real_excerpt.jsonl").read_text()
+        content = (COURSE_ROOT / "data/D01_real_excerpt.jsonl").read_text(encoding="utf-8")
         response = client.post(
             "/api/datasets", json={"name": "valid.jsonl", "jsonl": "\ufeff" + content}
         )
