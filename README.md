@@ -6,6 +6,8 @@ GPS 单点定位与可解释故障诊断工作台。Mac、Windows 和 Linux 共�
 
 ![工作台](docs/media/workbench.jpg)
 
+队友加入与提交流程见 [小组协作说明](CONTRIBUTING.md)。受邀成员接受 GitHub 邀请后即可参与开发。
+
 ## 已实现
 
 - GPS L1 C1 广播星历解算，卫星钟差、地球自转、电离层和对流层改正；逐历元独立最小二乘。
