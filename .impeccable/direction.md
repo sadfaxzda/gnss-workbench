@@ -39,3 +39,9 @@
 既有官方研究及其出处见 `docs/interface-research.md`；本轮直接依据 `web/src/styles.css`、`web/src/lib/chartTheme.ts`、`web/src/App.tsx`、`Skyplot.tsx` 与实际界面。当前截图为 `.impeccable/review/quiet-desktop.jpg`、`quiet-diagnostics.jpg`、`quiet-experiments.jpg`、`quiet-mobile.jpg`、`quiet-mobile-diagnostics.jpg`、`quiet-mobile-experiments.jpg`、`quiet-settings-1280.jpg` 和 `quiet-user-1280.jpg`。桌面覆盖1440×900，较矮设置/当前预览为1280×720，手机为390px宽；手机页面宽度已核验为390px。
 
 本轮实现验证包含 ESLint、Vitest（7项）、TypeScript/Vite build 和 Chromium/WebKit E2E（10项），布局检测结果前后均为 `[]`。这些为本轮父代理提供的验证记录；完整验收记录以 `docs/validation.md` 为准。README媒体清单见 `docs/media/screenshots.json`。规范 token、当前内距和组件见 `DESIGN.md` 与 `.impeccable/design.json`。
+
+## 控件与界面措辞修订（2026-10-14）
+
+按用户对箭头贴边、长解释与常驻免责声明的反馈，仅修订控件呈现和界面语言。单选下拉框使用统一12px箭头、右侧12px箭头内距、36px文字预留；仍为原生select，保留菜单、键盘、标签、禁用状态和高对比度回退。灰白单蓝、布局、字体及科学模型沿用。
+
+“三维解差”替代“算法修正距离”及其常驻说明；删除诊断页的风险段落与实验页重复功能宣传。状态由结构化结果生成短摘要，0/3星失效、四星无冗余、模糊候选、未完成搜索和停用检测仍可区分，旧记录不再直接展示旧版长原因。诊断方法折叠展示客观机制与单/双星范围；完整原因、评价定义与研究限制继续在日志和技术文档中保存。

@@ -4,7 +4,6 @@ import {
   Activity,
   ArrowDownToLine,
   ArrowRight,
-  Check,
   ChevronLeft,
   ChevronRight,
   SlidersHorizontal,
@@ -29,6 +28,7 @@ import { Skyplot } from './components/Skyplot'
 import { SatelliteInspector } from './components/SatelliteInspector'
 import { StatusReplay } from './components/StatusReplay'
 import { chartBase, chartColors } from './lib/chartTheme'
+import { algorithmLabels, solutionSummary } from './lib/presentation'
 import { useRunStream } from './hooks/useRunStream'
 import {
   type Dataset,
@@ -63,7 +63,7 @@ function Status({ value }: { value?: string }) {
   return (
     <span className={`status status-${statusTone(value)}`}>
       <span className="status-dot" />
-      {value ? statusLabels[value] || value : '尚未运行'}
+      {value ? statusLabels[value] || value : '待运行'}
     </span>
   )
 }
@@ -115,7 +115,11 @@ export default function App() {
   const [satelliteId, setSatelliteId] = useState<string | undefined>()
   const [actionError, setActionError] = useState('')
   const client = useQueryClient()
-  const { data: datasets = [], error: datasetError } = useQuery({
+  const {
+    data: datasets = [],
+    error: datasetError,
+    isPending: datasetsLoading,
+  } = useQuery({
     queryKey: ['datasets'],
     queryFn: () => request<Dataset[]>('/datasets'),
   })
@@ -138,6 +142,10 @@ export default function App() {
   const selected =
     selectedIndex == null ? latest : epochs[Math.min(selectedIndex, epochs.length - 1)]
   const solution = selected?.improved
+  const summary = solutionSummary(solution, run?.configuration.enable_fde)
+  const configuredAlgorithm = run?.configuration.algorithm ?? algorithm
+  const hasHypothesisSearch =
+    solution && ['SUSPECT', 'FAULT_EXCLUDED', 'FAULT_MITIGATED'].includes(solution.status)
   const satellite =
     solution?.diagnostics?.find((item) => item.sat_id === satelliteId) ??
     (satelliteId
@@ -414,13 +422,13 @@ export default function App() {
           {stale && (
             <div className="alert alert-warning" role="status">
               <Clock3 size={17} />
-              数据已过期。下方为历史结果，不能作为当前有效位置。
+              观测未更新 · 显示上次结果
             </div>
           )}
 
           {transport === 'TRANSPORT_RESUMED' && !stale && (
             <div className="alert" role="status">
-              传输已恢复；当前有效性以最新历元状态为准。
+              数据接收已恢复
             </div>
           )}
 
@@ -436,8 +444,13 @@ export default function App() {
                       setDatasetId(e.target.value as RunRequest['dataset_id'])
                       setScenario(initialScenario)
                     }}
-                    disabled={busy || scenario.kind !== 'none'}
+                    disabled={busy || scenario.kind !== 'none' || datasets.length === 0}
                   >
+                    {datasets.length === 0 && (
+                      <option value="">
+                        {datasetsLoading ? '正在加载观测数据…' : '无可用观测数据'}
+                      </option>
+                    )}
                     {datasets.map((d) => (
                       <option key={d.id} value={d.id}>
                         {d.title}
@@ -457,7 +470,7 @@ export default function App() {
                   }}
                   disabled={busy}
                 >
-                  <option value="file">文件逐历元</option>
+                  <option value="file">文件回放</option>
                   <option value="tcp">TCP 实时接入</option>
                 </select>
               </label>
@@ -506,14 +519,13 @@ export default function App() {
                         setAlgorithm(event.target.value as NonNullable<RunRequest['algorithm']>)
                       }
                     >
-                      <option value="single_fde">原版 · 唯一单星 FDE</option>
-                      <option value="consensus">多假设 · 最多两星故障</option>
-                      <option value="adaptive_gnc">实验 · 自适应 GNC + 一致性验证</option>
+                      <option value="single_fde">单星 FDE</option>
+                      <option value="consensus">多假设一致性检验</option>
+                      <option value="adaptive_gnc">自适应 GNC（实验）</option>
                     </select>
                   </label>
                   <p className="explanation">
-                    实验算法参考 ICCV 2025
-                    SAC-GNC；当前以鲁棒权重引导假设检验，是否更好需以对照结果判断。
+                    自适应 GNC：鲁棒权重引导候选搜索，采用一致性检验筛选。
                   </p>
                   <label>
                     观测 JSONL（最多 5000 历元）
@@ -535,9 +547,7 @@ export default function App() {
                       onChange={(event) => setNavigationFile(event.target.files?.[0] ?? null)}
                     />
                   </label>
-                  <p className="explanation">
-                    省略星历时使用课程 GPS 周 1316 星历。自定义数据不显示未经真值验证的精度指标。
-                  </p>
+                  <p className="explanation">未选择配套星历时，使用内置 GPS 周 1316 星历。</p>
                   <Button
                     disabled={busy || !importFile || importDataset.isPending}
                     onClick={() => importDataset.mutate()}
@@ -593,10 +603,10 @@ export default function App() {
                   </div>
                   <div className="metrics-grid" aria-label="当前解算指标">
                     <Metric
-                      title="参与定位卫星"
+                      title="参与解算卫星"
                       value={solution ? String(solution.n_used) : '—'}
                       unit="颗"
-                      note={solution?.n_used === 4 ? '当前解无观测冗余' : '至少 4 颗完成独立解算'}
+                      note="当前历元参与解算的卫星数"
                       icon={Satellite}
                     />
                     <Metric
@@ -621,7 +631,7 @@ export default function App() {
                       note={
                         metrics
                           ? `仿真评价 · 有效解比例 ${format((metrics.improved.availability_on_required ?? 0) * 100, 1)}%`
-                          : '有匹配真值的完整运行结束后计算'
+                          : '运行结束后按参考真值计算'
                       }
                       icon={ShieldCheck}
                     />
@@ -640,8 +650,8 @@ export default function App() {
                     {epochs.length === 0 && (
                       <div className="chart-empty">
                         <Radar size={28} />
-                        <strong>导入观测，开始定位</strong>
-                        <span>选择上方数据源并开始运行，或在设置中导入 JSONL。</span>
+                        <strong>暂无定位结果</strong>
+                        <span>选择观测数据，开始运行。</span>
                       </div>
                     )}
                   </div>
@@ -692,12 +702,14 @@ export default function App() {
                 <div className="panel-heading">
                   <div>
                     <h2>解算状态</h2>
-                    <p>{selectedIndex == null ? '最新接收历元' : '正在查看历史历元'}</p>
+                    <p>
+                      {selectedIndex == null ? '最新历元' : `历元 ${selected?.epoch_id ?? '—'}`}
+                    </p>
                   </div>
                 </div>
                 <div className="solution-status">
                   <Status value={stale ? 'TRANSPORT_STALE' : solution?.status} />
-                  <p>{solution?.reason || '运行后显示解算状态与诊断依据。'}</p>
+                  {summary && <p>{summary}</p>}
                 </div>
                 <dl className={stale ? 'position-details stale' : 'position-details'}>
                   <div>
@@ -738,7 +750,7 @@ export default function App() {
                 </dl>
                 <div className="correction">
                   <div>
-                    <span>算法修正距离</span>
+                    <span>三维解差</span>
                     <strong>
                       {format(selected?.view.correction_m, 3)} <small>m</small>
                     </strong>
@@ -747,7 +759,6 @@ export default function App() {
                     <ArrowRight size={19} />
                   </span>
                 </div>
-                <p className="footnote">修正距离为两种解的三维差值，不代表真实定位误差。</p>
                 <div className="inspector-sky">
                   <div className="inspector-heading">
                     <h3>卫星分布</h3>
@@ -771,7 +782,8 @@ export default function App() {
                   <div>
                     <h2>卫星观测与处置</h2>
                     <p>
-                      历元 {selected?.epoch_id ?? '—'} · {solution?.reason || '请先运行一组观测'}
+                      历元 {selected?.epoch_id ?? '—'}
+                      {summary && ` · ${summary}`}
                     </p>
                   </div>
                   <Status value={stale ? 'TRANSPORT_STALE' : solution?.status} />
@@ -785,7 +797,7 @@ export default function App() {
                         <th>方位角</th>
                         <th>残差 / m</th>
                         <th>最终权重</th>
-                        <th>鲁棒提议权重</th>
+                        <th>候选权重</th>
                         <th>处置</th>
                       </tr>
                     </thead>
@@ -820,7 +832,7 @@ export default function App() {
                     </tbody>
                   </table>
                   {!solution?.diagnostics?.length && (
-                    <div className="empty-state">当前历元没有可显示的逐星诊断。</div>
+                    <div className="empty-state">本历元无逐星诊断数据</div>
                   )}
                 </div>
               </section>
@@ -828,7 +840,7 @@ export default function App() {
                 <div className="panel-heading">
                   <div>
                     <h2>卫星天空图</h2>
-                    <p>北向为上；内圈60°、中圈30°、外圈0°；红色为剔除卫星</p>
+                    <p>高度角 0° / 30° / 60° · 北向为上</p>
                   </div>
                 </div>
                 <Skyplot
@@ -838,9 +850,10 @@ export default function App() {
                 />
                 <SatelliteInspector satellite={satellite} selectedId={inspectedSatelliteId} />
                 <p className="explanation">
-                  方法：{solution?.algorithm ?? '—'} · 已检验{' '}
-                  {solution?.candidate_scores?.length ?? 0} 个假设 · 搜索
-                  {!solution ? '—' : solution.search_complete === false ? '未完成' : '完整'}
+                  {algorithmLabels[configuredAlgorithm] ?? configuredAlgorithm} ·{' '}
+                  {hasHypothesisSearch
+                    ? `检验 ${solution.candidate_scores?.length ?? 0} 个假设 · 搜索${solution.search_complete === false ? '未完成' : '完成'}`
+                    : '假设检验未执行'}
                 </p>
                 {!!solution?.algorithm_trace?.length && (
                   <details>
@@ -901,9 +914,13 @@ export default function App() {
                   </div>
                 </div>
                 <details className="method-note">
-                  <summary>判定规则与方法边界</summary>
+                  <summary>诊断方法</summary>
                   <p>
-                    最小剔星数仅有一个假设通过残差与几何检验，且保留验证冗余时才确认剔除。多个候选通过则保留疑点。共同偏差由钟差吸收。
+                    按最少剔星数检验候选解。候选唯一、残差与几何检验通过且保留验证冗余时，剔除对应观测。
+                  </p>
+                  <p>
+                    诊断范围：{configuredAlgorithm === 'single_fde' ? '单星' : '单星与双星'}
+                    假设。观测共同偏差计入接收机钟差。
                   </p>
                 </details>
                 <div className="candidate-list">
@@ -933,10 +950,6 @@ export default function App() {
                     )
                   })}
                 </div>
-                <div className="info-box">
-                  <CircleHelp size={17} />
-                  最多诊断两星故障。相关故障、弱几何与噪声失配仍可能误判。残差通过不等于真实误差小，也不构成完好性保障。
-                </div>
               </section>
             </div>
           )}
@@ -947,7 +960,7 @@ export default function App() {
                 <div className="panel-heading">
                   <div>
                     <h2>受控故障实验</h2>
-                    <p>基于 D02 正常仿真数据，按参数修改观测副本</p>
+                    <p>数据源：D02 · 正常仿真观测</p>
                   </div>
                   <FlaskConical size={20} className="teal-text" />
                 </div>
@@ -963,7 +976,7 @@ export default function App() {
                         setDatasetId('D02_sim_clean')
                       }}
                     >
-                      <option value="none">不注入 · 原始数据</option>
+                      <option value="none">无故障注入</option>
                       <option value="satellite_bias">单星伪距偏差</option>
                       <option value="common_bias">全星共同偏差</option>
                       <option value="dropout">卫星观测缺失</option>
@@ -1048,7 +1061,9 @@ export default function App() {
                           disabled={busy}
                           onChange={(e) => setScenario({ ...scenario, ramp: e.target.checked })}
                         />
-                        <span>渐变偏差：从小偏差逐步增加至设置幅度</span>
+                        <span>
+                          渐变偏差 <small>线性增加至设定幅度</small>
+                        </span>
                       </label>
                     </>
                   )}
@@ -1078,7 +1093,7 @@ export default function App() {
                   </label>
                 </div>
                 <div className="form-footer">
-                  <span>原始数据保持完整，参数将写入实验记录</span>
+                  <span>参数随运行结果保存</span>
                   <Button
                     onClick={() => start.mutate()}
                     disabled={busy || start.isPending || source === 'tcp'}
@@ -1095,35 +1110,19 @@ export default function App() {
                     <p>
                       {run
                         ? `${run.configuration.dataset_id} · ${run.id.slice(0, 8)}`
-                        : '完成一次仿真实验后显示'}
+                        : '暂无评价结果'}
                     </p>
                   </div>
                   <Layers3 size={19} />
                 </div>
                 <Comparison evaluation={metrics} />
-                <div className="info-box">
-                  <CircleHelp size={17} />
-                  误差指标与有效解比例一起报告。真实历史观测 D01
-                  没有独立测量真值，不计算绝对定位精度。
-                </div>
-                <div className="feature-list">
-                  <div>
-                    <Check size={16} />
-                    相同输入、相同时间范围
-                  </div>
-                  <div>
-                    <Check size={16} />
-                    逐历元保留失败与缺测状态
-                  </div>
-                  <div>
-                    <Check size={16} />
-                    真值仅用于事后评价
-                  </div>
-                  <div>
-                    <Check size={16} />
-                    输入指纹与算法参数可追溯
-                  </div>
-                </div>
+                {!metrics && (
+                  <p className="explanation">
+                    {run?.configuration.dataset_id === 'D01_real_excerpt'
+                      ? 'D01 未配置参考真值'
+                      : '运行结束后生成评价结果'}
+                  </p>
+                )}
               </section>
             </div>
           )}
@@ -1134,7 +1133,7 @@ export default function App() {
                 <div className="panel-heading">
                   <div>
                     <h2>实验运行记录</h2>
-                    <p>点击记录可查看轨迹、诊断证据与评价结果</p>
+                    <p>保存的输入、参数与解算结果</p>
                   </div>
                   <span className="count-badge">{runs.length} 次运行</span>
                 </div>
@@ -1189,9 +1188,9 @@ export default function App() {
                   {runs.length === 0 && (
                     <div className="empty-state">
                       <History size={28} />
-                      <strong>还没有运行记录</strong>
-                      <span>每次运行都会自动保存结果与参数。</span>
-                      <Button onClick={() => setPage('live')}>开始第一次运行</Button>
+                      <strong>暂无运行记录</strong>
+                      <span>运行结果与参数自动保存。</span>
+                      <Button onClick={() => setPage('live')}>新建运行</Button>
                     </div>
                   )}
                 </div>

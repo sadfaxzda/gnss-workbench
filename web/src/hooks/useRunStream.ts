@@ -71,7 +71,7 @@ export function useRunStream(runId: string | null) {
         if (disposed) return
         if (code === 1008) {
           setConnection('disconnected')
-          setError('此运行记录不存在或连接被拒绝，请选择历史记录或开始新的运行')
+          setError('运行记录不可用，请在运行记录中重新选择或新建运行')
           return
         }
         if (completed) {
@@ -82,7 +82,7 @@ export function useRunStream(runId: string | null) {
         attempts += 1
         timer = setTimeout(connect, Math.min(1000 * 2 ** Math.min(attempts - 1, 4), 10000))
       }
-      socket.onerror = () => setError('连接暂时中断，正在尝试恢复')
+      socket.onerror = () => setError('连接中断，正在重连')
     }
     connect()
     return () => {

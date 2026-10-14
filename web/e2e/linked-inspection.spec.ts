@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test('epoch and satellite selection stay linked, and invalid epochs clear the position', async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto('/')
   await page.getByLabel('回放速度').selectOption('0')
   await page.getByRole('button', { name: '开始运行', exact: true }).click()
@@ -27,13 +27,20 @@ test('epoch and satellite selection stay linked, and invalid epochs clear the po
     'true',
   )
   await page.getByRole('button', { name: /^跳转到历元 520–529/ }).click()
-  await expect(inspector).toContainText('当前历元没有这颗卫星的诊断数据')
-  await expect(page.getByText('当前历元没有可显示的逐星诊断。')).toBeVisible()
+  await expect(inspector).toContainText('本历元无该卫星观测')
+  await expect(page.getByText('本历元无逐星诊断数据')).toBeVisible()
   await page.getByRole('button', { name: '实时定位', exact: true }).click()
   const latitude = page
     .locator('.position-details > div')
     .filter({ has: page.getByText('纬度', { exact: true }) })
   await expect(latitude).toContainText('—')
+  await page.getByRole('button', { name: /^跳转到历元 460–479/ }).click()
+  await expect(page.getByText('可用卫星 3 颗 · 最低要求 4 颗', { exact: true })).toBeVisible()
+  await expect(latitude).toContainText('—')
+  await expect(page.getByText('三维解差', { exact: true })).toBeVisible()
+  await expect(page.getByText(/不足四颗卫星，无法独立解算/)).toHaveCount(0)
+  await expect(page.getByText(/修正距离为两种解/)).toHaveCount(0)
+  await page.getByRole('button', { name: /^跳转到历元 520–529/ }).click()
   // The clock plot is a second entry to the same timeline, including empty plot space.
   const clock = page.getByRole('img', { name: '接收机钟差随历元变化' })
   const box = (await clock.boundingBox())!
@@ -51,5 +58,9 @@ test('epoch and satellite selection stay linked, and invalid epochs clear the po
     await expect
       .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
       .toBeLessThanOrEqual(viewport.width)
+    await page.screenshot({
+      path: testInfo.outputPath(`workbench-${viewport.width}.png`),
+      fullPage: true,
+    })
   }
 })

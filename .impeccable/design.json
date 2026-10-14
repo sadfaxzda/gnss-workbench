@@ -802,6 +802,21 @@
         "value": "20px",
         "purpose": "Existing advanced-settings overlay padding."
       }
+    },
+    "selectControl": {
+      "nativeMenu": true,
+      "arrowSize": "12px",
+      "arrowRightInset": "12px",
+      "textRightReserve": "36px",
+      "forcedColors": "Restore native appearance and arrow."
+    },
+    "interfaceLanguage": {
+      "voice": "Concise surveying tool labels and current-state facts.",
+      "solutionSummary": "web/src/lib/presentation.ts",
+      "correctionLabel": "三维解差",
+      "methodDisclosure": "诊断方法",
+      "routineDisclaimers": false,
+      "fullDiagnosticReasons": "Exported epoch logs and technical documents."
     }
   },
   "components": [

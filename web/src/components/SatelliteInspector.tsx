@@ -35,18 +35,14 @@ export function SatelliteInspector({
             </dd>
           </div>
           <div>
-            <dt>最终 / 提议权重</dt>
+            <dt>最终 / 候选权重</dt>
             <dd>
               {format(satellite.weight, 0)} / {format(satellite.robust_weight, 3)}
             </dd>
           </div>
         </dl>
       ) : (
-        <p className="inspector-empty">
-          {selectedId
-            ? '当前历元没有这颗卫星的诊断数据。'
-            : '运行后，点击天空图或卫星行查看观测详情。'}
-        </p>
+        <p className="inspector-empty">{selectedId ? '本历元无该卫星观测' : '选择卫星查看详情'}</p>
       )}
     </section>
   )

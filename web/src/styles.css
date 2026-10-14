@@ -617,12 +617,6 @@ dd {
 .correction-icon {
   display: none;
 }
-.footnote {
-  font-size: 11px;
-  line-height: 1.6;
-  color: var(--secondary);
-  margin: 6px var(--panel-inset) 12px;
-}
 .inspector-sky {
   border-top: 1px solid var(--line);
 }
@@ -1061,19 +1055,6 @@ tbody tr:hover {
   height: 100%;
   display: block;
 }
-.info-box {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  padding: 10px var(--panel-inset);
-  font-size: 11px;
-  line-height: 1.7;
-  color: var(--secondary);
-}
-.info-box svg {
-  flex-shrink: 0;
-  margin-top: 2px;
-}
 .sky-panel details {
   padding: 10px var(--panel-inset);
   font-size: 12px;
@@ -1159,21 +1140,6 @@ tbody tr:hover {
 }
 .form-footer > span {
   font-size: 11px;
-  color: var(--secondary);
-}
-.feature-list {
-  padding: var(--panel-inset);
-  display: grid;
-  gap: 12px;
-  font-size: 12px;
-  color: var(--secondary);
-}
-.feature-list > div {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-.feature-list svg {
   color: var(--secondary);
 }
 .comparison-table td {
@@ -1597,5 +1563,27 @@ tbody tr:hover {
   *::after {
     scroll-behavior: auto !important;
     transition: none !important;
+  }
+}
+
+/* Keep the native select menu and keyboard interaction, while giving its
+   closed field a consistent arrow inset in Safari and Chromium. */
+select:not([multiple]) {
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='m2 4 4 4 4-4' fill='none' stroke='%23293139' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--field-inset) center;
+  background-size: 12px 12px;
+  padding-inline-end: 36px;
+  text-overflow: ellipsis;
+}
+
+@media (forced-colors: active) {
+  select:not([multiple]) {
+    -webkit-appearance: auto;
+    appearance: auto;
+    background-image: none;
+    padding-inline-end: var(--field-inset);
   }
 }

@@ -155,7 +155,7 @@ test('TCP pause keeps old position stale until a new epoch is received', async (
     await page.reload()
     await expect(page.getByText('数据已过期 · 历史位置', { exact: true })).toBeVisible()
     socket.write(lines[2] + '\n')
-    await expect(page.getByText('传输已恢复；当前有效性以最新历元状态为准。')).toBeVisible()
+    await expect(page.getByText('数据接收已恢复')).toBeVisible()
     await expect(page.getByText('定位有效', { exact: true })).toBeVisible()
     socket.end('{"type":"end","epochs_sent":2}\n')
     await expect(page.getByText('已完成', { exact: true })).toBeVisible()
