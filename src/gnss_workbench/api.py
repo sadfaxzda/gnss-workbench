@@ -8,7 +8,7 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
-from fastapi import FastAPI, HTTPException, Query, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, HTTPException, Query, Response, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -59,8 +59,15 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
             raise HTTPException(422, str(error)) from error
 
     @application.get("/api/runs", response_model=list[RunInfo])
-    def runs():
-        return manager().store.list()
+    def runs(
+        response: Response,
+        offset: Annotated[int, Query(ge=0)] = 0,
+        limit: Annotated[int, Query(ge=1, le=100)] = 100,
+        query: Annotated[str, Query(max_length=100)] = "",
+    ):
+        query = query.strip()
+        response.headers["X-Total-Count"] = str(manager().store.count(query))
+        return manager().store.list(offset=offset, limit=limit, query=query)
 
     @application.post("/api/runs", response_model=RunInfo, status_code=201)
     async def create_run(request: RunRequest):
@@ -129,17 +136,29 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
         try:
             # One event-loop turn: snapshot and cursor cannot race the queue pump.
             last_seq = manager().sequence.get(run_id, 0)
+            snapshot_run = manager().get(run_id)
+            assert snapshot_run is not None
+            snapshot_count = (
+                snapshot_run["epoch_count"]
+                if snapshot_run["status"] in {"running", "stopping"}
+                else None
+            )
+            batches = manager().history_batches(run_id, snapshot_count)
             await websocket.send_json(
                 {
                     "type": "snapshot",
                     "schema": "gnss-stream/1",
-                    "run": manager().get(run_id),
-                    "epochs": manager().history(run_id),
+                    "run": snapshot_run,
+                    "epochs": next(batches, []),
                     "seq": last_seq,
                     "transport": manager().transport.get(run_id, ""),
                     "position_stale": manager().position_stale.get(run_id, False),
                 }
             )
+            for batch in batches:
+                await websocket.send_json(
+                    {"type": "snapshot_page", "schema": "gnss-stream/1", "epochs": batch}
+                )
             heartbeat = 0
             while True:
                 event_log = list(manager().events.get(run_id, []))
@@ -147,7 +166,7 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
                 # send yields, allowing the pump to append final epochs and finish.
                 # Reading a newer terminal status afterward would skip that tail.
                 info = manager().get(run_id)
-                if event_log and last_seq and event_log[0]["seq"] > last_seq + 1:
+                if event_log and event_log[0]["seq"] > last_seq + 1:
                     await websocket.send_json(
                         {"type": "resync_required", "schema": "gnss-stream/1"}
                     )

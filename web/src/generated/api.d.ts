@@ -496,7 +496,11 @@ export interface operations {
     };
     runs_api_runs_get: {
         parameters: {
-            query?: never;
+            query?: {
+                offset?: number;
+                limit?: number;
+                query?: string;
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -510,6 +514,15 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RunInfo"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

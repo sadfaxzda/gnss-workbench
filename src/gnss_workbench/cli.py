@@ -15,6 +15,7 @@ from .core.models import SolverConfig
 from .core.solver import PositioningEngine
 from .evaluation import evaluate_run
 from .io import export_solutions, navigation_from, read_epochs
+from .provenance import source_revision
 from .settings import COURSE_ROOT
 
 app = typer.Typer(no_args_is_help=True)
@@ -63,6 +64,7 @@ def solve(
     manifest = {
         "schema": "gnss-run/1",
         "version": __version__,
+        "git_revision": source_revision(),
         "input": input.name,
         "input_sha256": hashlib.sha256(input.read_bytes()).hexdigest(),
         "navigation_sha256": hashlib.sha256(navigation.read_bytes()).hexdigest(),

@@ -6,7 +6,6 @@ import csv
 import hashlib
 import json
 import socket
-import subprocess
 import time
 from collections.abc import Iterator
 from dataclasses import asdict
@@ -23,7 +22,8 @@ from .core.solver import PositioningEngine
 from .evaluation import evaluate_run
 from .experiments import inject
 from .io import csv_row, navigation_from, read_frames
-from .settings import COURSE_ROOT, PROJECT_ROOT
+from .provenance import source_revision
+from .settings import COURSE_ROOT
 
 MAX_LINE_BYTES = 1024 * 1024
 
@@ -146,21 +146,11 @@ def run_worker(
     source = (
         Path(source_path) if source_path else COURSE_ROOT / "data" / f"{request.dataset_id}.jsonl"
     )
-    revision = (
-        subprocess.run(
-            ["git", "rev-parse", "HEAD"],
-            cwd=PROJECT_ROOT,
-            capture_output=True,
-            text=True,
-            check=False,
-        ).stdout.strip()
-        or "uncommitted"
-    )
     manifest = {
         "schema": "gnss-run/1",
         "run_id": run_id,
         "software_version": __version__,
-        "git_revision": revision,
+        "git_revision": source_revision(),
         "request": raw_request,
         "solver": asdict(config),
         "source_sha256": hashlib.sha256(source.read_bytes()).hexdigest()
@@ -171,6 +161,20 @@ def run_worker(
     }
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     (output / "navigation.json").write_bytes(navigation.read_bytes())
+
+    def finalize_manifest(status: str, error: str | None = None) -> None:
+        saved_input = output / "input.jsonl"
+        manifest.update(
+            status=status,
+            error=error,
+            epoch_count=count,
+            input_sha256=hashlib.sha256(saved_input.read_bytes()).hexdigest()
+            if saved_input.is_file()
+            else None,
+            enu_origin_ecef=origin.tolist() if origin is not None else None,
+        )
+        (output / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+
     try:
         engine = PositioningEngine(navigation_from(navigation), config)
         frames = (
@@ -275,12 +279,7 @@ def run_worker(
             (output / "metrics.json").write_text(
                 json.dumps(summary["evaluation"], indent=2), encoding="utf-8"
             )
-        manifest.update(
-            epoch_count=count,
-            input_sha256=hashlib.sha256((output / "input.jsonl").read_bytes()).hexdigest(),
-            enu_origin_ecef=origin.tolist() if origin is not None else None,
-        )
-        (output / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+        finalize_manifest("stopped" if stop.is_set() else "completed")
         queue.put(
             {
                 "type": "complete",
@@ -290,12 +289,17 @@ def run_worker(
             }
         )
     except Exception as error:
+        message = f"{type(error).__name__}: {error}"
+        try:
+            finalize_manifest("failed", message)
+        except OSError as archive_error:
+            message += f"; 归档未完成: {archive_error}"
         queue.put(
             {
                 "type": "complete",
                 "status": "failed",
                 "epoch_count": count,
                 "summary": {},
-                "error": f"{type(error).__name__}: {error}",
+                "error": message,
             }
         )

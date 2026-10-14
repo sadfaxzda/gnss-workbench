@@ -3,9 +3,10 @@
     "origin": "Actual Chromium Playwright screenshot, web/e2e/workbench.spec.ts import/research-algorithm test",
     "viewport": "1440x1000",
     "scenario": "Single epoch G03 +85m, G20 -90m; adaptive_gnc",
-    "date": "2026-10-14",
+    "date": "2026-10-15",
     "theme": "Desktop engineering workbench; GNC dual-satellite result in formal grids",
-    "method": "Browser screenshot; no image generation"
+    "method": "Browser screenshot; no image generation",
+    "sha256": "f9c4325eb7d643f8b2f3a49a01033e6667f0e97352ab87c1ed677f04a9bad19f"
   },
   "workbench.png": {
     "origin": "Actual Chromium Playwright screenshot, web/e2e/linked-inspection.spec.ts",
@@ -23,5 +24,32 @@
     "date": "2026-10-14",
     "theme": "Sortable/resizable satellite grid, test comparison table and property grid",
     "method": "Browser screenshot; no image generation"
+  },
+  "workbench-audit.jpg": {
+    "origin": "Actual Codex browser screenshot",
+    "date": "2026-10-15",
+    "viewport": "1600x900",
+    "view": "实时定位",
+    "dataset": "D03_sim_demo",
+    "method": "Browser screenshot; no image generation",
+    "sha256": "e5bae57c297fd4c79567b2edf19ca21080e1189c9f8924644e3fda625d9bfdfc"
+  },
+  "diagnostics-audit.jpg": {
+    "origin": "Actual Codex browser screenshot",
+    "date": "2026-10-15",
+    "viewport": "1600x900",
+    "view": "逐星诊断，历元120，G19",
+    "dataset": "D03_sim_demo",
+    "method": "Browser screenshot; no image generation",
+    "sha256": "bdc6e5c577eabc981b8a33d8f2f24eef9ea29993efb1fee72eff00784e6fc7e6"
+  },
+  "history-audit.jpg": {
+    "origin": "Actual Codex browser screenshot",
+    "date": "2026-10-15",
+    "viewport": "1280x720",
+    "view": "运行记录",
+    "dataset": "D03_sim_demo",
+    "method": "Browser screenshot; no image generation",
+    "sha256": "77b7f9e5cf7f07711d760c8527300abd21e80e3f4fe6c6263c0e0e8b210688d0"
   }
 }

@@ -22,7 +22,7 @@ flowchart LR
 2. `io.py`、`worker.py` 负责输入、传输、持久化和进程通信。每个真实历元产生一行输出，包括 0 观测历元。计算不会阻塞 API 事件循环。
 3. `service.py` 为运行状态的单一拥有者。v0.2 采用单 API 进程、同时一个计算任务；启动多个 Uvicorn worker 会破坏该约束，因此当前不支持多 worker 部署。
 4. SQLAlchemy/Alembic 管理 SQLite 元数据与迁移。逐历元大数据写入 JSONL/CSV，浏览器断开不会停止计算；重启时将未完成任务标为 interrupted，不假装恢复已经中断的计算。
-5. WebSocket `gnss-stream/1` 发送快照、事件序号、心跳和终态。重连先取持久化快照，前端按 epoch_id 去重。REST 数据结构由 Pydantic 生成 OpenAPI 与 TypeScript 类型。WS 控制事件当前手工对齐，完整代码生成列为后续任务。
+5. WebSocket `gnss-stream/1` 发送快照、事件序号、心跳和终态。重连先取持久化快照（每批最多1000历元；后续批次为snapshot_page），前端按epoch_id去重并保留采集顺序；事件缓存溢出要求重新同步。REST 数据结构由 Pydantic 生成 OpenAPI 与 TypeScript 类型。WS 控制事件当前手工对齐，完整代码生成列为后续任务。
 6. 输入参数有 Pydantic 校验，TCP 行长度最多 1 MiB，文件下载使用白名单。服务默认仅监听本机；当前没有多用户认证、租户隔离或公网部署配置。
 
 ## 算法
@@ -39,6 +39,6 @@ flowchart LR
 
 SolverConfig.algorithm 提供 single_fde、consensus、adaptive_gnc 三种策略。任何后续滤波器须继续保留基线与同输入消融。当前 API 导入采用服务器生成的数据集ID，不接受任意文件路径；原始数据与导航保存在 runtime/datasets 下。
 
-长期服务器化再引入认证、PostgreSQL、外部任务队列和对象存储。大批数据应改为分页/分块或降采样显示；当前 WS 初始快照最多 5000 历元，定位于课程短时数据。完整导出不受网页快照上限影响。
+长期服务器化再引入认证、PostgreSQL、外部任务队列和对象存储。大批数据应改为分页/分块或降采样显示；当前WS按1000历元分批恢复完整快照，已通过6001历元TCP重载与CSV一致性验证；浏览器仍保存本次全部历元，因此更大规模持续采集需要分层索引和降采样。网页文件导入保持5000历元限制，完整导出不截断。
 
 桌面封装可复用现有前端和本机 API；当前无需为跨平台维护第二套解算器。安装型 wheel/独立可执行分发尚未完成，当前支持从完整仓库运行。

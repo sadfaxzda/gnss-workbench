@@ -15,7 +15,7 @@ def test_terminal_status_waits_for_epochs_added_during_send(tmp_path):
     sequence = {"finishing": 0}
     app.state.manager = SimpleNamespace(
         get=lambda _: dict(run),
-        history=lambda _: [],
+        history_batches=lambda _id, _count: iter([]),
         events={"finishing": log},
         sequence=sequence,
         transport={},

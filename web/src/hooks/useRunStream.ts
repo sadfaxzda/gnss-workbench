@@ -26,6 +26,20 @@ export function useRunStream(runId: string | null) {
     let socket: WebSocket | undefined
     let timer: ReturnType<typeof setTimeout> | undefined
     let attempts = 0
+    let pending: EpochFrame[] = []
+    let animation: number | undefined
+    const flush = () => {
+      if (animation !== undefined) cancelAnimationFrame(animation)
+      animation = undefined
+      if (!pending.length || disposed) return
+      const batch = pending
+      pending = []
+      setEpochs((previous) => upsertEpochs(previous, batch))
+    }
+    const append = (batch: EpochFrame[]) => {
+      pending.push(...batch)
+      if (animation === undefined) animation = requestAnimationFrame(flush)
+    }
     const connect = () => {
       if (disposed) return
       setConnection('connecting')
@@ -33,23 +47,30 @@ export function useRunStream(runId: string | null) {
         `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/api/runs/${runId}/stream`,
       )
       socket.onopen = () => {
+        if (disposed) return
         attempts = 0
         setConnection('connected')
         setError('')
       }
       socket.onmessage = ({ data }) => {
+        if (disposed) return
         try {
           const event = JSON.parse(data)
           if (event.schema !== 'gnss-stream/1') throw new Error('实时接口版本不兼容')
           if (event.type === 'snapshot') {
+            pending = []
             setEpochs(event.epochs)
             setRun(event.run)
             setTransport(event.transport || '')
             setPositionStale(Boolean(event.position_stale))
-            completed = !['running', 'stopping'].includes(event.run.status)
+            // Even a finished run may still have snapshot pages in transit.
+            // Only the terminal event confirms that restoration is complete.
+            completed = false
+          } else if (event.type === 'snapshot_page') {
+            append(event.epochs)
           } else if (event.type === 'epoch') {
             setPositionStale(false)
-            setEpochs((previous) => upsertEpochs(previous, [event as EpochFrame]))
+            append([event as EpochFrame])
           } else if (event.type === 'transport') {
             setTransport(event.status)
             if (event.status === 'TRANSPORT_STALE') setPositionStale(true)
@@ -57,6 +78,7 @@ export function useRunStream(runId: string | null) {
             setRun(event.run)
             completed = !['running', 'stopping'].includes(event.run.status)
             if (completed) {
+              flush()
               setConnection('completed')
               void queryClient.invalidateQueries({ queryKey: ['runs'] })
             }
@@ -69,6 +91,7 @@ export function useRunStream(runId: string | null) {
       }
       socket.onclose = ({ code }) => {
         if (disposed) return
+        flush()
         if (code === 1008) {
           setConnection('disconnected')
           setError('运行记录不可用，请在运行记录中重新选择或新建运行')
@@ -82,12 +105,15 @@ export function useRunStream(runId: string | null) {
         attempts += 1
         timer = setTimeout(connect, Math.min(1000 * 2 ** Math.min(attempts - 1, 4), 10000))
       }
-      socket.onerror = () => setError('连接中断，正在重连')
+      socket.onerror = () => {
+        if (!disposed) setError('连接中断，正在重连')
+      }
     }
     connect()
     return () => {
       disposed = true
       if (timer) clearTimeout(timer)
+      if (animation !== undefined) cancelAnimationFrame(animation)
       socket?.close()
     }
   }, [runId, queryClient])

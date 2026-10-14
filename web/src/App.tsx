@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import {
   Activity,
@@ -22,6 +22,8 @@ import {
   Waves,
 } from 'lucide-react'
 import type { EChartsOption } from 'echarts'
+import { RunHistory } from './components/RunHistory'
+import { Status } from './components/Status'
 import { Button } from './components/Button'
 import { Chart } from './components/Chart'
 import { SatelliteTable } from './components/SatelliteTable'
@@ -40,8 +42,6 @@ import {
   type Scenario,
   format,
   request,
-  statusLabels,
-  statusTone,
 } from './lib/api'
 
 type Page = 'live' | 'diagnostics' | 'experiments' | 'history'
@@ -59,15 +59,6 @@ const initialScenario: Scenario = {
   bias_m: 80,
   ramp: false,
   keep_satellites: 3,
-}
-
-function Status({ value }: { value?: string }) {
-  return (
-    <span className={`status status-${statusTone(value)}`}>
-      <span className="status-dot" />
-      {value ? statusLabels[value] || value : '待运行'}
-    </span>
-  )
 }
 
 function Metric({
@@ -112,6 +103,8 @@ export default function App() {
   const [navigationFile, setNavigationFile] = useState<File | null>(null)
   const [scenario, setScenario] = useState<Scenario>(initialScenario)
   const [noise, setNoise] = useState(1)
+  const [falseAlarmProbability, setFalseAlarmProbability] = useState(0.001)
+  const configuredRun = useRef<string | null>(null)
   const [port, setPort] = useState(8765)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
   const [satelliteId, setSatelliteId] = useState<string | undefined>()
@@ -152,6 +145,22 @@ export default function App() {
     positionStale,
     error: streamError,
   } = useRunStream(runId)
+  const restoreConfiguration = useCallback((config: RunRequest) => {
+    setDatasetId(config.dataset_id)
+    setSource(config.source ?? 'file')
+    setInterval(config.interval_seconds ?? 0.02)
+    setPort(config.tcp_port ?? 8765)
+    setEnableFde(config.enable_fde ?? true)
+    setAlgorithm(config.algorithm ?? 'consensus')
+    setNoise(config.noise_sigma_m ?? 1)
+    setFalseAlarmProbability(config.false_alarm_probability ?? 0.001)
+    setScenario({ ...initialScenario, ...config.scenario })
+  }, [])
+  useEffect(() => {
+    if (!run || configuredRun.current === run.id) return
+    configuredRun.current = run.id
+    restoreConfiguration(run.configuration)
+  }, [run, restoreConfiguration])
   const activeRun = runs.find((r) => ['running', 'stopping'].includes(r.status))
   const busy = Boolean(activeRun) || run?.status === 'running' || run?.status === 'stopping'
   const latest = epochs.at(-1)
@@ -187,17 +196,19 @@ export default function App() {
   }
 
   const start = useMutation({
-    mutationFn: () =>
+    mutationFn: (mode?: 'experiment') =>
       request<Run>('/runs', {
         method: 'POST',
         body: JSON.stringify({
-          dataset_id: scenario.kind !== 'none' ? 'D02_sim_clean' : datasetId,
-          source,
+          dataset_id:
+            mode === 'experiment' || scenario.kind !== 'none' ? 'D02_sim_clean' : datasetId,
+          source: mode === 'experiment' ? 'file' : source,
           interval_seconds: interval,
           tcp_port: port,
           enable_fde: enableFde,
           algorithm,
           noise_sigma_m: noise,
+          false_alarm_probability: falseAlarmProbability,
           scenario,
         }),
       }),
@@ -212,13 +223,25 @@ export default function App() {
   const importDataset = useMutation({
     mutationFn: async () => {
       if (!importFile) throw new Error('请选择 JSONL 观测文件')
+      if (!importFile.size) throw new Error('观测文件为空，请选择包含历元数据的 JSONL 文件')
       if (importFile.size > 16 * 1024 * 1024) throw new Error('导入文件上限为 16 MiB')
+      let navigation = null
+      if (navigationFile) {
+        if (navigationFile.size > 16 * 1024 * 1024) throw new Error('星历文件上限为 16 MiB')
+        try {
+          navigation = JSON.parse((await navigationFile.text()).replace(/^\uFEFF/, ''))
+        } catch {
+          throw new Error('星历文件 JSON 格式错误，请检查文件后重新导入')
+        }
+        if (!navigation || typeof navigation !== 'object' || Array.isArray(navigation))
+          throw new Error('星历文件应为 JSON 对象，请选择配套广播星历')
+      }
       return request<Dataset>('/datasets', {
         method: 'POST',
         body: JSON.stringify({
           name: importFile.name,
           jsonl: await importFile.text(),
-          navigation: navigationFile ? JSON.parse(await navigationFile.text()) : null,
+          navigation,
         }),
       })
     },
@@ -544,12 +567,17 @@ export default function App() {
                   观测数据
                   <select
                     aria-label="观测数据"
-                    value={datasetId}
+                    value={page === 'experiments' ? 'D02_sim_clean' : datasetId}
                     onChange={(e) => {
                       setDatasetId(e.target.value as RunRequest['dataset_id'])
                       setScenario(initialScenario)
                     }}
-                    disabled={busy || scenario.kind !== 'none' || datasets.length === 0}
+                    disabled={
+                      busy ||
+                      page === 'experiments' ||
+                      scenario.kind !== 'none' ||
+                      datasets.length === 0
+                    }
                   >
                     {datasets.length === 0 && (
                       <option value="">
@@ -568,18 +596,18 @@ export default function App() {
                 输入方式
                 <select
                   aria-label="输入方式"
-                  value={source}
+                  value={page === 'experiments' ? 'file' : source}
                   onChange={(e) => {
                     setSource(e.target.value as 'file' | 'tcp')
                     setScenario(initialScenario)
                   }}
-                  disabled={busy}
+                  disabled={busy || page === 'experiments'}
                 >
                   <option value="file">文件回放</option>
                   <option value="tcp">TCP 实时接入</option>
                 </select>
               </label>
-              {source === 'file' ? (
+              {source === 'file' || page === 'experiments' ? (
                 <label className="compact-field">
                   回放速度
                   <select
@@ -726,7 +754,7 @@ export default function App() {
                   <Button
                     onClick={() => {
                       setActionError('')
-                      start.mutate()
+                      start.mutate(page === 'experiments' ? 'experiment' : undefined)
                     }}
                     disabled={start.isPending || datasets.length === 0}
                   >
@@ -1199,7 +1227,7 @@ export default function App() {
                     故障类型
                     <select
                       aria-label="故障类型"
-                      disabled={busy || source === 'tcp'}
+                      disabled={busy}
                       value={scenario.kind}
                       onChange={(e) => {
                         setScenario({ ...scenario, kind: e.target.value as Scenario['kind'] })
@@ -1325,8 +1353,8 @@ export default function App() {
                 <div className="form-footer">
                   <span>参数随运行结果保存</span>
                   <Button
-                    onClick={() => start.mutate()}
-                    disabled={busy || start.isPending || source === 'tcp'}
+                    onClick={() => start.mutate('experiment')}
+                    disabled={busy || start.isPending}
                   >
                     <Play size={15} />
                     运行实验
@@ -1336,7 +1364,7 @@ export default function App() {
               <section className="panel compare-panel">
                 <div className="panel-heading">
                   <div>
-                    <h2>最近运行对比</h2>
+                    <h2>运行结果对比</h2>
                     <p>
                       {run
                         ? `${run.configuration.dataset_id} · ${run.id.slice(0, 8)}`
@@ -1358,74 +1386,15 @@ export default function App() {
           )}
 
           {page === 'history' && (
-            <>
-              <section className="panel">
-                <div className="panel-heading">
-                  <div>
-                    <h2>实验运行记录</h2>
-                    <p>保存的输入、参数与解算结果</p>
-                  </div>
-                  <span className="count-badge">{runs.length} 次运行</span>
-                </div>
-                <div className="table-scroll">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>运行编号</th>
-                        <th>数据集</th>
-                        <th>创建时间</th>
-                        <th>历元</th>
-                        <th>状态</th>
-                        <th />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {runs.map((r) => (
-                        <tr key={r.id}>
-                          <td className="mono">{r.id.slice(0, 8)}</td>
-                          <td>
-                            {r.configuration.dataset_id}
-                            <small className="table-sub">
-                              {r.configuration.scenario?.kind !== 'none'
-                                ? '受控故障实验'
-                                : r.configuration.enable_fde
-                                  ? '基线 + 故障诊断'
-                                  : '消融实验'}
-                            </small>
-                          </td>
-                          <td>
-                            {new Date(r.created_at).toLocaleString('zh-CN', { hour12: false })}
-                          </td>
-                          <td>{r.epoch_count}</td>
-                          <td>
-                            <Status value={r.status} />
-                          </td>
-                          <td>
-                            <Button
-                              variant="ghost"
-                              onClick={() => {
-                                selectRun(r.id)
-                                setPage('live')
-                              }}
-                            >
-                              查看 <ArrowRight size={14} />
-                            </Button>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                  {runs.length === 0 && (
-                    <div className="empty-state">
-                      <History size={28} />
-                      <strong>暂无运行记录</strong>
-                      <span>运行结果与参数自动保存。</span>
-                      <Button onClick={() => setPage('live')}>新建运行</Button>
-                    </div>
-                  )}
-                </div>
-              </section>
-            </>
+            <RunHistory
+              datasets={datasets}
+              onOpen={(record) => {
+                restoreConfiguration(record.configuration)
+                selectRun(record.id)
+                setPage('live')
+              }}
+              onNew={() => setPage('live')}
+            />
           )}
 
           {page !== 'history' && run && (

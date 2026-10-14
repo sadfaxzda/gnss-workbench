@@ -92,9 +92,30 @@ test('import observations, select research algorithm and inspect its evidence', 
   await page.goto('/')
   await page.getByText('算法与自定义数据', { exact: true }).click()
   await page.getByLabel('导入观测文件').setInputFiles({
+    name: '空文件.jsonl',
+    mimeType: 'application/json',
+    buffer: Buffer.from(''),
+  })
+  await page.getByRole('button', { name: '校验并导入' }).click()
+  await expect(page.getByRole('alert')).toContainText('观测文件为空')
+  await page.getByLabel('导入观测文件').setInputFiles({
     name: '双星未知场景.jsonl',
     mimeType: 'application/json',
     buffer: Buffer.from(lines[0] + '\n' + JSON.stringify(epoch) + '\n'),
+  })
+  await page.getByLabel('导入星历文件').setInputFiles({
+    name: 'navigation.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from('{bad-json'),
+  })
+  await page.getByRole('button', { name: '校验并导入' }).click()
+  await expect(page.getByRole('alert')).toContainText('星历文件 JSON 格式错误')
+  await page.getByLabel('导入星历文件').setInputFiles({
+    name: 'navigation.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(
+      '\uFEFF' + (await readFile('../fixtures/course/data/navigation.json', 'utf8')),
+    ),
   })
   const imported = page.waitForResponse(
     (response) =>
@@ -103,11 +124,15 @@ test('import observations, select research algorithm and inspect its evidence', 
   await page.getByRole('button', { name: '校验并导入' }).click()
   const dataset = await (await imported).json()
   await expect(page.getByLabel('观测数据')).toHaveValue(dataset.id)
+  await expect(page.getByRole('alert')).toHaveCount(0)
   await page.getByLabel('诊断算法').selectOption('adaptive_gnc')
   await page.getByLabel('回放速度').selectOption('0')
   await page.getByRole('button', { name: '开始运行', exact: true }).click()
   await expect(page.getByText('已完成', { exact: true })).toBeVisible()
   await expect(page.getByText('1 / 1 历元')).toBeVisible()
+  await page.reload()
+  await expect(page.getByLabel('观测数据')).toHaveValue(dataset.id)
+  await expect(page.getByLabel('诊断算法')).toHaveValue('adaptive_gnc')
   await page.getByRole('button', { name: '逐星诊断', exact: true }).click()
   await expect(page.getByRole('group', { name: '卫星天空图：方位角与高度角' })).toBeVisible()
   await expect(page.getByRole('row').filter({ hasText: 'G03' }).first()).toContainText('异常剔除')
@@ -165,6 +190,90 @@ test('TCP pause keeps old position stale until a new epoch is received', async (
     await page.getByRole('link', { name: '改进解', exact: true }).click()
     const file = await downloaded
     expect((await readFile((await file.path())!, 'utf8')).trim().split(/\r?\n/)).toHaveLength(3)
+  } finally {
+    socket?.destroy()
+    server.close()
+  }
+})
+
+test('history restores the saved configuration and a default experiment uses clean data', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await page.getByLabel('回放速度').selectOption('0')
+  await page.getByRole('button', { name: '实验设计', exact: true }).click()
+  await expect(page.getByLabel('观测数据')).toHaveValue('D02_sim_clean')
+  await expect(page.getByLabel('观测数据')).toBeDisabled()
+  await expect(page.getByLabel('输入方式')).toHaveValue('file')
+  const created = page.waitForResponse(
+    (response) => response.url().endsWith('/api/runs') && response.request().method() === 'POST',
+  )
+  await page.getByRole('button', { name: '运行实验', exact: true }).click()
+  const run = await (await created).json()
+  expect(run.configuration.dataset_id).toBe('D02_sim_clean')
+  await expect(page.getByText('已完成', { exact: true })).toBeVisible()
+  await page.getByLabel('观测数据').selectOption('D03_sim_demo')
+  await page.getByLabel('回放速度').selectOption('1')
+  await page.getByRole('button', { name: '运行记录', exact: true }).click()
+  await page.getByLabel('检索运行记录').fill(run.id)
+  await page.getByRole('button', { name: '检索', exact: true }).click()
+  await expect(page.getByText('共 1 次运行', { exact: true })).toBeVisible()
+  await page.getByRole('button', { name: '查看', exact: true }).click()
+  await expect(page.getByLabel('观测数据')).toHaveValue('D02_sim_clean')
+  await expect(page.getByLabel('回放速度')).toHaveValue('0')
+  await page.reload()
+  await expect(page.getByLabel('观测数据')).toHaveValue('D02_sim_clean')
+  await expect(page.getByLabel('回放速度')).toHaveValue('0')
+})
+
+test('long TCP acquisition keeps original order through reload and CSV export', async ({
+  page,
+}) => {
+  const { createServer } = await import('node:net')
+  const server = createServer()
+  server.listen(0, '127.0.0.1')
+  await once(server, 'listening')
+  const address = server.address()
+  if (!address || typeof address === 'string') throw new Error('No TCP port')
+  const connected = once(server, 'connection')
+  let socket: import('node:net').Socket | undefined
+  try {
+    const source = JSON.parse(
+      (await readFile('../fixtures/course/data/D02_sim_clean.jsonl', 'utf8')).split('\n')[1],
+    )
+    await page.goto('/')
+    await page.getByLabel('输入方式').selectOption('tcp')
+    await page.getByLabel('TCP端口').fill(String(address.port))
+    await page.getByRole('button', { name: '开始运行', exact: true }).click()
+    ;[socket] = (await connected) as [import('node:net').Socket]
+    const ids = [...Array(6001)].map((_, index) => 6000 - index)
+    const frames = ids.map((id, index) =>
+      JSON.stringify({
+        ...source,
+        epoch_id: id,
+        gps_sow: source.gps_sow + index,
+        observations: [],
+      }),
+    )
+    socket.end(frames.join('\n') + '\n{"type":"end","epochs_sent":6001}\n')
+    await expect(page.getByText('已完成', { exact: true })).toBeVisible()
+    await expect(page.getByText('6001 历元', { exact: true })).toBeVisible()
+    await page.reload()
+    await expect(page.getByText('6001 历元', { exact: true })).toBeVisible()
+    await page.getByLabel('历元时间轴').press('Home')
+    await expect(page.getByText('查看历元 6000', { exact: true })).toBeVisible()
+    await page.getByLabel('历元时间轴').press('End')
+    await expect(page.getByText('查看历元 0', { exact: true })).toBeVisible()
+    await page.locator('.export-menu summary').click()
+    const downloaded = page.waitForEvent('download')
+    await page.getByRole('link', { name: '改进解', exact: true }).click()
+    const csv = (await readFile((await (await downloaded).path())!, 'utf8')).trim().split(/\r?\n/)
+    expect(csv).toHaveLength(6002)
+    expect(csv.slice(1).map((row) => Number(row.split(',')[0]))).toEqual(ids)
+    // Every unavailable position remains empty, never a fabricated zero.
+    const columns = csv[0].split(',')
+    for (const field of ['x_m', 'y_m', 'z_m'])
+      expect(csv[1].split(',')[columns.indexOf(field)]).toBe('')
   } finally {
     socket?.destroy()
     server.close()

@@ -15,12 +15,17 @@ from .core.models import CSV_FIELDS, Epoch, Solution
 def read_frames(path: Path) -> Iterator[dict[str, Any]]:
     seen: set[int] = set()
     with path.open(encoding="utf-8-sig") as stream:
-        for line in stream:
+        for line_number, line in enumerate(stream, 1):
             if not line.strip():
                 continue
             if len(line.encode("utf-8")) > 1024 * 1024:
                 raise ValueError("Frame exceeds 1 MiB")
-            frame = json.loads(line)
+            try:
+                frame = json.loads(line)
+            except json.JSONDecodeError as error:
+                raise json.JSONDecodeError(
+                    f"观测文件第 {line_number} 行 JSON 格式错误：{error.msg}", line, error.pos
+                ) from error
             if not isinstance(frame, dict):
                 raise ValueError("Each frame must be a JSON object")
             if frame.get("type") == "meta":
@@ -83,7 +88,7 @@ def validate_navigation(nav: dict[str, Any]) -> dict[str, Any]:
 
 
 def navigation_from(path: Path) -> dict[str, Any]:
-    return validate_navigation(json.loads(path.read_text(encoding="utf-8")))
+    return validate_navigation(json.loads(path.read_text(encoding="utf-8-sig")))
 
 
 def csv_row(solution: Solution) -> dict[str, Any]:

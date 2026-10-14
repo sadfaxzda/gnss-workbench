@@ -7,7 +7,7 @@ from typing import Any
 
 from alembic import command
 from alembic.config import Config
-from sqlalchemy import JSON, Integer, String, Text, create_engine, select
+from sqlalchemy import JSON, Integer, String, Text, cast, create_engine, func, or_, select, true
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column
 
 from .settings import PROJECT_ROOT
@@ -86,14 +86,36 @@ class RunStore:
             record = session.get(RunRecord, run_id)
             return record.public() if record else None
 
-    def list(self) -> list[dict[str, Any]]:
+    @staticmethod
+    def _matching(query: str):
+        if not query:
+            return true()
+        return or_(
+            RunRecord.id.contains(query, autoescape=True),
+            cast(RunRecord.configuration, String).contains(query, autoescape=True),
+        )
+
+    def list(self, offset: int = 0, limit: int = 100, query: str = "") -> list[dict[str, Any]]:
         with Session(self.engine) as session:
             return [
                 r.public()
                 for r in session.scalars(
-                    select(RunRecord).order_by(RunRecord.created_at.desc()).limit(100)
+                    select(RunRecord)
+                    .where(self._matching(query))
+                    .order_by(RunRecord.created_at.desc(), RunRecord.id.desc())
+                    .offset(offset)
+                    .limit(limit)
                 )
             ]
+
+    def count(self, query: str = "") -> int:
+        with Session(self.engine) as session:
+            return (
+                session.scalar(
+                    select(func.count()).select_from(RunRecord).where(self._matching(query))
+                )
+                or 0
+            )
 
     def close(self) -> None:
         self.engine.dispose()

@@ -8,6 +8,7 @@ import multiprocessing as mp
 import queue
 import uuid
 from collections import deque
+from collections.abc import Iterator
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -143,6 +144,28 @@ class RunManager:
                 if len(result) >= limit:
                     break
         return result
+
+    def history_batches(
+        self, run_id: str, count: int | None, batch_size: int = 1000
+    ) -> Iterator[list[dict[str, Any]]]:
+        """Read a captured prefix once, keeping each socket message bounded."""
+        path = self.root / "runs" / run_id / "epochs.jsonl"
+        if not path.exists() or count == 0:
+            return
+        batch = []
+        with path.open(encoding="utf-8") as stream:
+            for index, line in enumerate(stream):
+                if count is not None and index >= count:
+                    break
+                try:
+                    batch.append(json.loads(line))
+                except json.JSONDecodeError:
+                    break
+                if len(batch) == batch_size:
+                    yield batch
+                    batch = []
+        if batch:
+            yield batch
 
     async def close(self) -> None:
         for run_id in list(self.active):
