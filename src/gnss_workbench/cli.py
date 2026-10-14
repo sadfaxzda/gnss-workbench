@@ -23,11 +23,11 @@ app = typer.Typer(no_args_is_help=True)
 @app.command()
 def solve(
     input: Annotated[Path, typer.Option(exists=True, dir_okay=False)],
-    out: Annotated[Path, typer.Option()],
-    navigation: Annotated[Path, typer.Option(exists=True)] = COURSE_ROOT
+    out: Annotated[Path, typer.Option(file_okay=False)],
+    navigation: Annotated[Path, typer.Option(exists=True, dir_okay=False)] = COURSE_ROOT
     / "data"
     / "navigation.json",
-    truth: Annotated[Path | None, typer.Option(exists=True)] = None,
+    truth: Annotated[Path | None, typer.Option(exists=True, dir_okay=False)] = None,
     disable_fde: bool = False,
     algorithm: Literal["single_fde", "consensus", "adaptive_gnc"] = "consensus",
     noise_sigma_m: float = 1.0,
@@ -38,20 +38,26 @@ def solve(
     )
     engine = PositioningEngine(navigation_from(navigation), config)
     baseline, improved = [], []
+    if out.exists() and any(out.iterdir()):
+        raise typer.BadParameter("Output directory must be empty; choose a new --out path")
     out.mkdir(parents=True, exist_ok=True)
-    with (out / "diagnostics.jsonl").open("w", encoding="utf-8") as stream:
-        for epoch in read_epochs(input):
-            b, i = engine.solve(epoch)
-            baseline.append(b)
-            improved.append(i)
-            stream.write(
-                json.dumps(
-                    {"baseline": b.to_dict(), "improved": i.to_dict()},
-                    ensure_ascii=False,
-                    allow_nan=False,
+    failure: str | None = None
+    try:
+        with (out / "diagnostics.jsonl").open("w", encoding="utf-8") as stream:
+            for epoch in read_epochs(input):
+                b, i = engine.solve(epoch)
+                baseline.append(b)
+                improved.append(i)
+                stream.write(
+                    json.dumps(
+                        {"baseline": b.to_dict(), "improved": i.to_dict()},
+                        ensure_ascii=False,
+                        allow_nan=False,
+                    )
+                    + "\n"
                 )
-                + "\n"
-            )
+    except (ValueError, KeyError, TypeError, OSError) as error:
+        failure = f"{type(error).__name__}: {error}"
     export_solutions(out / "baseline.csv", baseline)
     export_solutions(out / "improved.csv", improved)
     manifest = {
@@ -62,8 +68,13 @@ def solve(
         "navigation_sha256": hashlib.sha256(navigation.read_bytes()).hexdigest(),
         "configuration": asdict(config),
         "epochs": len(baseline),
+        "status": "failed" if failure else "completed",
+        "error": failure,
     }
     (out / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    if failure:
+        typer.echo(f"Stopped: {failure}. Preserved {len(baseline)} epochs → {out}", err=True)
+        raise typer.Exit(1)
     if truth:
         metrics = evaluate_run(input, truth, out)
         (out / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")

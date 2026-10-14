@@ -27,6 +27,8 @@ import type { EChartsOption } from 'echarts'
 import { Button } from './components/Button'
 import { Chart } from './components/Chart'
 import { Skyplot } from './components/Skyplot'
+import { StatusReplay } from './components/StatusReplay'
+import { chartBase, chartColors } from './lib/chartTheme'
 import { useRunStream } from './hooks/useRunStream'
 import {
   type Dataset,
@@ -55,13 +57,6 @@ const initialScenario: Scenario = {
   bias_m: 80,
   ramp: false,
   keep_satellites: 3,
-}
-const chartBase: EChartsOption = {
-  animation: false,
-  color: ['#ec9a4b', '#159d8d'],
-  textStyle: { fontFamily: 'Inter, -apple-system, sans-serif', color: '#758190', fontSize: 11 },
-  tooltip: { trigger: 'axis', confine: true },
-  grid: { left: 53, right: 28, top: 30, bottom: 45 },
 }
 
 function Status({ value }: { value?: string }) {
@@ -217,13 +212,13 @@ export default function App() {
         nameLocation: 'middle',
         nameGap: 26,
         scale: true,
-        splitLine: { lineStyle: { color: '#edf1f4' } },
+        splitLine: { lineStyle: { color: chartColors.grid } },
       },
       yAxis: {
         type: 'value',
         name: '北 / m',
         scale: true,
-        splitLine: { lineStyle: { color: '#edf1f4' } },
+        splitLine: { lineStyle: { color: chartColors.grid } },
       },
       series: [
         {
@@ -231,7 +226,7 @@ export default function App() {
           type: 'line',
           showSymbol: false,
           connectNulls: false,
-          lineStyle: { width: 1.5, opacity: 0.8 },
+          lineStyle: { width: 1.5, opacity: 0.85, type: 'dashed' },
           data: epochs.map((e) => e.view.baseline_enu?.slice(0, 2) ?? [null, null]),
         },
         {
@@ -246,7 +241,7 @@ export default function App() {
           name: '选中历元',
           type: 'scatter',
           symbolSize: 10,
-          itemStyle: { color: '#0d7e74', borderColor: '#fff', borderWidth: 2 },
+          itemStyle: { color: chartColors.improved, borderColor: '#fff', borderWidth: 2 },
           data: selected?.view.improved_enu ? [selected.view.improved_enu.slice(0, 2)] : [],
         },
       ],
@@ -265,14 +260,17 @@ export default function App() {
         axisTick: { show: false },
         axisLine: { show: false },
       },
-      yAxis: { type: 'value', name: 'm', splitLine: { lineStyle: { color: '#edf1f4' } } },
+      yAxis: { type: 'value', name: 'm', splitLine: { lineStyle: { color: chartColors.grid } } },
       series: [
         {
           type: 'bar',
           barMaxWidth: 22,
           data: (solution?.diagnostics ?? []).map((s) => ({
             value: Number(s.residual_m.toFixed(3)),
-            itemStyle: { color: s.excluded ? '#e39648' : '#5eaaa1', borderRadius: [4, 4, 0, 0] },
+            itemStyle: {
+              color: s.excluded ? chartColors.excluded : chartColors.improved,
+              borderRadius: [4, 4, 0, 0],
+            },
           })),
         },
       ],
@@ -294,7 +292,7 @@ export default function App() {
         type: 'value',
         scale: true,
         name: 'm',
-        splitLine: { lineStyle: { color: '#edf1f4' } },
+        splitLine: { lineStyle: { color: chartColors.grid } },
       },
       series: [
         {
@@ -303,8 +301,8 @@ export default function App() {
           showSymbol: false,
           connectNulls: false,
           data: epochs.map((e) => e.improved.clock_bias_m),
-          lineStyle: { color: '#6089b8', width: 1.7 },
-          areaStyle: { color: '#6089b8', opacity: 0.06 },
+          lineStyle: { color: chartColors.clock, width: 1.7 },
+          areaStyle: { color: chartColors.clock, opacity: 0.06 },
         },
       ],
     }),
@@ -331,6 +329,8 @@ export default function App() {
             <button
               key={id}
               aria-label={label}
+              aria-current={page === id ? 'page' : undefined}
+              title={label}
               onClick={() => setPage(id)}
               className={page === id ? 'nav-item active' : 'nav-item'}
             >
@@ -380,7 +380,6 @@ export default function App() {
         <div className="page-content">
           <div className="page-heading">
             <div>
-              <div className="eyebrow">POSITIONING & INTEGRITY</div>
               <h1>{page === 'live' ? '定位与故障诊断' : title}</h1>
               <p>
                 {page === 'live'
@@ -564,6 +563,14 @@ export default function App() {
                 </Button>
               </div>
             </details>
+          )}
+
+          {page !== 'history' && (
+            <StatusReplay
+              epochs={epochs}
+              selectedIndex={selectedIndex}
+              onSelect={setSelectedIndex}
+            />
           )}
 
           {page === 'live' && (
@@ -876,7 +883,7 @@ export default function App() {
                           <i
                             style={{
                               width: `${Math.min(100, ((c.statistic ?? 0) / Math.max(c.threshold ?? 1, 1)) * 50)}%`,
-                              background: c.passed ? '#159d8d' : '#c9d3de',
+                              background: c.passed ? chartColors.improved : chartColors.muted,
                             }}
                           />
                         </div>

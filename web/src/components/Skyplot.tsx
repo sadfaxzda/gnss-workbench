@@ -1,3 +1,4 @@
+import { chartColors } from '../lib/chartTheme'
 import type { components } from '../generated/api'
 
 type Satellite = components['schemas']['SatelliteDiagnostic']
@@ -11,10 +12,10 @@ export function Skyplot({ satellites }: { satellites: Satellite[] }) {
       aria-label="卫星天空图：方位角与高度角"
     >
       {[45, 90, 135].map((radius) => (
-        <circle key={radius} cx="170" cy="170" r={radius} fill="none" stroke="#dce5eb" />
+        <circle key={radius} cx="170" cy="170" r={radius} fill="none" stroke={chartColors.muted} />
       ))}
-      <path d="M35 170H305 M170 35V305" stroke="#dce5eb" />
-      <g fill="#758190" fontSize="12" textAnchor="middle">
+      <path d="M35 170H305 M170 35V305" stroke={chartColors.muted} />
+      <g fill={chartColors.text} fontSize="12" textAnchor="middle">
         <text x="170" y="20">
           北 N
         </text>
@@ -39,8 +40,13 @@ export function Skyplot({ satellites }: { satellites: Satellite[] }) {
               {satellite.sat_id}：高度角 {satellite.elevation_deg.toFixed(1)}°，残差{' '}
               {satellite.residual_m.toFixed(2)} m
             </title>
-            <circle cx={x} cy={y} r="8" fill={satellite.excluded ? '#ce654a' : '#159d8d'} />
-            <text x={x} y={y - 13} textAnchor="middle" fontSize="12" fill="#384b60">
+            <circle
+              cx={x}
+              cy={y}
+              r="8"
+              fill={satellite.excluded ? chartColors.rejected : chartColors.improved}
+            />
+            <text x={x} y={y - 13} textAnchor="middle" fontSize="12" fill={chartColors.text}>
               {satellite.sat_id}
             </text>
           </g>

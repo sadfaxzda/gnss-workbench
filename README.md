@@ -109,3 +109,19 @@ uv run --group research gnss cross-check --out runtime/cross-check.json
 [教师要求矩阵](docs/requirements-matrix.md) · [技术报告草稿](docs/report.pdf) · [预设实验设计](docs/algorithm-plan.md) · [保留种子完整结果](docs/experiments/holdout-report.md) · [原始实验归档](docs/experiments/holdout-evidence.zip)
 
 保留种子20261016，每类84历元：双星故障的10m内成功率由旧版单星FDE的1.2%提升到95.2%，水平P95由78.24m降至3.47m；正常/单星/渐变回归保持通过。GNC最终精度相同、耗时更高，保留实验选项。重尾与sigma失配仍出现失败和错剔，不能据此宣称真实环境领先。
+
+## 界面与交付完善
+
+- 按已接收的实际状态生成回放区段，可直接定位故障、四星、少星、无观测与恢复的起点。
+- 统一石墨蓝、冷白与青蓝界面；普通/改进轨迹同时以线型和颜色区分；手机保留文字导航。
+- CLI 遇到不可恢复的坏帧，保存此前已经完成的两份CSV、诊断日志与失败manifest，并以非零状态退出。`solve --out` 要求空目录，避免覆盖证据或混入旧评价结果。
+- [界面规范](DESIGN.md) · [现场演示与答辩准备](docs/demo-guide.md)。
+
+从已提交、工作区干净的仓库制作可核验交付包：
+
+```bash
+pnpm --dir web build
+uv run python scripts/package_submission.py --out ../GNSS_Workbench_submission.zip
+```
+
+包内包含源码、锁文件、构建前端、6页报告、D01/D02/D03新运行结果与D03消融，以及逐文件SHA256清单。解压后无需Node构建即可 `uv sync --locked`、`uv run gnss serve`；首次安装Python依赖仍需网络。打包不包含本机运行历史、Git凭证或虚拟环境。小组真实贡献和最终答辩仍需成员核验。
