@@ -1,0 +1,31 @@
+{
+  "algorithm": "SHA-256",
+  "scope": "Delivered package files, not the full original external source files.",
+  "files": {
+    "LICENSE_RTKLIB.txt": "033530feec8b0c1d1822c483d2e7646f5655dc4d37d697165e1b96783bae87a3",
+    "README.md": "64a3a3366e6f9550b5985f4fd03c6c3d22e9a0e889fffe8650beb2046c3b468b",
+    "data/D01_real_excerpt.csv": "f8679042083d1fa35f40adcac3284ef7a94d5a3276ceea812d4467eb7fd17f36",
+    "data/D01_real_excerpt.jsonl": "1debbef54cafdfacad04b42178d41eb928fe9ee60fbbd19a38fc848e0ac3d56c",
+    "data/D01_real_excerpt_epochs.csv": "3dec5f3b139e3ae7278700fa909327655706fe3db00108f8701eb8d570810cf4",
+    "data/D02_sim_clean.csv": "85ab4574a386f136a50795ce9d58f831e3fd27fe94121ae86ae9bac9eaf90195",
+    "data/D02_sim_clean.jsonl": "0c1459f3e4a101cc864ad7d9268f505c2c0d21be82b54df4d78d0474379ec2be",
+    "data/D02_sim_clean_epochs.csv": "2f4f141dced00131871f76e4118ea7efe142eeafad205f6b1e31a1f18ed5cf04",
+    "data/D03_sim_demo.csv": "d6a19077bfba66e6749f94c9b07961c979d847538fddc29a250e5e2c901aa27a",
+    "data/D03_sim_demo.jsonl": "cd341fe7872f5b8962742cea593f1af06b97f44db23677121e146148214ce428",
+    "data/D03_sim_demo_epochs.csv": "9e98f82efc3832aa48b53d9d055dd451f4ecfba89295b579ec625bb915071d10",
+    "data/gps_20050402_subset.nav": "c879d8f11117af14201d31425b84ef4964e0d81035e76569714ea13e723d0f67",
+    "data/navigation.json": "dccfb696c406bdb2ecef9f6a44cc40c113045d85d57817742aecc4ef7f580e7e",
+    "data/provenance.json": "1a7f912158365405821e8a0a66527f042176d3ff227022f55ee62ae78a84fe98",
+    "docs/INTERFACE.md": "3a805077d0af32634826adf90316e8df5bf5989ccabe827a9587141e145fe9c2",
+    "docs/MODEL_SPEC.md": "4ce2bc045c5ec8c702ee120caf9de2047c9c7883d329edcd825a8c147e1f9506",
+    "docs/作业任务书.docx": "85f921d1e66a644d35453657ed5b852b7c6178eba3db0d47cf16eeea17bf4582",
+    "reference/D02_sim_clean_truth.csv": "e4c66233d4b101a9ab10052fa6a4d8495ef4da7ba88fe4393224498e4fea1ff2",
+    "reference/D03_sim_demo_truth.csv": "06ee68eaf013db36db2ce123dd7e8ada517ce083957b5ee54ac8662bd3451e43",
+    "reference/satellite_checkpoints.csv": "10fbfafa421837e366aedc83d83b2a81ad6f25c100c9920b27a1361132670d58",
+    "requirements.txt": "99f43573522565d7c480efd1f954892948033915df6a4e685327e995d3396eb6",
+    "tools/client_skeleton.py": "809039d03e500c8c3fb962026e46f5ab7201f51c6d924813d2aa0ce02485ea30",
+    "tools/evaluate.py": "46bafbd006c2bdfbaf45b48252c80946a9756f9f9be6584ddccee9a7236ad05a",
+    "tools/replay.py": "07ed7c63f6f1b2811f8f7750175489cc12979684908f8de473e60901c1f556a4",
+    "tools/verify_integrity.py": "52c8cdd38f2cf53b0dcf746a3c02f22aaef42c2754900b847428e7ff81b6dfc9"
+  }
+}

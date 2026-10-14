@@ -1,0 +1,31 @@
+{
+  "retrieved_utc_date": "2026-09-05",
+  "station": "0759",
+  "original_observation_date_gpst": "2005-04-02",
+  "observation_source": "https://github.com/tomojitakasu/RTKLIB/blob/master/test/data/rinex/07590920.05o",
+  "observation_source_git_blob_sha": "43f8bcf43a4e33843bff3c85bf1954de4ad9edb1",
+  "extraction": "Original observation lines 18-197, C1 only; 20 epochs, 8 GPS satellites; C1 unchanged to 0.001 m. Last epoch is 00:09:30.001 GPST.",
+  "navigation_source": "https://github.com/tomojitakasu/RTKLIB/blob/master/test/data/rinex/07590920.05n",
+  "navigation_source_git_blob_sha": "f95d0080fe4faec9b28dcf97d7e120675ddf7e23",
+  "navigation_original_lines": {
+    "G03": "21-28",
+    "G07": "45-52",
+    "G08": "61-68",
+    "G11": "77-84",
+    "G19": "109-116",
+    "G20": "125-132",
+    "G24": "157-164",
+    "G28": "181-188"
+  },
+  "original_header_approx_ecef_m": [
+    -3976219.5082,
+    3382372.5671,
+    3652512.9849
+  ],
+  "reference_status": "APPROXIMATE ONLY. Not a surveyed truth position; do NOT score absolute positioning accuracy against this header.",
+  "receiver": "TRIMBLE 5700 1.24",
+  "source_agency": "GSI, JAPAN; redistributed as RTKLIB test data",
+  "cn0_status": "Not present in this source; left null, not fabricated.",
+  "time_system": "GPS; not UTC; week 1316. Historical GPS-UTC offset 13 s is not used in processing.",
+  "scope": "This is a curated teaching extract, not a full original file or a real urban dynamic benchmark."
+}

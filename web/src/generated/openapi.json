@@ -1,0 +1,912 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "GNSS Workbench",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthInfo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/datasets": {
+      "get": {
+        "summary": "Datasets",
+        "operationId": "datasets_api_datasets_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DatasetInfo"
+                  },
+                  "type": "array",
+                  "title": "Response Datasets Api Datasets Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs": {
+      "get": {
+        "summary": "Runs",
+        "operationId": "runs_api_runs_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/RunInfo"
+                  },
+                  "type": "array",
+                  "title": "Response Runs Api Runs Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Run",
+        "operationId": "create_run_api_runs_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}": {
+      "get": {
+        "summary": "Run",
+        "operationId": "run_api_runs__run_id__get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/stop": {
+      "post": {
+        "summary": "Stop Run",
+        "operationId": "stop_run_api_runs__run_id__stop_post",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RunInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/epochs": {
+      "get": {
+        "summary": "Epochs",
+        "operationId": "epochs_api_runs__run_id__epochs_get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 5000,
+              "minimum": 1,
+              "default": 5000,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpochFrame"
+                  },
+                  "title": "Response Epochs Api Runs  Run Id  Epochs Get"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/runs/{run_id}/download/{artifact}": {
+      "get": {
+        "summary": "Download",
+        "operationId": "download_api_runs__run_id__download__artifact__get",
+        "parameters": [
+          {
+            "name": "run_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Run Id"
+            }
+          },
+          {
+            "name": "artifact",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "enum": [
+                "baseline.csv",
+                "improved.csv",
+                "epochs.jsonl",
+                "input.jsonl",
+                "events.jsonl",
+                "manifest.json",
+                "metrics.json"
+              ],
+              "type": "string",
+              "title": "Artifact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DatasetInfo": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "kind": {
+            "type": "string",
+            "title": "Kind"
+          },
+          "epochs": {
+            "type": "integer",
+            "title": "Epochs"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "kind",
+          "epochs",
+          "description"
+        ],
+        "title": "DatasetInfo"
+      },
+      "EpochFrame": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "epoch",
+            "title": "Type",
+            "default": "epoch"
+          },
+          "epoch_id": {
+            "type": "integer",
+            "title": "Epoch Id"
+          },
+          "baseline": {
+            "$ref": "#/components/schemas/Solution"
+          },
+          "improved": {
+            "$ref": "#/components/schemas/Solution"
+          },
+          "view": {
+            "$ref": "#/components/schemas/EpochView"
+          }
+        },
+        "type": "object",
+        "required": [
+          "epoch_id",
+          "baseline",
+          "improved",
+          "view"
+        ],
+        "title": "EpochFrame"
+      },
+      "EpochView": {
+        "properties": {
+          "baseline_enu": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Baseline Enu"
+          },
+          "improved_enu": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Improved Enu"
+          },
+          "latitude_deg": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Latitude Deg"
+          },
+          "longitude_deg": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Longitude Deg"
+          },
+          "height_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Height M"
+          },
+          "correction_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correction M"
+          }
+        },
+        "type": "object",
+        "required": [
+          "baseline_enu",
+          "improved_enu",
+          "latitude_deg",
+          "longitude_deg",
+          "height_m",
+          "correction_m"
+        ],
+        "title": "EpochView"
+      },
+      "FaultScenario": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "none",
+              "satellite_bias",
+              "common_bias",
+              "dropout"
+            ],
+            "title": "Kind",
+            "default": "none"
+          },
+          "start_epoch": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Start Epoch",
+            "default": 120
+          },
+          "duration": {
+            "type": "integer",
+            "maximum": 100000.0,
+            "minimum": 1.0,
+            "title": "Duration",
+            "default": 60
+          },
+          "sat_id": {
+            "type": "string",
+            "pattern": "^G\\d{2}$",
+            "title": "Sat Id",
+            "default": "G19"
+          },
+          "bias_m": {
+            "type": "number",
+            "maximum": 1000.0,
+            "minimum": -1000.0,
+            "title": "Bias M",
+            "default": 80.0
+          },
+          "ramp": {
+            "type": "boolean",
+            "title": "Ramp",
+            "default": false
+          },
+          "keep_satellites": {
+            "type": "integer",
+            "maximum": 8.0,
+            "minimum": 0.0,
+            "title": "Keep Satellites",
+            "default": 3
+          }
+        },
+        "type": "object",
+        "title": "FaultScenario"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "HealthInfo": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "version": {
+            "type": "string",
+            "title": "Version"
+          },
+          "schema_version": {
+            "type": "string",
+            "const": "gnss-stream/1",
+            "title": "Schema Version",
+            "default": "gnss-stream/1"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "version"
+        ],
+        "title": "HealthInfo"
+      },
+      "RunInfo": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "created_at": {
+            "type": "string",
+            "title": "Created At"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "configuration": {
+            "$ref": "#/components/schemas/RunRequest"
+          },
+          "epoch_count": {
+            "type": "integer",
+            "title": "Epoch Count"
+          },
+          "summary": {
+            "additionalProperties": true,
+            "type": "object",
+            "title": "Summary"
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Error"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "status",
+          "configuration",
+          "epoch_count",
+          "summary",
+          "error"
+        ],
+        "title": "RunInfo"
+      },
+      "RunRequest": {
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "enum": [
+              "D01_real_excerpt",
+              "D02_sim_clean",
+              "D03_sim_demo"
+            ],
+            "title": "Dataset Id",
+            "default": "D03_sim_demo"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "file",
+              "tcp"
+            ],
+            "title": "Source",
+            "default": "file"
+          },
+          "interval_seconds": {
+            "type": "number",
+            "maximum": 30.0,
+            "minimum": 0.0,
+            "title": "Interval Seconds",
+            "default": 0.03
+          },
+          "tcp_port": {
+            "type": "integer",
+            "maximum": 65535.0,
+            "minimum": 1024.0,
+            "title": "Tcp Port",
+            "default": 8765
+          },
+          "enable_fde": {
+            "type": "boolean",
+            "title": "Enable Fde",
+            "default": true
+          },
+          "noise_sigma_m": {
+            "type": "number",
+            "maximum": 20.0,
+            "minimum": 0.1,
+            "title": "Noise Sigma M",
+            "default": 1.0
+          },
+          "false_alarm_probability": {
+            "type": "number",
+            "exclusiveMaximum": 0.1,
+            "exclusiveMinimum": 0.0,
+            "title": "False Alarm Probability",
+            "default": 0.001
+          },
+          "scenario": {
+            "$ref": "#/components/schemas/FaultScenario"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RunRequest"
+      },
+      "SatelliteDiagnostic": {
+        "properties": {
+          "sat_id": {
+            "type": "string",
+            "title": "Sat Id"
+          },
+          "residual_m": {
+            "type": "number",
+            "title": "Residual M"
+          },
+          "normalized_residual": {
+            "type": "number",
+            "title": "Normalized Residual"
+          },
+          "elevation_deg": {
+            "type": "number",
+            "title": "Elevation Deg"
+          },
+          "azimuth_deg": {
+            "type": "number",
+            "title": "Azimuth Deg"
+          },
+          "weight": {
+            "type": "number",
+            "title": "Weight",
+            "default": 1.0
+          },
+          "excluded": {
+            "type": "boolean",
+            "title": "Excluded",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "sat_id",
+          "residual_m",
+          "normalized_residual",
+          "elevation_deg",
+          "azimuth_deg"
+        ],
+        "title": "SatelliteDiagnostic"
+      },
+      "Solution": {
+        "properties": {
+          "epoch_id": {
+            "type": "integer",
+            "title": "Epoch Id"
+          },
+          "gps_week": {
+            "type": "integer",
+            "title": "Gps Week"
+          },
+          "gps_sow": {
+            "type": "number",
+            "title": "Gps Sow"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "x_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "X M"
+          },
+          "y_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Y M"
+          },
+          "z_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Z M"
+          },
+          "clock_bias_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Clock Bias M"
+          },
+          "n_used": {
+            "type": "integer",
+            "title": "N Used",
+            "default": 0
+          },
+          "pdop": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pdop"
+          },
+          "flagged_sats": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Flagged Sats"
+          },
+          "excluded_sats": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Excluded Sats"
+          },
+          "residual_rms_m": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Residual Rms M"
+          },
+          "processing_ms": {
+            "type": "number",
+            "title": "Processing Ms",
+            "default": 0.0
+          },
+          "diagnostics": {
+            "items": {
+              "$ref": "#/components/schemas/SatelliteDiagnostic"
+            },
+            "type": "array",
+            "title": "Diagnostics"
+          },
+          "reason": {
+            "type": "string",
+            "title": "Reason",
+            "default": ""
+          },
+          "test_statistic": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Test Statistic"
+          },
+          "test_threshold": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Test Threshold"
+          },
+          "dof": {
+            "type": "integer",
+            "title": "Dof",
+            "default": 0
+          },
+          "candidate_scores": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Candidate Scores"
+          }
+        },
+        "type": "object",
+        "required": [
+          "epoch_id",
+          "gps_week",
+          "gps_sow",
+          "status"
+        ],
+        "title": "Solution"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

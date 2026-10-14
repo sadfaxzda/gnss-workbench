@@ -1,0 +1,49 @@
+name: checks
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  python:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+        with:
+          version: '0.13.0'
+          python-version: '3.12'
+      - run: uv sync --locked
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run pyright
+      - run: uv run python scripts/verify_fixture.py
+      - run: uv run pytest -q
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+        with:
+          version: '0.13.0'
+          python-version: '3.12'
+      - uses: pnpm/action-setup@v6
+        with:
+          package_json_file: web/package.json
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+          cache-dependency-path: web/pnpm-lock.yaml
+      - run: uv sync --locked
+      - run: pnpm --dir web install --frozen-lockfile
+      - run: uv run python scripts/export_schema.py
+      - run: pnpm --dir web exec openapi-typescript src/generated/openapi.json -o src/generated/api.d.ts
+      - run: git diff --exit-code -- web/src/generated
+      - run: pnpm --dir web lint
+      - run: pnpm --dir web test
+      - run: pnpm --dir web build
+      - run: pnpm --dir web exec playwright install --with-deps chromium webkit
+      - run: pnpm --dir web test:e2e
