@@ -2,14 +2,14 @@
 
 GPS 单点定位与可解释故障诊断工作台。Mac、Windows 和 Linux 共用 Python 计算核心，通过浏览器运行、诊断和复现实验。
 
-当前版本 **v0.1.0**：真实计算、独立基线、单星故障检测与剔除、文件/TCP 输入、运行记录与导出已实现。设计与边界见 [架构](docs/architecture.md)，后续计划见 [路线图](docs/roadmap.md)。
+当前版本 **v0.2.0**：真实计算、独立基线、单星/双星诊断、GNC 实验、自定义导入、文件/TCP 输入、运行记录与导出已实现。设计与边界见 [架构](docs/architecture.md)，后续计划见 [路线图](docs/roadmap.md)。
 
 ![工作台](docs/media/workbench.png)
 
 ## 已实现
 
 - GPS L1 C1 广播星历解算，卫星钟差、地球自转、电离层和对流层改正；逐历元独立最小二乘。
-- 普通解与改进解并行比较；卡方残差检验、单星排除候选检验，展示阈值、残差和决策证据。
+- 普通解与改进解并行比较；卡方残差检验、最多两星排除候选检验，展示阈值、残差和决策证据。
 - 0 星、少于 4 星、恰好 4 星、几何退化等状态明确区分；无效坐标留空，禁止沿用旧定位值。
 - TCP 拆包/粘包、暂停与恢复、异常断开、正常结束；浏览器重连和历史快照。
 - 可配置单星偏差、渐变偏差、共同偏差、观测缺失；可关闭故障处理做消融实验。
@@ -87,6 +87,25 @@ GitHub Actions 对 Python 的 macOS/Windows/Linux 运行检查，在 Linux 上�
 
 React / TypeScript / Vite / Tailwind / Radix primitives / TanStack Query / ECharts；FastAPI / Pydantic / NumPy / SciPy；SQLAlchemy / Alembic / SQLite；uv / pnpm 锁文件；pytest / Vitest / Playwright / GitHub Actions。
 
-当前特色是**诊断证据可追溯、故障实验可配置、双算法对照可复现**。卡方检验和逐星排除是已有方法，项目不将其包装成原创算法。后续重点是噪声建模、复杂故障下的适用边界和系统化实验，详见 [路线图](docs/roadmap.md)。
+当前特色是**诊断证据可追溯、故障实验可配置、双算法对照可复现**。卡方检验和逐星排除是已有方法，项目不将其包装成原创算法。本轮已加入多故障对照、ICCV 2025 SAC-GNC 启发的实验算法及 Stanford 工具校验。方法来源与未复现部分见 [研究说明](docs/research.md)，后续重点见 [路线图](docs/roadmap.md)。
 
 `fixtures/course/` 保留用户提供的课程包，`reference/` 只供测试与事后评估。课程包、真实观测和 RTKLIB 来源/许可见原包 README、provenance.json、LICENSE_RTKLIB.txt。本仓库未为这些第三方材料另行授权；公开仓库前需先明确课程资料的发布范围。原包任务书与原包哈希清单存在一个既有不一致，见验证记录，原文件未被修改。
+
+## v0.2 算法与验收
+
+![双星故障诊断与GNC证据](docs/media/advanced-diagnostics.png)
+
+默认 `consensus`：先检验单星假设，若没有候选通过才检验双星；最小故障数存在多个可行候选时返回 SUSPECT。`single_fde` 保留旧版，`adaptive_gnc` 为论文启发的实验路径。关闭 FDE 始终得到独立等权基线。
+
+```bash
+uv run gnss solve --input fixtures/course/data/D03_sim_demo.jsonl --out runtime/gnc-demo --algorithm adaptive_gnc
+uv run gnss benchmark --out runtime/benchmark --seed 20261016 --samples 84
+uv sync --group research
+uv run --group research gnss cross-check --out runtime/cross-check.json
+```
+
+网页“算法与自定义数据”支持导入 JSONL 与可选星历（最多5000历元/16MiB），未给星历则用课程周1316星历；更长输入使用 CLI。参数、输入和逐星决策可完整导出。
+
+[教师要求矩阵](docs/requirements-matrix.md) · [技术报告草稿](docs/report.pdf) · [预设实验设计](docs/algorithm-plan.md) · [保留种子完整结果](docs/experiments/holdout-report.md) · [原始实验归档](docs/experiments/holdout-evidence.zip)
+
+保留种子20261016，每类84历元：双星故障的10m内成功率由旧版单星FDE的1.2%提升到95.2%，水平P95由78.24m降至3.47m；正常/单星/渐变回归保持通过。GNC最终精度相同、耗时更高，保留实验选项。重尾与sigma失配仍出现失败和错剔，不能据此宣称真实环境领先。

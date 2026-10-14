@@ -23,6 +23,7 @@ export async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const statusLabels: Record<string, string> = {
+  TRANSPORT_STALE: '数据已过期 · 历史位置',
   VALID: '定位有效',
   FAULT_EXCLUDED: '已剔除异常卫星',
   FAULT_MITIGATED: '已抑制异常',

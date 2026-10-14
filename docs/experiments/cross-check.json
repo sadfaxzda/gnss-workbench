@@ -1,0 +1,401 @@
+{
+  "tool": "Stanford-NavLab/gnss_lib_py",
+  "version": "1.1.0",
+  "scope": "Independent snapshot WLS only; corrections shared and frozen; not an external accuracy validation",
+  "epochs": 78,
+  "max_state_difference_m": 1.6587411649830815e-07,
+  "tolerance_m": 0.001,
+  "comparisons": [
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 0,
+      "state_difference_m": 4.7393914644737195e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 1,
+      "state_difference_m": 1.0096158741254782e-08
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 2,
+      "state_difference_m": 2.611906640128115e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 3,
+      "state_difference_m": 3.313365966711644e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 4,
+      "state_difference_m": 3.5228936519187194e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 5,
+      "state_difference_m": 9.216229652020121e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 6,
+      "state_difference_m": 2.861107855447322e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 7,
+      "state_difference_m": 4.324859134630407e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 8,
+      "state_difference_m": 8.883566586299544e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 9,
+      "state_difference_m": 7.713067612173835e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 10,
+      "state_difference_m": 9.397428109899716e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 11,
+      "state_difference_m": 5.740546119707406e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 12,
+      "state_difference_m": 7.897012140145022e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 13,
+      "state_difference_m": 9.911050831542714e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 14,
+      "state_difference_m": 6.893369882790727e-10
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 15,
+      "state_difference_m": 1.910029647799121e-08
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 16,
+      "state_difference_m": 1.550243470397184e-08
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 17,
+      "state_difference_m": 5.485821140266791e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 18,
+      "state_difference_m": 4.7709869410390144e-09
+    },
+    {
+      "dataset": "D01_real_excerpt",
+      "epoch_id": 19,
+      "state_difference_m": 5.3835793257089094e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 0,
+      "state_difference_m": 4.673504522032539e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 20,
+      "state_difference_m": 1.794739243145024e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 40,
+      "state_difference_m": 1.8104911694988843e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 60,
+      "state_difference_m": 4.903892876588562e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 80,
+      "state_difference_m": 4.011323263223188e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 100,
+      "state_difference_m": 4.619132966739689e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 120,
+      "state_difference_m": 6.606248979135631e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 140,
+      "state_difference_m": 1.0228332528854952e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 160,
+      "state_difference_m": 1.196815188374927e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 180,
+      "state_difference_m": 1.6147985994727053e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 200,
+      "state_difference_m": 5.997437294807997e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 220,
+      "state_difference_m": 5.960035294274993e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 240,
+      "state_difference_m": 2.4291171064582233e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 260,
+      "state_difference_m": 1.3727557155675143e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 280,
+      "state_difference_m": 2.652593822741621e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 300,
+      "state_difference_m": 2.3040695834260226e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 320,
+      "state_difference_m": 2.2078445896518975e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 340,
+      "state_difference_m": 1.9585148024234146e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 360,
+      "state_difference_m": 2.219504484119275e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 380,
+      "state_difference_m": 1.5579991576339063e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 400,
+      "state_difference_m": 6.5408269015433386e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 420,
+      "state_difference_m": 1.4666280434741909e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 440,
+      "state_difference_m": 6.931269087144305e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 460,
+      "state_difference_m": 1.521880070846017e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 480,
+      "state_difference_m": 6.513278600695995e-09
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 500,
+      "state_difference_m": 1.132122404613408e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 520,
+      "state_difference_m": 5.5061221115393946e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 540,
+      "state_difference_m": 5.319619803860522e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 560,
+      "state_difference_m": 5.2587619764142854e-08
+    },
+    {
+      "dataset": "D02_sim_clean",
+      "epoch_id": 580,
+      "state_difference_m": 5.063861231765863e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 0,
+      "state_difference_m": 3.805485816450611e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 20,
+      "state_difference_m": 1.1152524128234572e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 40,
+      "state_difference_m": 2.4854544476859197e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 60,
+      "state_difference_m": 8.111857429928312e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 80,
+      "state_difference_m": 2.8066117853861547e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 100,
+      "state_difference_m": 2.380127998826106e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 120,
+      "state_difference_m": 6.342581460355981e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 140,
+      "state_difference_m": 4.082454167337636e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 160,
+      "state_difference_m": 3.1740209048331226e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 180,
+      "state_difference_m": 7.033528191971284e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 200,
+      "state_difference_m": 3.325543109242655e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 220,
+      "state_difference_m": 1.3686787990190605e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 240,
+      "state_difference_m": 1.611905770750967e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 260,
+      "state_difference_m": 1.6900838922882688e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 280,
+      "state_difference_m": 1.4325360940905458e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 300,
+      "state_difference_m": 1.4329853980247054e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 320,
+      "state_difference_m": 4.04549132120354e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 340,
+      "state_difference_m": 1.6587411649830815e-07
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 360,
+      "state_difference_m": 4.888409398515792e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 380,
+      "state_difference_m": 1.2230140250454008e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 400,
+      "state_difference_m": 4.6156876724211055e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 420,
+      "state_difference_m": 6.733249171714825e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 440,
+      "state_difference_m": 4.2269306136329926e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 480,
+      "state_difference_m": 2.9075980227083695e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 500,
+      "state_difference_m": 3.6433488659852585e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 540,
+      "state_difference_m": 4.951608571914766e-09
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 560,
+      "state_difference_m": 2.6303158379563432e-08
+    },
+    {
+      "dataset": "D03_sim_demo",
+      "epoch_id": 580,
+      "state_difference_m": 3.732679719577504e-09
+    }
+  ],
+  "passed": true
+}

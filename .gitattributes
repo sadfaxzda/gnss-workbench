@@ -3,3 +3,5 @@
 fixtures/course/** -text
 *.png binary
 *.docx binary
+*.pdf binary
+*.zip binary

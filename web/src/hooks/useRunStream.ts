@@ -7,6 +7,7 @@ export function useRunStream(runId: string | null) {
   const [run, setRun] = useState<Run | null>(null)
   const [connection, setConnection] = useState('idle')
   const [transport, setTransport] = useState('')
+  const [positionStale, setPositionStale] = useState(false)
   const [error, setError] = useState('')
   const queryClient = useQueryClient()
 
@@ -14,6 +15,7 @@ export function useRunStream(runId: string | null) {
     setEpochs([])
     setRun(null)
     setTransport('')
+    setPositionStale(false)
     setError('')
     if (!runId) {
       setConnection('idle')
@@ -43,11 +45,14 @@ export function useRunStream(runId: string | null) {
             setEpochs(event.epochs)
             setRun(event.run)
             setTransport(event.transport || '')
+            setPositionStale(Boolean(event.position_stale))
             completed = !['running', 'stopping'].includes(event.run.status)
           } else if (event.type === 'epoch') {
+            setPositionStale(false)
             setEpochs((previous) => upsertEpochs(previous, [event as EpochFrame]))
           } else if (event.type === 'transport') {
             setTransport(event.status)
+            if (event.status === 'TRANSPORT_STALE') setPositionStale(true)
           } else if (event.type === 'heartbeat' || event.type === 'run_status') {
             setRun(event.run)
             completed = !['running', 'stopping'].includes(event.run.status)
@@ -86,5 +91,5 @@ export function useRunStream(runId: string | null) {
       socket?.close()
     }
   }, [runId, queryClient])
-  return { epochs, run, connection, transport, error }
+  return { epochs, run, connection, transport, positionStale, error }
 }

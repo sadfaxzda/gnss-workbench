@@ -6,7 +6,7 @@ import hashlib
 import json
 from dataclasses import asdict
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 
 import typer
 
@@ -29,9 +29,13 @@ def solve(
     / "navigation.json",
     truth: Annotated[Path | None, typer.Option(exists=True)] = None,
     disable_fde: bool = False,
+    algorithm: Literal["single_fde", "consensus", "adaptive_gnc"] = "consensus",
+    noise_sigma_m: float = 1.0,
 ) -> None:
     """Solve a JSONL stream, save both solutions and complete diagnosis evidence."""
-    config = SolverConfig(enable_fde=not disable_fde)
+    config = SolverConfig(
+        enable_fde=not disable_fde, algorithm=algorithm, noise_sigma_m=noise_sigma_m
+    )
     engine = PositioningEngine(navigation_from(navigation), config)
     baseline, improved = [], []
     out.mkdir(parents=True, exist_ok=True)
@@ -73,6 +77,30 @@ def serve(host: str = "127.0.0.1", port: int = 8000) -> None:
     import uvicorn
 
     uvicorn.run("gnss_workbench.api:app", host=host, port=port)
+
+
+@app.command()
+def benchmark(
+    out: Annotated[Path, typer.Option()], seed: int = 20261016, samples: int = 84
+) -> None:
+    """Run seven reproducible stress families against four algorithm configurations."""
+    from .benchmark import run_benchmark
+
+    run_benchmark(out, seed, samples)
+    typer.echo(f"Benchmark complete → {out / 'report.md'}")
+
+
+@app.command("cross-check")
+def cross_check_command(
+    out: Annotated[Path, typer.Option()] = Path("runtime/cross-check.json"),
+) -> None:
+    """Check snapshot WLS with the optional Stanford gnss_lib_py tool."""
+    from .research_tools import cross_check
+
+    result = cross_check(out)
+    typer.echo(
+        f"{result['epochs']} snapshots checked; max state delta {result['max_state_difference_m']:.6g} m"
+    )
 
 
 if __name__ == "__main__":

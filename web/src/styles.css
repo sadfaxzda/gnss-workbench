@@ -1245,3 +1245,64 @@ tbody tr:last-child td {
     font-size: 8px;
   }
 }
+
+.advanced-controls {
+  margin-bottom: 22px;
+  padding: 18px 22px;
+}
+.advanced-controls summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #384b60;
+}
+.advanced-controls .form-grid {
+  margin-top: 20px;
+}
+.advanced-controls input[type='file'] {
+  max-width: 100%;
+  height: auto;
+  padding: 8px;
+}
+.skyplot {
+  width: 100%;
+  max-height: 340px;
+}
+.sky-panel .explanation {
+  margin: 12px 22px;
+}
+.sky-panel details {
+  margin: 18px;
+}
+.sky-panel details .table-scroll {
+  max-height: 240px;
+}
+.diagnostic-layout > .panel:first-child {
+  grid-column: 1 / -1;
+}
+.sky-panel {
+  align-self: start;
+}
+.candidate-row > span:first-child {
+  width: 92px;
+  flex-shrink: 0;
+}
+.advanced-controls .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.advanced-controls label {
+  min-width: 0;
+}
+.advanced-controls select {
+  max-width: 100%;
+}
+@media (max-width: 680px) {
+  .advanced-controls .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+    padding-inline: 0;
+  }
+}
+
+.candidate-list {
+  max-height: 560px;
+  overflow-y: auto;
+}

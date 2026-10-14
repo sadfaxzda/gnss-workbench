@@ -26,6 +26,7 @@ import {
 import type { EChartsOption } from 'echarts'
 import { Button } from './components/Button'
 import { Chart } from './components/Chart'
+import { Skyplot } from './components/Skyplot'
 import { useRunStream } from './hooks/useRunStream'
 import {
   type Dataset,
@@ -107,6 +108,9 @@ export default function App() {
   const [source, setSource] = useState<'file' | 'tcp'>('file')
   const [interval, setInterval] = useState(0.02)
   const [enableFde, setEnableFde] = useState(true)
+  const [algorithm, setAlgorithm] = useState<NonNullable<RunRequest['algorithm']>>('consensus')
+  const [importFile, setImportFile] = useState<File | null>(null)
+  const [navigationFile, setNavigationFile] = useState<File | null>(null)
   const [scenario, setScenario] = useState<Scenario>(initialScenario)
   const [noise, setNoise] = useState(1)
   const [port, setPort] = useState(8765)
@@ -122,7 +126,14 @@ export default function App() {
     queryFn: () => request<Run[]>('/runs'),
     refetchInterval: 3000,
   })
-  const { epochs, run, connection, transport, error: streamError } = useRunStream(runId)
+  const {
+    epochs,
+    run,
+    connection,
+    transport,
+    positionStale,
+    error: streamError,
+  } = useRunStream(runId)
   const activeRun = runs.find((r) => ['running', 'stopping'].includes(r.status))
   const busy = Boolean(activeRun) || run?.status === 'running' || run?.status === 'stopping'
   const latest = epochs.at(-1)
@@ -131,7 +142,8 @@ export default function App() {
   const solution = selected?.improved
   const metrics = run?.summary.evaluation as Evaluation | undefined
   const stale =
-    transport === 'TRANSPORT_STALE' || (run?.status === 'running' && connection === 'disconnected')
+    positionStale ||
+    (run?.status === 'running' && ['disconnected', 'connecting'].includes(connection))
   const currentDataset = datasets.find((d) => d.id === (run?.configuration.dataset_id ?? datasetId))
   const total = currentDataset?.epochs ?? 600
   const progress = Math.min(100, (epochs.length / total) * 100)
@@ -153,6 +165,7 @@ export default function App() {
           interval_seconds: interval,
           tcp_port: port,
           enable_fde: enableFde,
+          algorithm,
           noise_sigma_m: noise,
           scenario,
         }),
@@ -163,6 +176,28 @@ export default function App() {
       void client.invalidateQueries({ queryKey: ['runs'] })
     },
     onError: (e) => setActionError(e.message),
+  })
+  const importDataset = useMutation({
+    mutationFn: async () => {
+      if (!importFile) throw new Error('请选择 JSONL 观测文件')
+      if (importFile.size > 16 * 1024 * 1024) throw new Error('导入文件上限为 16 MiB')
+      return request<Dataset>('/datasets', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: importFile.name,
+          jsonl: await importFile.text(),
+          navigation: navigationFile ? JSON.parse(await navigationFile.text()) : null,
+        }),
+      })
+    },
+    onSuccess: (dataset) => {
+      setDatasetId(dataset.id)
+      setSource('file')
+      setScenario(initialScenario)
+      setActionError('')
+      void client.invalidateQueries({ queryKey: ['datasets'] })
+    },
+    onError: (error) => setActionError(error.message),
   })
   const stop = useMutation({
     mutationFn: () => request<Run>(`/runs/${activeRun?.id ?? runId}/stop`, { method: 'POST' }),
@@ -320,7 +355,7 @@ export default function App() {
           </div>
           <p>计算与数据保存在本机</p>
           <div className="version">
-            v0.1.0 <span>科学计算工作台</span>
+            v0.2.0 <span>科学计算工作台</span>
           </div>
         </div>
       </aside>
@@ -375,6 +410,12 @@ export default function App() {
             <div className="alert alert-warning" role="status">
               <Clock3 size={17} />
               数据已过期。下方为历史结果，不能作为当前有效位置。
+            </div>
+          )}
+
+          {transport === 'TRANSPORT_RESUMED' && !stale && (
+            <div className="alert" role="status">
+              传输已恢复；当前有效性以最新历元状态为准。
             </div>
           )}
 
@@ -469,6 +510,62 @@ export default function App() {
             </section>
           )}
 
+          {page !== 'history' && (
+            <details className="panel advanced-controls">
+              <summary>算法与自定义数据</summary>
+              <div className="form-grid">
+                <label>
+                  诊断算法
+                  <select
+                    aria-label="诊断算法"
+                    value={algorithm}
+                    disabled={busy}
+                    onChange={(event) =>
+                      setAlgorithm(event.target.value as NonNullable<RunRequest['algorithm']>)
+                    }
+                  >
+                    <option value="single_fde">原版 · 唯一单星 FDE</option>
+                    <option value="consensus">多假设 · 最多两星故障</option>
+                    <option value="adaptive_gnc">实验 · 自适应 GNC + 一致性验证</option>
+                  </select>
+                </label>
+                <p className="explanation">
+                  实验算法参考 ICCV 2025
+                  SAC-GNC；当前以鲁棒权重引导假设检验，是否更好需以对照结果判断。
+                </p>
+                <label>
+                  观测 JSONL（最多 5000 历元）
+                  <input
+                    aria-label="导入观测文件"
+                    type="file"
+                    accept=".jsonl,.json"
+                    disabled={busy}
+                    onChange={(event) => setImportFile(event.target.files?.[0] ?? null)}
+                  />
+                </label>
+                <label>
+                  配套星历 JSON（可选）
+                  <input
+                    aria-label="导入星历文件"
+                    type="file"
+                    accept=".json"
+                    disabled={busy}
+                    onChange={(event) => setNavigationFile(event.target.files?.[0] ?? null)}
+                  />
+                </label>
+                <p className="explanation">
+                  省略星历时使用课程 GPS 周 1316 星历。自定义数据不显示未经真值验证的精度指标。
+                </p>
+                <Button
+                  disabled={busy || !importFile || importDataset.isPending}
+                  onClick={() => importDataset.mutate()}
+                >
+                  {importDataset.isPending ? '正在校验…' : '校验并导入'}
+                </Button>
+              </div>
+            </details>
+          )}
+
           {page === 'live' && (
             <>
               <div className="metrics-grid">
@@ -556,7 +653,7 @@ export default function App() {
                     <Radio size={18} className="muted" />
                   </div>
                   <div className="solution-status">
-                    <Status value={solution?.status} />
+                    <Status value={stale ? 'TRANSPORT_STALE' : solution?.status} />
                     <p>{solution?.reason || '运行后显示解算状态与诊断依据。'}</p>
                   </div>
                   <dl className={stale ? 'position-details stale' : 'position-details'}>
@@ -647,7 +744,7 @@ export default function App() {
                       历元 {selected?.epoch_id ?? '—'} · {solution?.reason || '请先运行一组观测'}
                     </p>
                   </div>
-                  <Status value={solution?.status} />
+                  <Status value={stale ? 'TRANSPORT_STALE' : solution?.status} />
                 </div>
                 <div className="table-scroll">
                   <table>
@@ -657,7 +754,8 @@ export default function App() {
                         <th>高度角</th>
                         <th>方位角</th>
                         <th>残差 / m</th>
-                        <th>权重</th>
+                        <th>最终权重</th>
+                        <th>鲁棒提议权重</th>
                         <th>处置</th>
                       </tr>
                     </thead>
@@ -672,6 +770,7 @@ export default function App() {
                           <td>{format(s.azimuth_deg, 1)}°</td>
                           <td className="mono">{format(s.residual_m, 3)}</td>
                           <td>{s.weight}</td>
+                          <td>{format(s.robust_weight, 3)}</td>
                           <td>
                             <span
                               className={`status ${s.excluded ? 'status-warn' : 'status-good'}`}
@@ -688,11 +787,60 @@ export default function App() {
                   )}
                 </div>
               </section>
+              <section className="panel sky-panel">
+                <div className="panel-heading">
+                  <div>
+                    <h2>卫星天空图</h2>
+                    <p>北向为上；内圈60°、中圈30°、外圈0°；红色为剔除卫星</p>
+                  </div>
+                </div>
+                <Skyplot satellites={solution?.diagnostics ?? []} />
+                <p className="explanation">
+                  方法：{solution?.algorithm ?? '—'} · 已检验{' '}
+                  {solution?.candidate_scores?.length ?? 0} 个假设 · 搜索
+                  {solution?.search_complete === false ? '未完成' : '完整'}
+                </p>
+                {!!solution?.algorithm_trace?.length && (
+                  <details>
+                    <summary>GNC 搜索轨迹 · {solution.algorithm_trace.length} 个提议</summary>
+                    <div className="table-scroll">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>深度</th>
+                            <th>退火率</th>
+                            <th>尺度 / m</th>
+                            <th>MSAC / m²</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {solution.algorithm_trace.map((raw, index) => {
+                            const trace = raw as {
+                              depth: number
+                              annealing_rate: number
+                              shape_m: number
+                              msac_score_m2: number
+                            }
+                            return (
+                              <tr key={index}>
+                                <td>{trace.depth}</td>
+                                <td>{trace.annealing_rate}</td>
+                                <td>{format(trace.shape_m)}</td>
+                                <td>{format(trace.msac_score_m2)}</td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </details>
+                )}
+              </section>
               <section className="panel evidence-panel">
                 <div className="panel-heading">
                   <div>
                     <h2>故障诊断证据</h2>
-                    <p>全局检验与逐星剔除假设</p>
+                    <p>全局检验与最小故障数假设</p>
                   </div>
                   <ShieldCheck size={20} className="teal-text" />
                 </div>
@@ -711,36 +859,38 @@ export default function App() {
                   </div>
                 </div>
                 <p className="explanation">
-                  只有一个剔星假设通过残差检验、且剩余观测仍有冗余时，系统才自动剔除该卫星。共同偏差由接收机钟差吸收。
+                  最小剔星数仅有一个假设通过残差与几何检验，且保留验证冗余时才确认剔除。多个候选通过则保留疑点。共同偏差由钟差吸收。
                 </p>
-                {(solution?.candidate_scores ?? []).map((raw) => {
-                  const c = raw as {
-                    sat_id: string
-                    statistic: number
-                    threshold: number
-                    passed: boolean
-                  }
-                  return (
-                    <div className="candidate-row" key={c.sat_id}>
-                      <span>剔除 {c.sat_id}</span>
-                      <div className="candidate-track">
-                        <i
-                          style={{
-                            width: `${Math.min(100, (c.statistic / Math.max(c.threshold, 1)) * 50)}%`,
-                            background: c.passed ? '#159d8d' : '#c9d3de',
-                          }}
-                        />
+                <div className="candidate-list">
+                  {(solution?.candidate_scores ?? []).map((raw) => {
+                    const c = raw as {
+                      sat_id: string
+                      statistic: number | null
+                      threshold: number | null
+                      passed: boolean
+                    }
+                    return (
+                      <div className="candidate-row" key={c.sat_id}>
+                        <span>剔除 {c.sat_id}</span>
+                        <div className="candidate-track">
+                          <i
+                            style={{
+                              width: `${Math.min(100, ((c.statistic ?? 0) / Math.max(c.threshold ?? 1, 1)) * 50)}%`,
+                              background: c.passed ? '#159d8d' : '#c9d3de',
+                            }}
+                          />
+                        </div>
+                        <strong>{format(c.statistic, 1)}</strong>
+                        <span className={c.passed ? 'teal-text' : 'muted'}>
+                          {c.passed ? '通过' : '未通过'}
+                        </span>
                       </div>
-                      <strong>{format(c.statistic, 1)}</strong>
-                      <span className={c.passed ? 'teal-text' : 'muted'}>
-                        {c.passed ? '通过' : '未通过'}
-                      </span>
-                    </div>
-                  )
-                })}
+                    )
+                  })}
+                </div>
                 <div className="info-box">
                   <CircleHelp size={17} />
-                  本方法针对单星故障设计；多个相关故障可能无法唯一识别。低残差也不能保证真实误差小。
+                  最多诊断两星故障。相关故障、弱几何与噪声失配仍可能误判。残差通过不等于真实误差小，也不构成完好性保障。
                 </div>
               </section>
             </div>
@@ -1058,6 +1208,14 @@ export default function App() {
                       <a href={`/api/runs/${run.id}/download/epochs.jsonl`} download>
                         <ArrowDownToLine size={13} />
                         诊断日志
+                      </a>
+                      <a href={`/api/runs/${run.id}/download/input.jsonl`} download>
+                        <ArrowDownToLine size={13} />
+                        观测输入
+                      </a>
+                      <a href={`/api/runs/${run.id}/download/navigation.json`} download>
+                        <ArrowDownToLine size={13} />
+                        配套星历
                       </a>
                       <a href={`/api/runs/${run.id}/download/manifest.json`} download>
                         <ArrowDownToLine size={13} />

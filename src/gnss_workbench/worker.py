@@ -22,7 +22,7 @@ from .core.models import CSV_FIELDS, Epoch, SolverConfig
 from .core.solver import PositioningEngine
 from .evaluation import evaluate_run
 from .experiments import inject
-from .io import csv_row, navigation_from, read_epochs
+from .io import csv_row, navigation_from, read_frames
 from .settings import COURSE_ROOT, PROJECT_ROOT
 
 MAX_LINE_BYTES = 1024 * 1024
@@ -71,7 +71,7 @@ def tcp_frames(port: int, stop: Any) -> Iterator[dict[str, Any]]:
                     yield {"type": "transport", "status": "TRANSPORT_ENDED"}
                     return
                 elif frame.get("type") == "epoch":
-                    epoch = Epoch.from_dict(frame)
+                    epoch = Epoch.from_dict(frame, tolerate_observation_errors=True)
                     if epoch.epoch_id in seen:
                         raise ValueError("Duplicate TCP epoch_id")
                     seen.add(epoch.epoch_id)
@@ -123,7 +123,13 @@ def _derived_truth(request: RunRequest, output: Path) -> Path:
 
 
 def run_worker(
-    run_id: str, raw_request: dict[str, Any], output_path: str, queue: Any, stop: Any
+    run_id: str,
+    raw_request: dict[str, Any],
+    output_path: str,
+    queue: Any,
+    stop: Any,
+    source_path: str | None = None,
+    navigation_path: str | None = None,
 ) -> None:
     request = RunRequest.model_validate(raw_request)
     output = Path(output_path)
@@ -134,9 +140,12 @@ def run_worker(
         noise_sigma_m=request.noise_sigma_m,
         false_alarm_probability=request.false_alarm_probability,
         enable_fde=request.enable_fde,
+        algorithm=request.algorithm,
     )
-    navigation = COURSE_ROOT / "data/navigation.json"
-    source = COURSE_ROOT / "data" / f"{request.dataset_id}.jsonl"
+    navigation = Path(navigation_path) if navigation_path else COURSE_ROOT / "data/navigation.json"
+    source = (
+        Path(source_path) if source_path else COURSE_ROOT / "data" / f"{request.dataset_id}.jsonl"
+    )
     revision = (
         subprocess.run(
             ["git", "rev-parse", "HEAD"],
@@ -161,12 +170,11 @@ def run_worker(
         "reference_truth_used_for_positioning": False,
     }
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    (output / "navigation.json").write_bytes(navigation.read_bytes())
     try:
         engine = PositioningEngine(navigation_from(navigation), config)
         frames = (
-            tcp_frames(request.tcp_port, stop)
-            if request.source == "tcp"
-            else ({"type": "epoch", **asdict(e)} for e in read_epochs(source))
+            tcp_frames(request.tcp_port, stop) if request.source == "tcp" else read_frames(source)
         )
         with (
             (output / "baseline.csv").open("w", newline="") as bfile,
@@ -179,6 +187,18 @@ def run_worker(
                 csv.DictWriter(bfile, fieldnames=CSV_FIELDS),
                 csv.DictWriter(ifile, fieldnames=CSV_FIELDS),
             )
+            inputs.write(
+                json.dumps(
+                    {
+                        "type": "meta",
+                        "schema": "GNSS-COURSE-1.0",
+                        "time_system": "GPST_RECEIVER_TIME_TAG",
+                        "observable": "GPS_L1_C1",
+                        "replay_interval_wall_s": request.interval_seconds,
+                    }
+                )
+                + "\n"
+            )
             bw.writeheader()
             iw.writeheader()
             for frame in frames:
@@ -190,8 +210,11 @@ def run_worker(
                     events.flush()
                     queue.put(event)
                     continue
-                epoch = inject(Epoch.from_dict(frame), request.scenario)
-                inputs.write(json.dumps({"type": "epoch", **asdict(epoch)}) + "\n")
+                epoch = inject(
+                    Epoch.from_dict(frame, tolerate_observation_errors=True), request.scenario
+                )
+                saved_frame = frame if epoch.data_error else {"type": "epoch", **asdict(epoch)}
+                inputs.write(json.dumps(saved_frame) + "\n")
                 baseline, improved = engine.solve(epoch)
                 bw.writerow(csv_row(baseline))
                 iw.writerow(csv_row(improved))
@@ -243,7 +266,7 @@ def run_worker(
         }
         if (
             request.source == "file"
-            and request.dataset_id != "D01_real_excerpt"
+            and request.dataset_id in {"D02_sim_clean", "D03_sim_demo"}
             and not stop.is_set()
         ):
             truth = _derived_truth(request, output)

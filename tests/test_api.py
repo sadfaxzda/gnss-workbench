@@ -75,8 +75,8 @@ def test_scenario_and_ablation_are_recorded(tmp_path):
         assert run["status"] == "completed", run
         assert run["summary"]["evaluation"]["improved"]["fault_detection_recall"] >= 0.9
         source = client.get(f"/api/runs/{run_id}/download/input.jsonl").text
-        assert len(source.splitlines()) == 600
-        assert json.loads(source.splitlines()[40])["epoch_id"] == 40
+        assert len(source.splitlines()) == 601
+        assert json.loads(source.splitlines()[41])["epoch_id"] == 40
         assert (
             client.post(
                 "/api/runs", json={"source": "tcp", "scenario": {"kind": "satellite_bias"}}

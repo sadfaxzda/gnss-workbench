@@ -13,9 +13,9 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import __version__
-from .contracts import DatasetInfo, EpochFrame, HealthInfo, RunInfo, RunRequest
+from .contracts import DatasetImport, DatasetInfo, EpochFrame, HealthInfo, RunInfo, RunRequest
 from .service import RunManager
-from .settings import DATASETS, PROJECT_ROOT, RUNTIME_ROOT
+from .settings import PROJECT_ROOT, RUNTIME_ROOT
 
 
 def create_app(runtime_root: Path | None = None) -> FastAPI:
@@ -49,7 +49,14 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
 
     @application.get("/api/datasets", response_model=list[DatasetInfo])
     def datasets():
-        return [{"id": key, **value} for key, value in DATASETS.items()]
+        return manager().datasets.list()
+
+    @application.post("/api/datasets", response_model=DatasetInfo, status_code=201)
+    def import_dataset(request: DatasetImport):
+        try:
+            return manager().datasets.create(request)
+        except (ValueError, KeyError, TypeError) as error:
+            raise HTTPException(422, str(error)) from error
 
     @application.get("/api/runs", response_model=list[RunInfo])
     def runs():
@@ -89,6 +96,7 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
             "improved.csv",
             "epochs.jsonl",
             "input.jsonl",
+            "navigation.json",
             "events.jsonl",
             "manifest.json",
             "metrics.json",
@@ -129,6 +137,7 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
                     "epochs": manager().history(run_id),
                     "seq": last_seq,
                     "transport": manager().transport.get(run_id, ""),
+                    "position_stale": manager().position_stale.get(run_id, False),
                 }
             )
             heartbeat = 0

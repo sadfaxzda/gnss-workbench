@@ -1,0 +1,10 @@
+{
+  "dev-report.md": "7a4c381b22bf9b5c2ac5a60c988ac0fdee9914a9ecec1c3df2aa9ac0f87d32e5",
+  "cross-check.json": "c32a7caeba1d6ce6fe82168aeab06ecf188eafacec8a12337054e12f40b0931f",
+  "holdout-evidence.zip": "2cd7e841171ba3a7a8c0a3796e30cfb7a45b85be53933515b618918f5d8b632d",
+  "dev-metrics.json": "bc6f9f1ef6c05c87b32162ecbb1573623cc0028f08c5a0cab88140ff32a2f784",
+  "holdout-metrics.json": "1ac659bd3612741c5828e98af0dc1a88398461ea3b45c6c2d5fcd6fcd78d09b6",
+  "validation-report.md": "fae5b8b7eb77c639185e7b9b07270da74d176e9575545be0e992fb7782c906ed",
+  "holdout-report.md": "5604dc5478f67eb94ae0b771c5a3cbfa4cc1de9503e06b69db5de17141235c6b",
+  "validation-metrics.json": "334103bdab514bff509d003d9bf4e9a857c90974bf403ce60a4e7d0f466b3f75"
+}

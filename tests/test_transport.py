@@ -63,3 +63,33 @@ def test_oversize_partial_frame_rejected():
     with pytest.raises(ValueError, match="1 MiB"):
         list(tcp_frames(port, threading.Event()))
     thread.join(timeout=1)
+
+
+def test_file_and_fragmented_tcp_use_identical_solutions():
+    from gnss_workbench.core.models import Epoch
+    from gnss_workbench.core.solver import PositioningEngine
+    from gnss_workbench.io import csv_row, navigation_from
+
+    nav = navigation_from(COURSE_ROOT / "data/navigation.json")
+    file_epochs = list(read_epochs(COURSE_ROOT / "data/D03_sim_demo.jsonl"))
+    selected = [file_epochs[i] for i in [70, 170, 330, 460, 500, 520, 550]]
+    data = (
+        "\n".join(json.dumps({"type": "epoch", **asdict(epoch)}) for epoch in selected)
+        + '\n{"type":"end","epochs_sent":7}\n'
+    ).encode()
+    port, thread = server_sends([data[:19], data[19:150], data[150:]])
+    engine_file, engine_tcp = PositioningEngine(nav), PositioningEngine(nav)
+    streamed = [
+        Epoch.from_dict(frame, tolerate_observation_errors=True)
+        for frame in tcp_frames(port, threading.Event())
+        if frame["type"] == "epoch"
+    ]
+    for file_epoch, tcp_epoch in zip(selected, streamed, strict=True):
+        for file_result, tcp_result in zip(
+            engine_file.solve(file_epoch), engine_tcp.solve(tcp_epoch), strict=True
+        ):
+            file_row, tcp_row = csv_row(file_result), csv_row(tcp_result)
+            file_row.pop("processing_ms")
+            tcp_row.pop("processing_ms")
+            assert file_row == tcp_row
+    thread.join(timeout=1)

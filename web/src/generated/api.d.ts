@@ -31,7 +31,8 @@ export interface paths {
         /** Datasets */
         get: operations["datasets_api_datasets_get"];
         put?: never;
-        post?: never;
+        /** Import Dataset */
+        post: operations["import_dataset_api_datasets_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -128,6 +129,17 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** DatasetImport */
+        DatasetImport: {
+            /** Name */
+            name: string;
+            /** Jsonl */
+            jsonl: string;
+            /** Navigation */
+            navigation?: {
+                [key: string]: unknown;
+            } | null;
+        };
         /** DatasetInfo */
         DatasetInfo: {
             /** Id */
@@ -250,9 +262,8 @@ export interface components {
             /**
              * Dataset Id
              * @default D03_sim_demo
-             * @enum {string}
              */
-            dataset_id: "D01_real_excerpt" | "D02_sim_clean" | "D03_sim_demo";
+            dataset_id: string;
             /**
              * Source
              * @default file
@@ -274,6 +285,12 @@ export interface components {
              * @default true
              */
             enable_fde: boolean;
+            /**
+             * Algorithm
+             * @default consensus
+             * @enum {string}
+             */
+            algorithm: "single_fde" | "consensus" | "adaptive_gnc";
             /**
              * Noise Sigma M
              * @default 1
@@ -308,6 +325,8 @@ export interface components {
              * @default false
              */
             excluded: boolean;
+            /** Robust Weight */
+            robust_weight?: number | null;
         };
         /** Solution */
         Solution: {
@@ -363,6 +382,20 @@ export interface components {
             dof: number;
             /** Candidate Scores */
             candidate_scores?: {
+                [key: string]: unknown;
+            }[];
+            /**
+             * Algorithm
+             * @default ols
+             */
+            algorithm: string;
+            /**
+             * Search Complete
+             * @default true
+             */
+            search_complete: boolean;
+            /** Algorithm Trace */
+            algorithm_trace?: {
                 [key: string]: unknown;
             }[];
         };
@@ -424,6 +457,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["DatasetInfo"][];
+                };
+            };
+        };
+    };
+    import_dataset_api_datasets_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DatasetImport"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DatasetInfo"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
@@ -583,7 +649,7 @@ export interface operations {
             header?: never;
             path: {
                 run_id: string;
-                artifact: "baseline.csv" | "improved.csv" | "epochs.jsonl" | "input.jsonl" | "events.jsonl" | "manifest.json" | "metrics.json";
+                artifact: "baseline.csv" | "improved.csv" | "epochs.jsonl" | "input.jsonl" | "navigation.json" | "events.jsonl" | "manifest.json" | "metrics.json";
             };
             cookie?: never;
         };

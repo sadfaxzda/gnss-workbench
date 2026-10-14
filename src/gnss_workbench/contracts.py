@@ -10,11 +10,12 @@ from .experiments import FaultScenario
 
 class RunRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    dataset_id: Literal["D01_real_excerpt", "D02_sim_clean", "D03_sim_demo"] = "D03_sim_demo"
+    dataset_id: str = Field(default="D03_sim_demo", pattern=r"^[A-Za-z0-9_-]{1,64}$")
     source: Literal["file", "tcp"] = "file"
     interval_seconds: float = Field(default=0.03, ge=0, le=30, allow_inf_nan=False)
     tcp_port: int = Field(default=8765, ge=1024, le=65535)
     enable_fde: bool = True
+    algorithm: Literal["single_fde", "consensus", "adaptive_gnc"] = "consensus"
     noise_sigma_m: float = Field(default=1.0, ge=0.1, le=20, allow_inf_nan=False)
     false_alarm_probability: float = Field(default=0.001, gt=0, lt=0.1, allow_inf_nan=False)
     scenario: FaultScenario = Field(default_factory=FaultScenario)
@@ -67,3 +68,10 @@ class EpochFrame(BaseModel):
     baseline: Solution
     improved: Solution
     view: EpochView
+
+
+class DatasetImport(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    name: str = Field(min_length=1, max_length=100)
+    jsonl: str = Field(min_length=1, max_length=16 * 1024 * 1024)
+    navigation: dict[str, Any] | None = None

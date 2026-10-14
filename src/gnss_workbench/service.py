@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from .contracts import RunRequest
+from .datasets import DatasetStore
 from .persistence import RunStore
 from .worker import run_worker
 
@@ -21,14 +22,17 @@ class RunManager:
     def __init__(self, root: Path):
         self.root = root
         self.store = RunStore(root)
+        self.datasets = DatasetStore(root)
         self.active: dict[str, dict[str, Any]] = {}
         self.events: dict[str, deque] = {}
         self.sequence: dict[str, int] = {}
         self.transport: dict[str, str] = {}
+        self.position_stale: dict[str, bool] = {}
 
     def create(self, request: RunRequest) -> dict[str, Any]:
         if self.active:
             raise ValueError("已有运行中的任务，请先停止或等待完成")
+        source, navigation = self.datasets.resolve(request.dataset_id)
         run_id = uuid.uuid4().hex
         output = self.root / "runs" / run_id
         output.mkdir(parents=True)
@@ -38,7 +42,15 @@ class RunManager:
         stop = context.Event()
         process = context.Process(
             target=run_worker,
-            args=(run_id, request.model_dump(), str(output), event_queue, stop),
+            args=(
+                run_id,
+                request.model_dump(),
+                str(output),
+                event_queue,
+                stop,
+                str(source),
+                str(navigation),
+            ),
             daemon=True,
         )
         self.events[run_id] = deque(maxlen=2000)
@@ -66,7 +78,10 @@ class RunManager:
                 self.events[run_id].append(event)
                 if event["type"] == "transport":
                     self.transport[run_id] = event["status"]
+                    if event["status"] == "TRANSPORT_STALE":
+                        self.position_stale[run_id] = True
                 if event["type"] == "epoch":
+                    self.position_stale[run_id] = False
                     active["count"] += 1
                     if active["count"] % 10 == 0:
                         self.store.update(run_id, epoch_count=active["count"])

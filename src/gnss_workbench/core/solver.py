@@ -1,4 +1,4 @@
-"""Equal-weight SPP and conservative, single-fault residual consistency diagnosis.
+"""Equal-weight SPP and bounded, explainable single/multiple-fault diagnosis.
 
 No dataset names, fault schedules or reference receiver positions enter this module.
 The previous fix is only an iteration initial value, never a measurement constraint.
@@ -10,6 +10,7 @@ import copy
 import math
 import time
 from dataclasses import dataclass
+from itertools import combinations
 from typing import Any
 
 import numpy as np
@@ -99,13 +100,24 @@ class PositioningEngine:
             elevations.append(el)
         return np.array(h), np.array(residual), np.array(azimuths), np.array(elevations)
 
-    def _fit(self, observations: list[PreparedObservation], sow: float, initial: np.ndarray) -> Fit:
+    def _fit(
+        self,
+        observations: list[PreparedObservation],
+        sow: float,
+        initial: np.ndarray,
+        weights: np.ndarray | None = None,
+    ) -> Fit:
         if len(observations) < 4:
             raise SolveError("INVALID_INSUFFICIENT", "参与解算的卫星不足四颗")
         state = initial.copy()
+        root_weights = np.ones(len(observations)) if weights is None else np.sqrt(weights)
+        if root_weights.shape != (len(observations),) or not np.all(np.isfinite(root_weights)):
+            raise SolveError("INVALID_DATA", "Invalid robust weights")
         for _ in range(self.config.max_iterations):
             h, residual, _, _ = self._linearize(observations, state, sow)
-            step, _, rank, singular = np.linalg.lstsq(h, residual, rcond=None)
+            step, _, rank, singular = np.linalg.lstsq(
+                h * root_weights[:, None], residual * root_weights, rcond=None
+            )
             if rank < 4 or singular[-1] < 1e-8:
                 raise SolveError("INVALID_GEOMETRY", "几何矩阵秩不足或严重病态")
             state += step
@@ -169,6 +181,16 @@ class PositioningEngine:
     def solve(self, epoch: Epoch) -> tuple[Solution, Solution]:
         started = time.perf_counter()
         n = len(epoch.observations)
+        if epoch.data_error:
+            invalid = Solution(
+                epoch.epoch_id,
+                epoch.gps_week,
+                epoch.gps_sow,
+                "INVALID_DATA",
+                reason=epoch.data_error,
+            )
+            invalid.processing_ms = (time.perf_counter() - started) * 1000
+            return invalid, copy.deepcopy(invalid)
         if n < 4:
             status = "NO_OBSERVATIONS" if n == 0 else "INVALID_INSUFFICIENT"
             reason = (
@@ -202,6 +224,7 @@ class PositioningEngine:
             )
             if self.config.enable_fde:
                 improved = self._diagnose(epoch, fit, improved)
+                improved.algorithm = self.config.algorithm
             else:
                 improved.reason = "消融模式：关闭异常检测与剔除，结果与基线一致"
             improved.processing_ms = (time.perf_counter() - started) * 1000
@@ -221,6 +244,27 @@ class PositioningEngine:
             return invalid, copy.deepcopy(invalid)
 
     def _diagnose(self, epoch: Epoch, fit: Fit, result: Solution) -> Solution:
+        if self.config.algorithm == "single_fde":
+            return self._single_fde(epoch, fit, result)
+        if (
+            result.test_threshold is None
+            or result.test_statistic is None
+            or result.test_statistic <= result.test_threshold
+        ):
+            return result
+        if result.status == "GEOMETRY_WARNING":
+            result.reason += "；残差异常，几何不足以支持自动归因"
+            return result
+        result.status = "SUSPECT"
+        if len(fit.observations) < 6:
+            result.reason = "残差异常，但剔星后缺少验证冗余"
+            return result
+        proposal_weights = None
+        if self.config.algorithm == "adaptive_gnc":
+            proposal_weights, result.algorithm_trace = self._adaptive_gnc(epoch, fit)
+        return self._consensus(epoch, fit, result, proposal_weights)
+
+    def _single_fde(self, epoch: Epoch, fit: Fit, result: Solution) -> Solution:
         if (
             result.test_threshold is None
             or result.test_statistic is None
@@ -289,3 +333,175 @@ class PositioningEngine:
         )
         diagnosed.diagnostics.sort(key=lambda d: d.sat_id)
         return diagnosed
+
+    def _adaptive_gnc(self, epoch: Epoch, fit: Fit) -> tuple[np.ndarray, list[dict[str, Any]]]:
+        """Bounded GM continuation inspired by SAC-GNC (ICCV 2025).
+
+        This is a deterministic GNSS adaptation, not a reproduction of SAC-GNC.
+        Three annealing rates compete in a width-three beam. MSAC scores retain
+        the best hypothesis across all depths. Final acceptance is independently
+        checked by unweighted subset fits in _consensus; weights alone never
+        certify a fault or an integrity guarantee.
+        """
+        cutoff2 = (3 * self.config.noise_sigma_m) ** 2
+        shape2 = max(cutoff2, float(np.max(fit.residual**2)))
+        beam = [(fit, shape2)]
+        best_score = float(np.minimum(fit.residual**2, cutoff2).sum())
+        best_weights = np.ones(len(fit.observations))
+        trace: list[dict[str, Any]] = []
+        for depth in range(6):
+            children: list[tuple[float, Fit, float]] = []
+            for parent, parent_shape in beam:
+                for rate in (1.4, 2.6, 4.9):
+                    shape = max(cutoff2, parent_shape / rate**2)
+                    candidate = parent
+                    try:
+                        for _ in range(5):
+                            weights = (shape / (shape + candidate.residual**2)) ** 2
+                            updated = self._fit(
+                                fit.observations,
+                                epoch.gps_sow,
+                                candidate.state,
+                                np.maximum(weights, 1e-6),
+                            )
+                            change = float(np.linalg.norm(updated.state - candidate.state))
+                            candidate = updated
+                            if change < 0.001:
+                                break
+                    except (SolveError, np.linalg.LinAlgError):
+                        continue
+                    weights = (shape / (shape + candidate.residual**2)) ** 2
+                    score = float(np.minimum(candidate.residual**2, cutoff2).sum())
+                    trace.append(
+                        {
+                            "depth": depth,
+                            "annealing_rate": rate,
+                            "shape_m": math.sqrt(shape),
+                            "msac_score_m2": score,
+                            "weights": {
+                                o.sat_id: float(w)
+                                for o, w in zip(fit.observations, weights, strict=True)
+                            },
+                        }
+                    )
+                    if score < best_score:
+                        best_score, best_weights = score, weights.copy()
+                    if shape > cutoff2:
+                        children.append((score, candidate, shape))
+            if not children:
+                break
+            children.sort(key=lambda item: item[0])
+            beam = [(candidate, shape) for _, candidate, shape in children[:3]]
+        return best_weights, trace
+
+    def _consensus(
+        self,
+        epoch: Epoch,
+        fit: Fit,
+        result: Solution,
+        proposal_weights: np.ndarray | None,
+    ) -> Solution:
+        """Minimal-cardinality FDE with complete, bounded hypothesis evidence.
+
+        A candidate must retain >= 5 satellites, pass the unweighted residual
+        test, have acceptable unweighted PDOP, and be uniquely admissible at the
+        first cardinality that passes. Ambiguous or truncated search stays SUSPECT.
+        No probabilistic integrity claim is made for multiple-hypothesis testing.
+        """
+        observations = fit.observations
+        if proposal_weights is not None:
+            for diagnostic, weight in zip(result.diagnostics, proposal_weights, strict=True):
+                diagnostic.robust_weight = float(weight)
+        scores: list[dict[str, Any]] = []
+        for size in range(1, min(self.config.max_faults, len(observations) - 5) + 1):
+            hypotheses = list(combinations(range(len(observations)), size))
+            if proposal_weights is not None:
+                hypotheses.sort(
+                    key=lambda indices: sum(float(proposal_weights[i]) for i in indices)
+                )
+            passed: list[tuple[tuple[int, ...], Fit]] = []
+            for indices in hypotheses:
+                if len(scores) >= self.config.max_hypotheses:
+                    result.search_complete = False
+                    result.reason = "达到假设检验预算；搜索不完整，不能确认故障归因"
+                    result.candidate_scores = scores
+                    return result
+                removed_ids = [observations[i].sat_id for i in indices]
+                retained = [o for i, o in enumerate(observations) if i not in indices]
+                evidence: dict[str, Any] = {
+                    "sat_id": "+".join(removed_ids),
+                    "excluded_sats": removed_ids,
+                    "passed": False,
+                    "statistic": None,
+                    "threshold": None,
+                    "pdop": None,
+                }
+                try:
+                    candidate = self._fit(retained, epoch.gps_sow, fit.state)
+                    statistic = float(
+                        candidate.residual @ candidate.residual / self.config.noise_sigma_m**2
+                    )
+                    threshold = float(
+                        chi2.ppf(1 - self.config.false_alarm_probability, len(retained) - 4)
+                    )
+                    accepted = statistic <= threshold and candidate.pdop <= self.config.pdop_warning
+                    evidence.update(
+                        statistic=statistic,
+                        threshold=threshold,
+                        pdop=candidate.pdop,
+                        passed=accepted,
+                    )
+                    if accepted:
+                        passed.append((indices, candidate))
+                except (SolveError, np.linalg.LinAlgError) as error:
+                    evidence["failure"] = str(error)
+                scores.append(evidence)
+            result.candidate_scores = scores
+            if not passed:
+                continue
+            if len(passed) != 1:
+                result.reason = (
+                    f"{size} 星故障模型有 {len(passed)} 个假设通过，保留 SUSPECT，避免武断归因"
+                )
+                return result
+            indices, best = passed[0]
+            diagnosed = self._solution(epoch, best)
+            diagnosed.status = "FAULT_EXCLUDED"
+            diagnosed.excluded_sats = [observations[i].sat_id for i in indices]
+            diagnosed.flagged_sats = diagnosed.excluded_sats.copy()
+            diagnosed.candidate_scores = scores
+            diagnosed.algorithm_trace = result.algorithm_trace
+            diagnosed.reason = (
+                f"最小 {size} 星故障假设唯一通过；剔除后保留 {diagnosed.dof} 个验证自由度"
+            )
+            _, residuals, azimuths, elevations = self._linearize(
+                observations, best.state, epoch.gps_sow
+            )
+            for i in indices:
+                diagnosed.diagnostics.append(
+                    SatelliteDiagnostic(
+                        observations[i].sat_id,
+                        float(residuals[i]),
+                        float(residuals[i] / self.config.noise_sigma_m),
+                        math.degrees(float(elevations[i])),
+                        math.degrees(float(azimuths[i])),
+                        weight=0.0,
+                        excluded=True,
+                    )
+                )
+            if proposal_weights is not None:
+                by_id = {
+                    o.sat_id: float(w) for o, w in zip(observations, proposal_weights, strict=True)
+                }
+                for diagnostic in diagnosed.diagnostics:
+                    diagnostic.robust_weight = by_id[diagnostic.sat_id]
+            diagnosed.diagnostics.sort(key=lambda diagnostic: diagnostic.sat_id)
+            return diagnosed
+        result.reason = "一星及两星假设均未获得唯一一致解；可能存在更多故障或模型失配"
+        if proposal_weights is not None:
+            by_id = {
+                o.sat_id: float(w) for o, w in zip(observations, proposal_weights, strict=True)
+            }
+            for diagnostic in result.diagnostics:
+                diagnostic.robust_weight = by_id[diagnostic.sat_id]
+        return result

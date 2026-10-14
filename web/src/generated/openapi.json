@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "GNSS Workbench",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   "paths": {
     "/api/health": {
@@ -38,6 +38,42 @@
                   },
                   "type": "array",
                   "title": "Response Datasets Api Datasets Get"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Import Dataset",
+        "operationId": "import_dataset_api_datasets_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DatasetImport"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DatasetInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
                 }
               }
             }
@@ -271,6 +307,7 @@
                 "improved.csv",
                 "epochs.jsonl",
                 "input.jsonl",
+                "navigation.json",
                 "events.jsonl",
                 "manifest.json",
                 "metrics.json"
@@ -305,6 +342,41 @@
   },
   "components": {
     "schemas": {
+      "DatasetImport": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "jsonl": {
+            "type": "string",
+            "maxLength": 16777216,
+            "minLength": 1,
+            "title": "Jsonl"
+          },
+          "navigation": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Navigation"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name",
+          "jsonl"
+        ],
+        "title": "DatasetImport"
+      },
       "DatasetInfo": {
         "properties": {
           "id": {
@@ -601,11 +673,7 @@
         "properties": {
           "dataset_id": {
             "type": "string",
-            "enum": [
-              "D01_real_excerpt",
-              "D02_sim_clean",
-              "D03_sim_demo"
-            ],
+            "pattern": "^[A-Za-z0-9_-]{1,64}$",
             "title": "Dataset Id",
             "default": "D03_sim_demo"
           },
@@ -636,6 +704,16 @@
             "type": "boolean",
             "title": "Enable Fde",
             "default": true
+          },
+          "algorithm": {
+            "type": "string",
+            "enum": [
+              "single_fde",
+              "consensus",
+              "adaptive_gnc"
+            ],
+            "title": "Algorithm",
+            "default": "consensus"
           },
           "noise_sigma_m": {
             "type": "number",
@@ -690,6 +768,17 @@
             "type": "boolean",
             "title": "Excluded",
             "default": false
+          },
+          "robust_weight": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Robust Weight"
           }
         },
         "type": "object",
@@ -856,6 +945,24 @@
             },
             "type": "array",
             "title": "Candidate Scores"
+          },
+          "algorithm": {
+            "type": "string",
+            "title": "Algorithm",
+            "default": "ols"
+          },
+          "search_complete": {
+            "type": "boolean",
+            "title": "Search Complete",
+            "default": true
+          },
+          "algorithm_trace": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Algorithm Trace"
           }
         },
         "type": "object",
