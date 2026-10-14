@@ -1,20 +1,20 @@
 # GNSS Workbench — 测绘分析工作台
 
-2026-10-14。用户要求重构配色，可靠、稳重，并参考长期使用的测绘企业软件界面。本次采用实际实现为依据的 Operate / code-led 路径，沿用已确认的紧凑联动面板；用户已委托具体取舍，不另起风格投票或概念竞赛。
+2026-10-14。用户最新反馈是“配色还是太复杂了”，并指出部分文字离边框过近。本次为已授权的配色收敛与内容内距修订，采用实际实现为依据的 Operate / code-led 路径；保留专业、稳重的连接工作区、原字体和全部科学语义，不另起概念或功能探索。
 
 ## 已确认方向
 
-Leica Infinity、Topcon MAGNET Office、Trimble Business Center 的官方界面和资料是本轮配色研究依据：中性灰工具框架、按内容区分深色绘图区与浅色数据表、图形与属性联动。项目据此建立自己的颜色关系，不复制厂商原值、商标或截图，也不声称厂商认证。此前 Emlid、Felt、Foxglove 参考所形成的紧凑处理流程、工作区分配和统一回放结构继续保留，配色以本轮测绘软件研究与实际代码为准。
+视觉北极星为“测绘分析工作台”。石墨顶栏 `#30373d`、浅灰工具栏与标题 `#f2f3f4`、白色数据与绘图面 `#ffffff` 形成统一工作区。测量蓝 `#355f79` 是唯一日常强调色，用于主要按钮、改进解实线、选择、焦点、次级链接和滑块。按钮白字，悬浮使用同一蓝色深阶 `#294b61`，导航当前指示和深色顶栏焦点使用同一体系的浅蓝 `#a8c4d8`。
 
-视觉北极星为“测绘分析工作台”。可靠感来自稳定的工业工具层级：石墨顶栏 `#343c36`、设备灰工具栏和面板标题 `#eceee8`、白色数据纸面 `#fdfdfb`、独立深色轨迹区 `#242c27`。这是一套按职责组织的色彩系统，框架、操作、数据与状态各有辨识。
+轨迹已由独立深绿区改为白底：普通解使用中性灰 `#707b84` 虚线，改进解与选中历元为测量蓝；钟差、正常残差和正常卫星统一为中性灰 `#626c75`。普通有效、已处置和中性状态是辅助灰文字加小圆点、透明背景。表格剔除行不整行染色，选中行统一浅蓝 `#edf2f6`。红 `#a3463e` 保留给剔除观测、失效/错误状态与已有危险操作；琥珀 `#805d1e` 仅用于真实警告。设备黄、金色曲线、深绿轨迹和持续绿色胶囊已退出当前视觉系统。
 
-设备黄 `#d7b65c` 用于主要运行动作、品牌小标识和导航指示；测量蓝 `#365f71` 用于浅色图表数据、选中对象和次级交互。深色轨迹上，改进解使用浅蓝实线 `#8bb7ca`，普通解使用金色虚线 `#d3b66b`，选中历元另有浅黄点 `#ead17a`。浅色残差中的剔除观测为基线褐 `#98763b`；天空图的剔除点为砖红。有效、警告、无效保留绿/琥珀/红及文字、线型、点形和圆环，颜色不独自承担含义。规范 token、状态与组件详见 `DESIGN.md` 和 `.impeccable/design.json`。
+不同数据角色仍有各自 token 名称，但共享同一灰/蓝色值：减少的是可见色相，不是删除语义。CSS 中 `--action` / `--action-border` 复用 `--accent`，`--action-hover` 复用 `--accent-hover`；`--plot` / `--plot-text` / `--plot-grid` 分别复用 `--surface` / `--secondary` / `--line-soft`。前一轮设备黄与深色轨迹方案已由本轮明确反馈替代；先前 Leica Infinity、Topcon MAGNET Office、Trimble Business Center 的研究继续提供专业工具结构背景，当前色值以代码与本轮选择为准。
 
 ## 第一屏契约
 
-52px 顶部导航，设备灰紧凑数据源与运行工具栏，主要面积交给轨迹与观测。左侧深色轨迹和底部浅色残差/钟差，右侧白色解算状态与卫星检查，统一历元回放位于桌面底部。面板连接、直角、细分界；标题使用设备灰。保持当前信息密度与联动关系，不以展示性大标题、宽大侧栏或悬浮卡片重新组织首屏。
+52px 顶部导航，浅灰紧凑数据源与运行工具栏，主要面积交给白底轨迹与观测。左侧轨迹和底部残差/钟差，右侧白色解算状态与卫星检查；统一历元回放位于桌面底部。面板连接、直角、细分界；标题浅灰。主要标题、指标带、工具栏、底部图带与时间轴总高度及工作区拓扑保持原实现。
 
-主要按钮为设备黄底、深色字与黄褐边界；次级操作为蓝色文字或纯白描边按钮。工具栏字段使用纸面白与独立 `control-border`，普通表单字段和回放控件为纯白。常规键盘焦点为黄褐，石墨导航使用亮黄焦点。普通面板无投影，只有高级设置浮层使用石墨透明度投影。
+面板内容共用 `--panel-inset`（桌面16px，≤600px为12px）；字段共用 `--field-inset`（12px）。普通表单字段上下6px、工具栏和回放字段上下4px，文件输入6px 12px。标题分隔线后解算状态和证据统计共用 `--content-start`（12px），普通表格单元格上下 `--cell-block`（8px）。支撑图标题上下均8px，单位标签 grid top 为26px。高级设置浮层20px内距保持不变。普通面板无投影，只有高级设置浮层使用石墨透明度投影。
 
 ## 字体契约
 
@@ -24,11 +24,11 @@ Leica Infinity、Topcon MAGNET Office、Trimble Business Center 的官方界面�
 
 ## 核心交互契约
 
-历元时间轴、状态分段、前后历元按钮、轨迹点和钟差图共享选择状态。当前坐标、残差、天空图、诊断表与证据随同一历元更新。卫星表、天空图、残差图共享卫星选择；已选卫星在某历元无记录时明确显示缺失，不能沿用旧值。轨迹 XY 等比例，失效历元不连线、不造坐标。仿真 P95 明确属于整次运行，真值只用于结束后评价。
+历元时间轴、状态分段、前后历元按钮、轨迹点和钟差图共享选择状态。当前坐标、残差、天空图、诊断表与证据随同一历元更新。卫星表、天空图、残差图共享卫星选择；已选卫星在某历元无记录时明确显示缺失，不能沿用旧值。轨迹 XY 等比例，失效历元不连线、不造坐标。仿真 P95 明确属于整次运行，真值只用于结束后评价。本轮不改变科学模型、算法或数据契约。
 
 ## 跨页面和响应式
 
-诊断页：左上卫星表、左下检验证据、右侧天空图和卫星详情。实验与运行历史沿用相同控件和表格语法。1600px、1150px、900px、600px 宽度阈值及620px高度阈值沿用当前实现，准确的布局变化见 `DESIGN.md`。手机改为单列滚动，导航保留文字，表格只在自身区域横向滚动；极矮或窄窗口进入自然文档流。高级输入折叠，完成启动后关闭。
+诊断页：左上卫星表、左下检验证据、右侧天空图和卫星详情。实验与运行历史沿用相同控件和表格语法。1600px、1150px、900px、600px宽度阈值及620px高度阈值沿用当前实现，准确布局变化见 `DESIGN.md`。手机单列滚动，导航保留文字，表格只在自身区域横向滚动；极矮或窄窗口进入自然文档流。高级输入折叠，完成启动后关闭。
 
 ## 数据语义边界
 
@@ -36,17 +36,6 @@ Leica Infinity、Topcon MAGNET Office、Trimble Business Center 的官方界面�
 
 ## 参考与当前证据
 
-本轮研究的官方来源：
+既有官方研究及其出处见 `docs/interface-research.md`；本轮直接依据 `web/src/styles.css`、`web/src/lib/chartTheme.ts`、`web/src/App.tsx`、`Skyplot.tsx` 与实际界面。当前截图为 `.impeccable/review/quiet-desktop.jpg`、`quiet-diagnostics.jpg`、`quiet-experiments.jpg`、`quiet-mobile.jpg`、`quiet-mobile-diagnostics.jpg`、`quiet-mobile-experiments.jpg`、`quiet-settings-1280.jpg` 和 `quiet-user-1280.jpg`。桌面覆盖1440×900，较矮设置/当前预览为1280×720，手机为390px宽；手机页面宽度已核验为390px。
 
-- [Leica Infinity 官方产品与手册](https://leica-geosystems.com/products/gnss-systems/software/leica-infinity?sc_lang=en)
-- [Topcon 官方软件手册](https://www.topconpositioning.com/content/dam/topcon_digital_asset_hub/collateral/ebooks/topcon_software_enGL23ebk.pdf)
-- [Trimble Business Center 官方视图说明](https://help.fieldsystems.trimble.com/tbc/5455.htm)
-- [Trimble Plan View 实际界面](https://help.fieldsystems.trimble.com/tbc/1891.png)
-
-既有结构参考：
-
-- [Emlid Studio GNSS 处理工作流](https://docs.emlid.com/emlid-studio/kinematic-processing-workflow/)
-- [Felt 界面导览](https://help.felt.com/getting-started/tour-the-interface)
-- [Foxglove Plot 面板](https://docs.foxglove.dev/docs/visualization/panels/plot)
-
-完整研究解释、字体来源及已计算的对比度配对见 `docs/interface-research.md`；这些配对不等同于整站无障碍认证。当前界面证据位于 `.impeccable/review/industrial-desktop.jpg`、`industrial-user-1280.jpg`、`industrial-user-1414.jpg`、`industrial-mobile.jpg`、`industrial-diagnostics.jpg`、`industrial-mobile-diagnostics.jpg`、`industrial-experiments.jpg`、`industrial-mobile-experiments.jpg`、`industrial-empty.jpg`。README 示例截图由同轮真实界面更新，清单见 `docs/media/screenshots.json`。
+本轮实现验证包含 ESLint、Vitest（7项）、TypeScript/Vite build 和 Chromium/WebKit E2E（10项），布局检测结果前后均为 `[]`。这些为本轮父代理提供的验证记录；完整验收记录以 `docs/validation.md` 为准。README媒体清单见 `docs/media/screenshots.json`。规范 token、当前内距和组件见 `DESIGN.md` 与 `.impeccable/design.json`。

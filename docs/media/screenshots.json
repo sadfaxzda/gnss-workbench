@@ -1,18 +1,20 @@
 {
   "workbench.jpg": {
-    "origin": "Actual local browser screenshot of GNSS Workbench at http://127.0.0.1:8000",
+    "origin": "Actual local GNSS Workbench browser screenshot, CUA IAB",
     "viewport": "1440x900",
     "dataset": "D03_sim_demo",
     "selected_epoch": 120,
-    "run_id": "940462388eb54b0da18bfb9a3e473c02",
+    "run_id": "e816e4876e5748d78d7ba4e7700865e8",
     "date": "2026-10-14",
-    "method": "CUA IAB screenshot; no image generation"
+    "theme": "neutral gray-white and single blue; shared content insets",
+    "method": "Browser screenshot; no image generation"
   },
   "advanced-diagnostics.png": {
-    "origin": "Actual Chromium Playwright screenshot from web/e2e/workbench.spec.ts import/research-algorithm test",
+    "origin": "Actual Chromium Playwright screenshot, web/e2e/workbench.spec.ts import/research-algorithm test",
     "viewport": "1440x1000",
-    "scenario": "Single epoch with G03 +85m, G20 -90m; adaptive_gnc",
+    "scenario": "Single epoch G03 +85m, G20 -90m; adaptive_gnc",
     "date": "2026-10-14",
+    "theme": "neutral gray-white and single blue; anomaly red",
     "method": "Browser screenshot; no image generation"
   }
 }

@@ -21,20 +21,22 @@ export function equalAxisBounds(points: number[][], width: number, height: numbe
 
 // Canvas and SVG share the semantic colors documented in DESIGN.md.
 export const chartColors = {
-  baseline: '#98763b',
-  improved: '#365f71',
-  excluded: '#98763b',
-  rejected: '#a33f34',
-  clock: '#60758b',
-  grid: '#e0e4dc',
-  text: '#505951',
-  muted: '#636b63',
-  plotBaseline: '#d3b66b',
-  plotImproved: '#8bb7ca',
-  plotSelected: '#ead17a',
-  plotText: '#cbd5c8',
-  plotGrid: '#47534a',
-  plotAxis: '#82917f',
+  baseline: '#707b84',
+  improved: '#355f79',
+  excluded: '#a3463e',
+  rejected: '#a3463e',
+  clock: '#626c75',
+  satellite: '#626c75',
+  residual: '#626c75',
+  grid: '#e2e5e8',
+  text: '#535d66',
+  muted: '#626c75',
+  plotBaseline: '#707b84',
+  plotImproved: '#355f79',
+  plotSelected: '#355f79',
+  plotText: '#535d66',
+  plotGrid: '#e2e5e8',
+  plotAxis: '#7a858e',
 } as const
 
 export const chartBase: EChartsOption = {

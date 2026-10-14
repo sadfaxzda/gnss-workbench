@@ -259,7 +259,7 @@ export default function App() {
           name: '选中历元',
           type: 'scatter',
           symbolSize: 10,
-          itemStyle: { color: chartColors.plotSelected, borderColor: '#242c27', borderWidth: 2 },
+          itemStyle: { color: chartColors.plotSelected, borderColor: '#fff', borderWidth: 2 },
           data: selected?.view.improved_enu ? [selected.view.improved_enu.slice(0, 2)] : [],
           tooltip: { show: false },
         },
@@ -294,7 +294,7 @@ export default function App() {
   const residualOption = useMemo<EChartsOption>(
     () => ({
       ...chartBase,
-      grid: { left: 42, right: 20, top: 20, bottom: 28 },
+      grid: { left: 42, right: 20, top: 26, bottom: 28 },
       tooltip: { trigger: 'axis', confine: true },
       xAxis: {
         type: 'category',
@@ -310,7 +310,7 @@ export default function App() {
           data: (solution?.diagnostics ?? []).map((s) => ({
             value: Number(s.residual_m.toFixed(3)),
             itemStyle: {
-              color: s.excluded ? chartColors.excluded : chartColors.improved,
+              color: s.excluded ? chartColors.excluded : chartColors.residual,
               borderRadius: [4, 4, 0, 0],
             },
           })),
@@ -323,7 +323,7 @@ export default function App() {
   const clockOption = useMemo<EChartsOption>(
     () => ({
       ...chartBase,
-      grid: { left: 58, right: 25, top: 20, bottom: 30 },
+      grid: { left: 58, right: 25, top: 26, bottom: 30 },
       xAxis: {
         type: 'category',
         data: epochs.map((e) => e.epoch_id),

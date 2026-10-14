@@ -73,7 +73,7 @@ export function Skyplot({
               cx={x}
               cy={y}
               r="8"
-              fill={satellite.excluded ? chartColors.rejected : chartColors.improved}
+              fill={satellite.excluded ? chartColors.rejected : chartColors.satellite}
             />
             <text x={x} y={y - 13} textAnchor="middle" fontSize="12" fill={chartColors.text}>
               {satellite.sat_id}
