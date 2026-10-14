@@ -143,6 +143,10 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
             heartbeat = 0
             while True:
                 event_log = list(manager().events.get(run_id, []))
+                # Keep status and this event batch in one event-loop turn. A socket
+                # send yields, allowing the pump to append final epochs and finish.
+                # Reading a newer terminal status afterward would skip that tail.
+                info = manager().get(run_id)
                 if event_log and last_seq and event_log[0]["seq"] > last_seq + 1:
                     await websocket.send_json(
                         {"type": "resync_required", "schema": "gnss-stream/1"}
@@ -154,7 +158,6 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
                             json.dumps(event, ensure_ascii=False, allow_nan=False)
                         )
                         last_seq = event["seq"]
-                info = manager().get(run_id)
                 if info and info["status"] not in {"running", "stopping"}:
                     await websocket.send_json(
                         {"type": "run_status", "run": info, "schema": "gnss-stream/1"}

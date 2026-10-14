@@ -60,3 +60,10 @@ D03 的 30 个观测不足历元正确输出无效状态，恰好 4 星的 20 �
 - 本轮本机验证：ESLint、Prettier、TypeScript/Vite 构建通过；Vitest 7项通过；Chromium/WebKit 端到端10项通过，含600历元、故障/消融、导入GNC、TCP暂停恢复、CSV导出、联动选择和无观测坐标清空。Vite在测试页面关闭时出现过 WebSocket EPIPE/ECONNRESET 代理日志；浏览器测试全部通过，未将其描述为零日志告警。
 - 实际浏览器视觉检查：1440×900、用户窗口1414×749、390×844；自动化另覆盖1280×720及430×932。手机布局单列滚动，逐星表可局部横向滚动。矮桌面的右侧检查区需要独立滚动。
 - 既有提交候选ZIP与验收记录仍是原源提交的快照。本轮在线源码与界面更新不代表旧ZIP自动更新；以包内 SUBMISSION.txt 为准。
+
+## 测绘配色、指定字体与流同步复核（2026-10-14，第三轮）
+
+- 调研 Leica Infinity、Topcon MAGNET Office、Trimble Business Center 的实际工作界面后，重构设备灰操作区、白色数据表、深色轨迹与设备黄主要操作。字体按用户指定分配为中文微软雅黑、英文/数字 Times New Roman，DOM、SVG 与 Canvas 统一；本机四个常规/粗体字体加载结果均成功。规则、来源与已计算对比度见 interface-research.md。
+- 前端 ESLint、Prettier、7项 Vitest、TypeScript/Vite 构建及 Chromium/WebKit 共10项端到端测试通过。配色提交 `8f23f26` 的远端 web、Ubuntu Python、Mac Python 与研究工具检查通过，Windows Python 流测试暴露了结束状态提前发送的竞态：600历元只收到589个。失败记录保留于 GitHub Actions run `38541136797`。
+- WebSocket 原先在逐条发送事件后读取最新运行状态；发送过程会让出事件循环，事件泵可能追加剩余历元并完成运行，导致旧批次发送完即关闭连接。现将运行状态与事件批次在同一事件循环读取，下一批尾部历元发送后再通知结束。没有修改数值算法和课程数据。
+- 新增确定性回归 `test_terminal_status_waits_for_epochs_added_during_send`，模拟发送中追加最后历元：修复前只收到第0历元、测试失败；修复后收到0/1两个历元再收到结束状态。本机51项 Python 测试、Ruff检查/格式与Pyright通过。
