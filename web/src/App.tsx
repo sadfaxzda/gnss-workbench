@@ -1047,19 +1047,19 @@ export default function App() {
                 <div className="exports">
                   {!['running', 'stopping'].includes(run.status) && (
                     <>
-                      <a href={`/api/runs/${run.id}/download/baseline.csv`}>
+                      <a href={`/api/runs/${run.id}/download/baseline.csv`} download>
                         <ArrowDownToLine size={13} />
                         普通解
                       </a>
-                      <a href={`/api/runs/${run.id}/download/improved.csv`}>
+                      <a href={`/api/runs/${run.id}/download/improved.csv`} download>
                         <ArrowDownToLine size={13} />
                         改进解
                       </a>
-                      <a href={`/api/runs/${run.id}/download/epochs.jsonl`}>
+                      <a href={`/api/runs/${run.id}/download/epochs.jsonl`} download>
                         <ArrowDownToLine size={13} />
                         诊断日志
                       </a>
-                      <a href={`/api/runs/${run.id}/download/manifest.json`}>
+                      <a href={`/api/runs/${run.id}/download/manifest.json`} download>
                         <ArrowDownToLine size={13} />
                         实验参数
                       </a>

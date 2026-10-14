@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test'
+import { readFile } from 'node:fs/promises'
 
-test('run actual observations, inspect evidence, reload history and export', async ({ page }) => {
+test('run actual observations, inspect evidence, reload history and export', async ({
+  page,
+}, testInfo) => {
   const errors: string[] = []
   page.on('pageerror', (error) => errors.push(error.message))
   await page.goto('/')
@@ -13,7 +16,7 @@ test('run actual observations, inspect evidence, reload history and export', asy
   const run = await (await created).json()
   await expect(page.getByText('已完成', { exact: true })).toBeVisible()
   await expect(page.getByText('600 / 600 历元')).toBeVisible()
-  await page.screenshot({ path: '../docs/media/workbench.png', fullPage: true })
+  await page.screenshot({ path: testInfo.outputPath('workbench.png'), fullPage: true })
   await page.getByRole('button', { name: '逐星诊断', exact: true }).click()
   await expect(page.getByRole('heading', { name: '故障诊断证据' })).toBeVisible()
   await expect(page.getByRole('cell', { name: 'G19', exact: true })).toBeVisible()
@@ -23,6 +26,9 @@ test('run actual observations, inspect evidence, reload history and export', asy
   await page.getByRole('link', { name: '改进解', exact: true }).click()
   const file = await downloaded
   expect(file.suggestedFilename()).toContain('improved.csv')
+  expect(await file.failure()).toBeNull()
+  const csv = await readFile((await file.path())!, 'utf8')
+  expect(csv.trim().split(/\r?\n/)).toHaveLength(601)
   await page.getByRole('button', { name: '实验设计', exact: true }).click()
   await expect(page.getByRole('cell', { name: '1.59 m', exact: true })).toBeVisible()
   await page.getByRole('button', { name: '运行记录', exact: true }).click()

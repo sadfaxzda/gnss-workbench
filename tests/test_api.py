@@ -41,7 +41,10 @@ def test_file_run_websocket_export_and_restart(tmp_path):
         history = client.get(f"/api/runs/{run_id}/epochs").json()
         assert len(history) == 600
         assert history[460]["improved"]["x_m"] is None
-        assert client.get(f"/api/runs/{run_id}/download/improved.csv").status_code == 200
+        download = client.get(f"/api/runs/{run_id}/download/improved.csv")
+        assert download.status_code == 200
+        assert download.headers["content-type"] == "application/octet-stream"
+        assert download.headers["content-disposition"].startswith("attachment;")
         manifest = client.get(f"/api/runs/{run_id}/download/manifest.json").json()
         assert len(manifest["input_sha256"]) == 64
         assert manifest["reference_truth_used_for_positioning"] is False

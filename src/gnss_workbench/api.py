@@ -100,7 +100,11 @@ def create_app(runtime_root: Path | None = None) -> FastAPI:
         path = manager().root / "runs" / run_id / artifact
         if not path.is_file():
             raise HTTPException(404, "此运行尚无该输出文件")
-        return FileResponse(path, filename=f"{run_id[:8]}-{artifact}")
+        return FileResponse(
+            path,
+            filename=f"{run_id[:8]}-{artifact}",
+            media_type="application/octet-stream",
+        )
 
     @application.websocket("/api/runs/{run_id}/stream")
     async def stream(websocket: WebSocket, run_id: str):

@@ -2,6 +2,9 @@ name: checks
 on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   python:
     strategy:
@@ -47,3 +50,11 @@ jobs:
       - run: pnpm --dir web build
       - run: pnpm --dir web exec playwright install --with-deps chromium webkit
       - run: pnpm --dir web test:e2e
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        if: failure()
+        with:
+          name: browser-test-evidence
+          path: |
+            web/test-results
+            web/playwright-report
+          retention-days: 7
