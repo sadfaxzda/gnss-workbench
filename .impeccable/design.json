@@ -768,7 +768,11 @@
         ".impeccable/review/quiet-mobile-diagnostics.jpg",
         ".impeccable/review/quiet-mobile-experiments.jpg",
         ".impeccable/review/quiet-settings-1280.jpg",
-        ".impeccable/review/quiet-user-1280.jpg"
+        ".impeccable/review/quiet-user-1280.jpg",
+        ".impeccable/review/trajectory-desktop.png",
+        ".impeccable/review/trajectory-1600.png",
+        ".impeccable/review/trajectory-1024.png",
+        ".impeccable/review/trajectory-390.png"
       ]
     },
     "colorAliases": {
@@ -817,6 +821,16 @@
       "methodDisclosure": "诊断方法",
       "routineDisclaimers": false,
       "fullDiagnosticReasons": "Exported epoch logs and technical documents."
+    },
+    "trajectoryLayout": {
+      "desktopMinWidth": "1100px exclusive",
+      "trajectoryColumn": "minmax(440px, min(64%, 70dvh))",
+      "supportColumn": "minmax(280px, 1fr)",
+      "workspaceRows": "minmax(0, 1fr)",
+      "supportRows": "minmax(0, 1fr) minmax(0, 1fr)",
+      "supportHeight": "auto",
+      "naturalFlowAt": "width <= 1100px or height <= 620px",
+      "equalAxisScale": "Unchanged; equal metres per pixel for both axes."
     }
   },
   "components": [

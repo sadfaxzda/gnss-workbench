@@ -50,7 +50,9 @@ test('epoch and satellite selection stay linked, and invalid epochs clear the po
   await page.getByRole('button', { name: '回到最新', exact: true }).click()
   await expect(page.getByText('跟随最新历元', { exact: true })).toBeVisible()
   for (const viewport of [
+    { width: 1600, height: 900 },
     { width: 1280, height: 720 },
+    { width: 1024, height: 768 },
     { width: 390, height: 844 },
   ]) {
     await page.setViewportSize(viewport)
@@ -58,6 +60,21 @@ test('epoch and satellite selection stay linked, and invalid epochs clear the po
     await expect
       .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
       .toBeLessThanOrEqual(viewport.width)
+    if (viewport.width >= 1100) {
+      // A wide, shallow map makes the equal-scale trajectory unreadably small.
+      const trajectory = page.getByRole('img', { name: '普通解与改进解的定位轨迹' })
+      const bounds = (await trajectory.boundingBox())!
+      expect(bounds.height / bounds.width).toBeGreaterThanOrEqual(0.5)
+    }
+    const timeline = (await page.getByRole('region', { name: '统一历元回放' }).boundingBox())!
+    for (const name of [
+      '普通解与改进解的定位轨迹',
+      '当前历元各颗卫星的伪距残差',
+      '接收机钟差随历元变化',
+    ]) {
+      const chart = (await page.getByRole('img', { name }).boundingBox())!
+      expect(chart.y + chart.height).toBeLessThanOrEqual(timeline.y + 1)
+    }
     await page.screenshot({
       path: testInfo.outputPath(`workbench-${viewport.width}.png`),
       fullPage: true,

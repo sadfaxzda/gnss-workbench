@@ -390,8 +390,9 @@ dd {
 .plot-workspace {
   min-height: 0;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(440px, min(64%, 70dvh)) minmax(280px, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   gap: 1px;
   background: var(--line);
 }
@@ -399,6 +400,14 @@ dd {
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+.trajectory-panel .panel-heading > div:first-child {
+  min-width: 0;
+}
+.trajectory-panel .run-reference {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .metrics-grid {
   display: flex;
@@ -480,9 +489,9 @@ dd {
 }
 .signal-tray {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1px;
-  height: clamp(165px, 23vh, 230px);
+  height: auto;
   flex-shrink: 0;
   min-width: 0;
 }
@@ -1268,7 +1277,7 @@ tbody tr:hover {
     padding-inline: 12px;
   }
 }
-@media (max-width: 900px), (max-height: 620px) {
+@media (max-width: 1100px), (max-height: 620px) {
   .app-shell {
     height: auto;
     min-height: 100dvh;
@@ -1296,11 +1305,17 @@ tbody tr:hover {
   .workbench-grid {
     grid-template-columns: minmax(0, 1fr) 255px;
   }
+  .plot-workspace {
+    display: flex;
+    flex-direction: column;
+  }
   .chart-container {
     height: 350px;
     flex: none;
   }
   .signal-tray {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
     height: 210px;
   }
   .solution-panel {
@@ -1443,7 +1458,8 @@ tbody tr:hover {
   }
   .signal-tray {
     height: auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
   }
   .signal-tray > .panel {
     height: 200px;

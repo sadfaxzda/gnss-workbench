@@ -4,7 +4,7 @@ GPS 单点定位与可解释故障诊断工作台。Mac、Windows 和 Linux 共�
 
 当前版本 **v0.2.0**：真实计算、独立基线、单星/双星诊断、GNC 实验、自定义导入、文件/TCP 输入、运行记录与导出已实现。设计与边界见 [架构](docs/architecture.md)，后续计划见 [路线图](docs/roadmap.md)。
 
-![工作台](docs/media/workbench.jpg)
+![工作台](docs/media/workbench.png)
 
 队友加入与提交流程见 [小组协作说明](CONTRIBUTING.md)。受邀成员接受 GitHub 邀请后即可参与开发。
 
