@@ -1,0 +1,5 @@
+* text=auto eol=lf
+# Preserve original teaching fixtures byte-for-byte, including their CRLF lines.
+fixtures/course/** -text
+*.png binary
+*.docx binary
