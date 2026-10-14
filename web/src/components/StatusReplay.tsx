@@ -63,11 +63,14 @@ export function StatusReplay({
           </button>
         </div>
       </div>
-      <div className="replay-strip" aria-hidden="true">
+      <div className="replay-strip" aria-label="历元状态分布">
         {segments.map((segment, n) => (
-          <span
+          <button
             key={segment.start}
             title={description(segment)}
+            aria-label={`跳转到${description(segment)}`}
+            aria-pressed={n === active}
+            onClick={() => onSelect(segment.start)}
             className={`segment segment-${statusTone(segment.status)}${n === active ? ' selected' : ''}`}
             style={{ flexGrow: segment.end - segment.start + 1 }}
           />

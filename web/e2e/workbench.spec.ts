@@ -8,7 +8,7 @@ test('run actual observations, inspect evidence, reload history and export', asy
   const errors: string[] = []
   page.on('pageerror', (error) => errors.push(error.message))
   await page.goto('/')
-  await expect(page.getByRole('heading', { name: '定位与故障诊断', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: '定位与故障诊断', exact: true })).toBeAttached()
   await page.getByLabel('回放速度').selectOption('0')
   const created = page.waitForResponse(
     (response) => response.url().endsWith('/api/runs') && response.request().method() === 'POST',
@@ -30,7 +30,7 @@ test('run actual observations, inspect evidence, reload history and export', asy
   await page.screenshot({ path: testInfo.outputPath('workbench.png'), fullPage: true })
   await page.getByRole('button', { name: '逐星诊断', exact: true }).click()
   await expect(page.getByRole('heading', { name: '故障诊断证据' })).toBeVisible()
-  await expect(page.getByRole('cell', { name: 'G19', exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: '查看卫星 G19', exact: true })).toBeVisible()
   await page.reload()
   await expect(page.getByText('600 / 600 历元')).toBeVisible()
   const downloaded = page.waitForEvent('download')
@@ -108,12 +108,12 @@ test('import observations, select research algorithm and inspect its evidence', 
   await expect(page.getByText('已完成', { exact: true })).toBeVisible()
   await expect(page.getByText('1 / 1 历元')).toBeVisible()
   await page.getByRole('button', { name: '逐星诊断', exact: true }).click()
-  await expect(page.getByRole('img', { name: '卫星天空图：方位角与高度角' })).toBeVisible()
+  await expect(page.getByRole('group', { name: '卫星天空图：方位角与高度角' })).toBeVisible()
   await expect(page.getByRole('row').filter({ hasText: 'G03' }).first()).toContainText('异常剔除')
   await expect(page.getByRole('row').filter({ hasText: 'G20' }).first()).toContainText('异常剔除')
   await page.getByText(/GNC 搜索轨迹/).click()
   await expect(page.getByRole('columnheader', { name: 'MSAC / m²' })).toBeVisible()
-  await page.getByText('算法与自定义数据', { exact: true }).click()
+  await expect(page.locator('.advanced-controls')).not.toHaveAttribute('open')
   await page.evaluate(() => window.scrollTo(0, 0))
   await page.screenshot({ path: testInfo.outputPath('advanced-diagnostics.png'), fullPage: true })
   await page.setViewportSize({ width: 430, height: 932 })

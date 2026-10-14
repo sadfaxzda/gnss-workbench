@@ -5,21 +5,20 @@ import {
   ArrowDownToLine,
   ArrowRight,
   Check,
+  ChevronLeft,
   ChevronRight,
+  SlidersHorizontal,
   CircleHelp,
   Clock3,
-  Database,
   FlaskConical,
   History,
   Layers3,
   Orbit,
   Play,
-  Radio,
   Radar,
   Satellite,
   ShieldCheck,
   Square,
-  Terminal,
   TriangleAlert,
   Waves,
 } from 'lucide-react'
@@ -27,6 +26,7 @@ import type { EChartsOption } from 'echarts'
 import { Button } from './components/Button'
 import { Chart } from './components/Chart'
 import { Skyplot } from './components/Skyplot'
+import { SatelliteInspector } from './components/SatelliteInspector'
 import { StatusReplay } from './components/StatusReplay'
 import { chartBase, chartColors } from './lib/chartTheme'
 import { useRunStream } from './hooks/useRunStream'
@@ -73,16 +73,18 @@ function Metric({
   value,
   unit,
   note,
+  scope,
   icon: Icon,
 }: {
   title: string
   value: string
   unit?: string
   note: string
+  scope?: string
   icon: typeof Satellite
 }) {
   return (
-    <div className="metric-card">
+    <div className="metric-card" title={note} tabIndex={0}>
       <div className="metric-title">
         {title}
         <Icon size={16} />
@@ -91,7 +93,7 @@ function Metric({
         {value}
         <small>{unit}</small>
       </div>
-      <div className="metric-note">{note}</div>
+      {scope && <p className="metric-scope">{scope}</p>}
     </div>
   )
 }
@@ -110,6 +112,7 @@ export default function App() {
   const [noise, setNoise] = useState(1)
   const [port, setPort] = useState(8765)
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
+  const [satelliteId, setSatelliteId] = useState<string | undefined>()
   const [actionError, setActionError] = useState('')
   const client = useQueryClient()
   const { data: datasets = [], error: datasetError } = useQuery({
@@ -135,6 +138,12 @@ export default function App() {
   const selected =
     selectedIndex == null ? latest : epochs[Math.min(selectedIndex, epochs.length - 1)]
   const solution = selected?.improved
+  const satellite =
+    solution?.diagnostics?.find((item) => item.sat_id === satelliteId) ??
+    (satelliteId
+      ? undefined
+      : (solution?.diagnostics?.find((item) => item.excluded) ?? solution?.diagnostics?.[0]))
+  const inspectedSatelliteId = satelliteId ?? satellite?.sat_id
   const metrics = run?.summary.evaluation as Evaluation | undefined
   const stale =
     positionStale ||
@@ -148,6 +157,7 @@ export default function App() {
     setRunId(id)
     setSelectedIndex(null)
     setActionError('')
+    setSatelliteId(undefined)
   }
 
   const start = useMutation({
@@ -168,6 +178,7 @@ export default function App() {
     onSuccess: (result) => {
       selectRun(result.id)
       setPage('live')
+      document.querySelector<HTMLDetailsElement>('.advanced-controls')?.removeAttribute('open')
       void client.invalidateQueries({ queryKey: ['runs'] })
     },
     onError: (e) => setActionError(e.message),
@@ -205,6 +216,7 @@ export default function App() {
   const trajectoryOption = useMemo<EChartsOption>(
     () => ({
       ...chartBase,
+      grid: { left: 58, right: 28, top: 30, bottom: 45, outerBoundsMode: 'none' },
       tooltip: { trigger: 'item', confine: true, formatter: '{a}<br/>{c}' },
       xAxis: {
         type: 'value',
@@ -212,12 +224,14 @@ export default function App() {
         nameLocation: 'middle',
         nameGap: 26,
         scale: true,
+        axisLabel: { showMinLabel: false, showMaxLabel: false },
         splitLine: { lineStyle: { color: chartColors.grid } },
       },
       yAxis: {
         type: 'value',
         name: '北 / m',
         scale: true,
+        axisLabel: { showMinLabel: false, showMaxLabel: false },
         splitLine: { lineStyle: { color: chartColors.grid } },
       },
       series: [
@@ -243,10 +257,34 @@ export default function App() {
           symbolSize: 10,
           itemStyle: { color: chartColors.improved, borderColor: '#fff', borderWidth: 2 },
           data: selected?.view.improved_enu ? [selected.view.improved_enu.slice(0, 2)] : [],
+          tooltip: { show: false },
+        },
+        {
+          name: '历元',
+          type: 'scatter',
+          symbolSize: 16,
+          itemStyle: { color: chartColors.improved, opacity: 0 },
+          emphasis: { itemStyle: { opacity: 0.65 } },
+          data: epochs.map((e) => e.view.improved_enu?.slice(0, 2) ?? [null, null]),
+          tooltip: {
+            formatter: (params) => {
+              const point = Array.isArray(params) ? params[0] : params
+              const epoch = epochs[point.dataIndex]
+              return `历元 ${epoch?.epoch_id ?? '—'} · 点击查看`
+            },
+          },
         },
       ],
     }),
     [epochs, selected],
+  )
+
+  const trajectoryPoints = useMemo(
+    () =>
+      epochs
+        .flatMap((epoch) => [epoch.view.baseline_enu, epoch.view.improved_enu])
+        .filter((point): point is number[] => point != null),
+    [epochs],
   )
 
   const residualOption = useMemo<EChartsOption>(
@@ -302,103 +340,67 @@ export default function App() {
           connectNulls: false,
           data: epochs.map((e) => e.improved.clock_bias_m),
           lineStyle: { color: chartColors.clock, width: 1.7 },
-          areaStyle: { color: chartColors.clock, opacity: 0.06 },
+          markLine: selected
+            ? {
+                silent: true,
+                symbol: 'none',
+                label: { show: false },
+                lineStyle: { color: chartColors.improved, type: 'dashed', width: 1 },
+                data: [{ xAxis: epochs.indexOf(selected) }],
+              }
+            : undefined,
         },
       ],
     }),
-    [epochs],
+    [epochs, selected],
   )
 
   const visibleError = actionError || datasetError?.message || streamError || run?.error
   const title = navigation.find((item) => item.id === page)?.label
   return (
     <div className="app-shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <div className="brand-mark">
-            <Orbit size={26} />
-          </div>
-          <div>
-            <strong>GNSS</strong>
-            <span>WORKBENCH</span>
-          </div>
-        </div>
-        <div className="workspace-label">定位与诊断工作台</div>
+      <header className="app-header">
+        <a className="brand" href="/" aria-label="GNSS Workbench 首页">
+          <Orbit size={23} />
+          <strong>
+            GNSS<span>Workbench</span>
+          </strong>
+        </a>
         <nav aria-label="主导航">
           {navigation.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               aria-label={label}
               aria-current={page === id ? 'page' : undefined}
-              title={label}
               onClick={() => setPage(id)}
               className={page === id ? 'nav-item active' : 'nav-item'}
             >
-              <Icon size={18} />
+              <Icon size={16} />
               <span>{label}</span>
-              {page === id && <ChevronRight size={14} />}
             </button>
           ))}
         </nav>
-        <div className="sidebar-divider" />
-        <div className="sidebar-caption">当前模型</div>
-        <div className="model-info">
-          <span className="model-dot" />
-          <div>
-            GPS L1 C1<small>广播星历 · 单点定位</small>
-          </div>
+        <div className="workspace-state">
+          <span className={`connection-dot ${connection === 'connected' ? 'online' : ''}`} />
+          {connection === 'connected'
+            ? '实时连接'
+            : connection === 'completed'
+              ? '历史回放'
+              : '本地工作区'}
+          <a
+            href="/api/docs"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="API 文档"
+            title="API 文档"
+          >
+            <CircleHelp size={17} />
+          </a>
         </div>
-        <div className="sidebar-bottom">
-          <div className="local-indicator">
-            <span />
-            本地工作空间
-          </div>
-          <p>计算与数据保存在本机</p>
-          <div className="version">
-            v0.2.0 <span>科学计算工作台</span>
-          </div>
-        </div>
-      </aside>
-
-      <main className="main">
-        <header className="topbar">
-          <div className="breadcrumb">
-            工作空间 <ChevronRight size={13} /> <strong>{title}</strong>
-          </div>
-          <div className="topbar-right">
-            <span className="muted">GPS / GPST</span>
-            <span className={`connection-dot ${connection === 'connected' ? 'online' : ''}`} />
-            <span>
-              {connection === 'connected'
-                ? '实时连接'
-                : connection === 'completed'
-                  ? '历史记录'
-                  : '本地服务'}
-            </span>
-          </div>
-        </header>
+      </header>
+      <main className="main" data-page={page}>
+        <h1 className="sr-only">{page === 'live' ? '定位与故障诊断' : title}</h1>
         <div className="page-content">
-          <div className="page-heading">
-            <div>
-              <h1>{page === 'live' ? '定位与故障诊断' : title}</h1>
-              <p>
-                {page === 'live'
-                  ? '从原始伪距出发，观察定位结果与每一颗卫星的状态。'
-                  : page === 'diagnostics'
-                    ? '查看残差检验、剔星假设和异常处置依据。'
-                    : page === 'experiments'
-                      ? '改变观测条件，用同一套算法检验不同故障与消融设置。'
-                      : '保留输入、参数、计算结果和完整诊断证据。'}
-              </p>
-            </div>
-            <div className="heading-label">
-              <Layers3 size={15} />
-              GPS 单系统
-              <span className="vertical-divider" />
-              双算法对照
-            </div>
-          </div>
-
           {visibleError && (
             <div className="alert alert-error" role="alert">
               <TriangleAlert size={17} />
@@ -421,9 +423,6 @@ export default function App() {
           {page !== 'history' && (
             <section className="control-bar" aria-label="运行控制">
               <div className="control-source">
-                <div className="control-icon">
-                  <Database size={20} />
-                </div>
                 <label>
                   观测数据
                   <select
@@ -437,7 +436,7 @@ export default function App() {
                   >
                     {datasets.map((d) => (
                       <option key={d.id} value={d.id}>
-                        {d.id} · {d.title}
+                        {d.title}
                       </option>
                     ))}
                   </select>
@@ -487,6 +486,62 @@ export default function App() {
                   />
                 </label>
               )}
+              <details className="panel advanced-controls">
+                <summary>
+                  <SlidersHorizontal size={15} />
+                  算法与自定义数据
+                </summary>
+                <div className="form-grid">
+                  <label>
+                    诊断算法
+                    <select
+                      aria-label="诊断算法"
+                      value={algorithm}
+                      disabled={busy}
+                      onChange={(event) =>
+                        setAlgorithm(event.target.value as NonNullable<RunRequest['algorithm']>)
+                      }
+                    >
+                      <option value="single_fde">原版 · 唯一单星 FDE</option>
+                      <option value="consensus">多假设 · 最多两星故障</option>
+                      <option value="adaptive_gnc">实验 · 自适应 GNC + 一致性验证</option>
+                    </select>
+                  </label>
+                  <p className="explanation">
+                    实验算法参考 ICCV 2025
+                    SAC-GNC；当前以鲁棒权重引导假设检验，是否更好需以对照结果判断。
+                  </p>
+                  <label>
+                    观测 JSONL（最多 5000 历元）
+                    <input
+                      aria-label="导入观测文件"
+                      type="file"
+                      accept=".jsonl,.json"
+                      disabled={busy}
+                      onChange={(event) => setImportFile(event.target.files?.[0] ?? null)}
+                    />
+                  </label>
+                  <label>
+                    配套星历 JSON（可选）
+                    <input
+                      aria-label="导入星历文件"
+                      type="file"
+                      accept=".json"
+                      disabled={busy}
+                      onChange={(event) => setNavigationFile(event.target.files?.[0] ?? null)}
+                    />
+                  </label>
+                  <p className="explanation">
+                    省略星历时使用课程 GPS 周 1316 星历。自定义数据不显示未经真值验证的精度指标。
+                  </p>
+                  <Button
+                    disabled={busy || !importFile || importDataset.isPending}
+                    onClick={() => importDataset.mutate()}
+                  >
+                    {importDataset.isPending ? '正在校验…' : '校验并导入'}
+                  </Button>
+                </div>
+              </details>
               <div className="control-actions">
                 {busy && runId ? (
                   <Button variant="outline" onClick={() => stop.mutate()} disabled={stop.isPending}>
@@ -509,112 +564,17 @@ export default function App() {
             </section>
           )}
 
-          {page !== 'history' && (
-            <details className="panel advanced-controls">
-              <summary>算法与自定义数据</summary>
-              <div className="form-grid">
-                <label>
-                  诊断算法
-                  <select
-                    aria-label="诊断算法"
-                    value={algorithm}
-                    disabled={busy}
-                    onChange={(event) =>
-                      setAlgorithm(event.target.value as NonNullable<RunRequest['algorithm']>)
-                    }
-                  >
-                    <option value="single_fde">原版 · 唯一单星 FDE</option>
-                    <option value="consensus">多假设 · 最多两星故障</option>
-                    <option value="adaptive_gnc">实验 · 自适应 GNC + 一致性验证</option>
-                  </select>
-                </label>
-                <p className="explanation">
-                  实验算法参考 ICCV 2025
-                  SAC-GNC；当前以鲁棒权重引导假设检验，是否更好需以对照结果判断。
-                </p>
-                <label>
-                  观测 JSONL（最多 5000 历元）
-                  <input
-                    aria-label="导入观测文件"
-                    type="file"
-                    accept=".jsonl,.json"
-                    disabled={busy}
-                    onChange={(event) => setImportFile(event.target.files?.[0] ?? null)}
-                  />
-                </label>
-                <label>
-                  配套星历 JSON（可选）
-                  <input
-                    aria-label="导入星历文件"
-                    type="file"
-                    accept=".json"
-                    disabled={busy}
-                    onChange={(event) => setNavigationFile(event.target.files?.[0] ?? null)}
-                  />
-                </label>
-                <p className="explanation">
-                  省略星历时使用课程 GPS 周 1316 星历。自定义数据不显示未经真值验证的精度指标。
-                </p>
-                <Button
-                  disabled={busy || !importFile || importDataset.isPending}
-                  onClick={() => importDataset.mutate()}
-                >
-                  {importDataset.isPending ? '正在校验…' : '校验并导入'}
-                </Button>
-              </div>
-            </details>
-          )}
-
-          {page !== 'history' && (
-            <StatusReplay
-              epochs={epochs}
-              selectedIndex={selectedIndex}
-              onSelect={setSelectedIndex}
-            />
-          )}
-
           {page === 'live' && (
-            <>
-              <div className="metrics-grid">
-                <Metric
-                  title="参与定位卫星"
-                  value={solution ? String(solution.n_used) : '—'}
-                  unit="颗"
-                  note={solution?.n_used === 4 ? '当前解无观测冗余' : '至少 4 颗完成独立解算'}
-                  icon={Satellite}
-                />
-                <Metric
-                  title="位置精度因子"
-                  value={format(solution?.pdop)}
-                  unit="PDOP"
-                  note="由未加权卫星几何矩阵计算"
-                  icon={Orbit}
-                />
-                <Metric
-                  title="后验残差"
-                  value={format(solution?.residual_rms_m)}
-                  unit="m"
-                  note="实际参与解算观测的 RMS"
-                  icon={Waves}
-                />
-                <Metric
-                  title="水平误差 P95"
-                  value={format(metrics?.improved.h_p95_m)}
-                  unit="m"
-                  note={
-                    metrics
-                      ? `仿真评价 · 有效解比例 ${format((metrics.improved.availability_on_required ?? 0) * 100, 1)}%`
-                      : '有匹配真值的完整运行结束后计算'
-                  }
-                  icon={ShieldCheck}
-                />
-              </div>
-              <div className="workspace-grid">
+            <div className="workbench-grid">
+              <div className="plot-workspace">
                 <section className="panel trajectory-panel">
                   <div className="panel-heading">
                     <div>
                       <h2>定位轨迹</h2>
-                      <p>局部东—北坐标 · 原点为首次有效改进解</p>
+                      <span className="run-reference">
+                        {currentDataset?.title ?? '选择观测数据'}
+                        {run && ` / ${run.id.slice(0, 8)}`}
+                      </span>
                     </div>
                     <div className="legend">
                       <span>
@@ -627,123 +587,182 @@ export default function App() {
                       </span>
                     </div>
                   </div>
+                  <div className="metrics-grid" aria-label="当前解算指标">
+                    <Metric
+                      title="参与定位卫星"
+                      value={solution ? String(solution.n_used) : '—'}
+                      unit="颗"
+                      note={solution?.n_used === 4 ? '当前解无观测冗余' : '至少 4 颗完成独立解算'}
+                      icon={Satellite}
+                    />
+                    <Metric
+                      title="位置精度因子"
+                      value={format(solution?.pdop)}
+                      unit="PDOP"
+                      note="由未加权卫星几何矩阵计算"
+                      icon={Orbit}
+                    />
+                    <Metric
+                      title="后验残差"
+                      value={format(solution?.residual_rms_m)}
+                      unit="m"
+                      note="实际参与解算观测的 RMS"
+                      icon={Waves}
+                    />
+                    <Metric
+                      title="水平误差 P95"
+                      scope="仿真 · 全程"
+                      value={format(metrics?.improved.h_p95_m)}
+                      unit="m"
+                      note={
+                        metrics
+                          ? `仿真评价 · 有效解比例 ${format((metrics.improved.availability_on_required ?? 0) * 100, 1)}%`
+                          : '有匹配真值的完整运行结束后计算'
+                      }
+                      icon={ShieldCheck}
+                    />
+                  </div>
+
                   <div className="chart-container">
                     <Chart
                       option={trajectoryOption}
-                      height={337}
+                      height="100%"
                       label="普通解与改进解的定位轨迹"
+                      equalScalePoints={trajectoryPoints}
+                      onPointSelect={(index, series) => {
+                        if (series === 3) setSelectedIndex(index)
+                      }}
                     />
                     {epochs.length === 0 && (
                       <div className="chart-empty">
-                        <Radar size={36} />
-                        <strong>等待第一组观测</strong>
-                        <span>选择数据后开始运行，轨迹将在这里逐步绘制</span>
+                        <Radar size={28} />
+                        <strong>导入观测，开始定位</strong>
+                        <span>选择上方数据源并开始运行，或在设置中导入 JSONL。</span>
                       </div>
                     )}
                   </div>
                   <div className="trajectory-footer">
-                    <span>
-                      <span className="status-dot" />
-                      {epochs.length} 个历元
-                    </span>
-                    <span>
-                      WGS84 / ENU<span className="footer-dot">·</span>单位：米
-                    </span>
+                    <span>ENU · 首次有效改进解为原点 · 等比例 / 米</span>
+                    <span>点击轨迹定位历元</span>
                   </div>
                 </section>
-                <section className="panel solution-panel">
-                  <div className="panel-heading">
-                    <div>
-                      <h2>解算状态</h2>
-                      <p>{selectedIndex == null ? '最新接收历元' : '正在查看历史历元'}</p>
+                <div className="signal-tray">
+                  <section className="panel residual-panel">
+                    <div className="panel-heading">
+                      <h2>
+                        逐星残差 <small>m</small>
+                      </h2>
+                      <button className="text-button" onClick={() => setPage('diagnostics')}>
+                        诊断详情 <ArrowRight size={13} />
+                      </button>
                     </div>
-                    <Radio size={18} className="muted" />
-                  </div>
-                  <div className="solution-status">
-                    <Status value={stale ? 'TRANSPORT_STALE' : solution?.status} />
-                    <p>{solution?.reason || '运行后显示解算状态与诊断依据。'}</p>
-                  </div>
-                  <dl className={stale ? 'position-details stale' : 'position-details'}>
-                    <div>
-                      <dt>纬度</dt>
-                      <dd>
-                        {format(selected?.view.latitude_deg, 7)}
-                        <small>°</small>
-                      </dd>
+                    <Chart
+                      option={residualOption}
+                      height="100%"
+                      label="当前历元各颗卫星的伪距残差"
+                      onPointSelect={(index) => {
+                        const id = solution?.diagnostics?.[index]?.sat_id
+                        if (id) setSatelliteId(id)
+                      }}
+                    />
+                  </section>
+                  <section className="panel clock-panel">
+                    <div className="panel-heading">
+                      <h2>
+                        接收机钟差 <small>m</small>
+                      </h2>
+                      <span className="muted">b = c · Δt</span>
                     </div>
-                    <div>
-                      <dt>经度</dt>
-                      <dd>
-                        {format(selected?.view.longitude_deg, 7)}
-                        <small>°</small>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>椭球高</dt>
-                      <dd>
-                        {format(selected?.view.height_m, 3)}
-                        <small>m</small>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>接收机钟差</dt>
-                      <dd>
-                        {format(solution?.clock_bias_m, 3)}
-                        <small>m</small>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>单历元计算</dt>
-                      <dd>
-                        {format(solution?.processing_ms, 2)}
-                        <small>ms</small>
-                      </dd>
-                    </div>
-                  </dl>
-                  <div className="correction">
-                    <div>
-                      <span>算法修正距离</span>
-                      <strong>
-                        {format(selected?.view.correction_m, 3)} <small>m</small>
-                      </strong>
-                    </div>
-                    <span className="correction-icon">
-                      <ArrowRight size={19} />
-                    </span>
-                  </div>
-                  <p className="footnote">修正距离为两种解的三维差值，不代表真实定位误差。</p>
-                </section>
+                    <Chart
+                      option={clockOption}
+                      height="100%"
+                      label="接收机钟差随历元变化"
+                      onCategorySelect={(index) =>
+                        setSelectedIndex(Math.max(0, Math.min(index, epochs.length - 1)))
+                      }
+                    />
+                  </section>
+                </div>
               </div>
-              <div className="lower-grid">
-                <section className="panel">
-                  <div className="panel-heading">
-                    <div>
-                      <h2>逐星残差</h2>
-                      <p>橙色表示已剔除卫星</p>
-                    </div>
-                    <button className="text-button" onClick={() => setPage('diagnostics')}>
-                      诊断详情 <ArrowRight size={14} />
-                    </button>
+              <section className="panel solution-panel">
+                <div className="panel-heading">
+                  <div>
+                    <h2>解算状态</h2>
+                    <p>{selectedIndex == null ? '最新接收历元' : '正在查看历史历元'}</p>
                   </div>
-                  <Chart option={residualOption} height={193} label="当前历元各颗卫星的伪距残差" />
-                </section>
-                <section className="panel">
-                  <div className="panel-heading">
-                    <div>
-                      <h2>接收机钟差</h2>
-                      <p>距离项 b = c · Δt · 横轴为历元编号</p>
-                    </div>
-                    <Clock3 size={17} className="muted" />
+                </div>
+                <div className="solution-status">
+                  <Status value={stale ? 'TRANSPORT_STALE' : solution?.status} />
+                  <p>{solution?.reason || '运行后显示解算状态与诊断依据。'}</p>
+                </div>
+                <dl className={stale ? 'position-details stale' : 'position-details'}>
+                  <div>
+                    <dt>纬度</dt>
+                    <dd>
+                      {format(selected?.view.latitude_deg, 7)}
+                      <small>°</small>
+                    </dd>
                   </div>
-                  <Chart option={clockOption} height={193} label="接收机钟差随历元变化" />
-                </section>
-              </div>
-            </>
+                  <div>
+                    <dt>经度</dt>
+                    <dd>
+                      {format(selected?.view.longitude_deg, 7)}
+                      <small>°</small>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>椭球高</dt>
+                    <dd>
+                      {format(selected?.view.height_m, 3)}
+                      <small>m</small>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>接收机钟差</dt>
+                    <dd>
+                      {format(solution?.clock_bias_m, 3)}
+                      <small>m</small>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>单历元计算</dt>
+                    <dd>
+                      {format(solution?.processing_ms, 2)}
+                      <small>ms</small>
+                    </dd>
+                  </div>
+                </dl>
+                <div className="correction">
+                  <div>
+                    <span>算法修正距离</span>
+                    <strong>
+                      {format(selected?.view.correction_m, 3)} <small>m</small>
+                    </strong>
+                  </div>
+                  <span className="correction-icon">
+                    <ArrowRight size={19} />
+                  </span>
+                </div>
+                <p className="footnote">修正距离为两种解的三维差值，不代表真实定位误差。</p>
+                <div className="inspector-sky">
+                  <div className="inspector-heading">
+                    <h3>卫星分布</h3>
+                    <span>点击选择卫星</span>
+                  </div>
+                  <Skyplot
+                    satellites={solution?.diagnostics ?? []}
+                    selectedId={inspectedSatelliteId}
+                    onSelect={setSatelliteId}
+                  />
+                </div>
+                <SatelliteInspector satellite={satellite} selectedId={inspectedSatelliteId} />
+              </section>
+            </div>
           )}
 
           {page === 'diagnostics' && (
             <div className="diagnostic-layout">
-              <section className="panel">
+              <section className="panel satellite-panel">
                 <div className="panel-heading">
                   <div>
                     <h2>卫星观测与处置</h2>
@@ -768,10 +787,19 @@ export default function App() {
                     </thead>
                     <tbody>
                       {(solution?.diagnostics ?? []).map((s) => (
-                        <tr key={s.sat_id} className={s.excluded ? 'excluded-row' : ''}>
+                        <tr
+                          key={s.sat_id}
+                          className={`${s.excluded ? 'excluded-row' : ''} ${inspectedSatelliteId === s.sat_id ? 'selected-row' : ''}`}
+                        >
                           <td>
-                            <Satellite size={14} />
-                            {s.sat_id}
+                            <button
+                              className="satellite-select"
+                              aria-label={`查看卫星 ${s.sat_id}`}
+                              aria-pressed={inspectedSatelliteId === s.sat_id}
+                              onClick={() => setSatelliteId(s.sat_id)}
+                            >
+                              {s.sat_id}
+                            </button>
                           </td>
                           <td>{format(s.elevation_deg, 1)}°</td>
                           <td>{format(s.azimuth_deg, 1)}°</td>
@@ -779,10 +807,8 @@ export default function App() {
                           <td>{s.weight}</td>
                           <td>{format(s.robust_weight, 3)}</td>
                           <td>
-                            <span
-                              className={`status ${s.excluded ? 'status-warn' : 'status-good'}`}
-                            >
-                              {s.excluded ? '异常剔除' : '参与定位'}
+                            <span className={s.excluded ? 'warning-text' : 'muted'}>
+                              {s.excluded ? '异常剔除' : s.weight > 0 ? '参与定位' : '未参与定位'}
                             </span>
                           </td>
                         </tr>
@@ -801,11 +827,16 @@ export default function App() {
                     <p>北向为上；内圈60°、中圈30°、外圈0°；红色为剔除卫星</p>
                   </div>
                 </div>
-                <Skyplot satellites={solution?.diagnostics ?? []} />
+                <Skyplot
+                  satellites={solution?.diagnostics ?? []}
+                  selectedId={inspectedSatelliteId}
+                  onSelect={setSatelliteId}
+                />
+                <SatelliteInspector satellite={satellite} selectedId={inspectedSatelliteId} />
                 <p className="explanation">
                   方法：{solution?.algorithm ?? '—'} · 已检验{' '}
                   {solution?.candidate_scores?.length ?? 0} 个假设 · 搜索
-                  {solution?.search_complete === false ? '未完成' : '完整'}
+                  {!solution ? '—' : solution.search_complete === false ? '未完成' : '完整'}
                 </p>
                 {!!solution?.algorithm_trace?.length && (
                   <details>
@@ -865,9 +896,12 @@ export default function App() {
                     <strong>{format(solution?.test_statistic)}</strong>
                   </div>
                 </div>
-                <p className="explanation">
-                  最小剔星数仅有一个假设通过残差与几何检验，且保留验证冗余时才确认剔除。多个候选通过则保留疑点。共同偏差由钟差吸收。
-                </p>
+                <details className="method-note">
+                  <summary>判定规则与方法边界</summary>
+                  <p>
+                    最小剔星数仅有一个假设通过残差与几何检验，且保留验证冗余时才确认剔除。多个候选通过则保留疑点。共同偏差由钟差吸收。
+                  </p>
+                </details>
                 <div className="candidate-list">
                   {(solution?.candidate_scores ?? []).map((raw) => {
                     const c = raw as {
@@ -1162,7 +1196,12 @@ export default function App() {
           )}
 
           {page !== 'history' && run && (
-            <section className="panel timeline-panel">
+            <section className="panel timeline-panel" aria-label="统一历元回放">
+              <StatusReplay
+                epochs={epochs}
+                selectedIndex={selectedIndex}
+                onSelect={setSelectedIndex}
+              />
               <div className="timeline-top">
                 <div>
                   <Activity size={16} />
@@ -1174,9 +1213,37 @@ export default function App() {
                     GPST
                   </span>
                 </div>
-                <button className="text-button" onClick={() => setSelectedIndex(null)}>
-                  回到最新
-                </button>
+                <div className="epoch-actions">
+                  <button
+                    className="icon-button"
+                    aria-label="上一个历元"
+                    title="上一个历元"
+                    disabled={!epochs.length || (selectedIndex ?? epochs.length - 1) === 0}
+                    onClick={() =>
+                      setSelectedIndex(Math.max(0, (selectedIndex ?? epochs.length - 1) - 1))
+                    }
+                  >
+                    <ChevronLeft size={15} />
+                  </button>
+                  <button
+                    className="icon-button"
+                    aria-label="下一个历元"
+                    title="下一个历元"
+                    disabled={
+                      !epochs.length || (selectedIndex ?? epochs.length - 1) >= epochs.length - 1
+                    }
+                    onClick={() =>
+                      setSelectedIndex(
+                        Math.min(epochs.length - 1, (selectedIndex ?? epochs.length - 1) + 1),
+                      )
+                    }
+                  >
+                    <ChevronRight size={15} />
+                  </button>
+                  <button className="text-button" onClick={() => setSelectedIndex(null)}>
+                    回到最新
+                  </button>
+                </div>
               </div>
               <input
                 aria-label="历元时间轴"
@@ -1234,14 +1301,6 @@ export default function App() {
               </div>
             </section>
           )}
-          <footer className="page-footer">
-            <span>
-              <Terminal size={13} /> GPS L1 C1 · 广播星历 · 等权最小二乘 / 残差一致性诊断
-            </span>
-            <a href="/api/docs" target="_blank" rel="noreferrer">
-              API 文档 <ArrowRight size={12} />
-            </a>
-          </footer>
         </div>
       </main>
     </div>

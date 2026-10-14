@@ -3,12 +3,20 @@ import type { components } from '../generated/api'
 
 type Satellite = components['schemas']['SatelliteDiagnostic']
 
-export function Skyplot({ satellites }: { satellites: Satellite[] }) {
+export function Skyplot({
+  satellites,
+  selectedId,
+  onSelect,
+}: {
+  satellites: Satellite[]
+  selectedId?: string
+  onSelect?: (id: string) => void
+}) {
   return (
     <svg
       className="skyplot"
       viewBox="0 0 340 340"
-      role="img"
+      role={onSelect ? 'group' : 'img'}
       aria-label="卫星天空图：方位角与高度角"
     >
       {[45, 90, 135].map((radius) => (
@@ -35,11 +43,32 @@ export function Skyplot({ satellites }: { satellites: Satellite[] }) {
         const x = 170 + radius * Math.sin(angle),
           y = 170 - radius * Math.cos(angle)
         return (
-          <g key={satellite.sat_id}>
+          <g
+            key={satellite.sat_id}
+            role={onSelect ? 'button' : undefined}
+            tabIndex={onSelect ? 0 : undefined}
+            aria-label={onSelect ? `选择卫星 ${satellite.sat_id}` : undefined}
+            aria-pressed={onSelect ? selectedId === satellite.sat_id : undefined}
+            onClick={() => onSelect?.(satellite.sat_id)}
+            onKeyDown={(event) => {
+              if (onSelect && (event.key === 'Enter' || event.key === ' ')) {
+                event.preventDefault()
+                onSelect(satellite.sat_id)
+              }
+            }}
+            className={onSelect ? 'sky-satellite' : undefined}
+          >
             <title>
               {satellite.sat_id}：高度角 {satellite.elevation_deg.toFixed(1)}°，残差{' '}
               {satellite.residual_m.toFixed(2)} m
             </title>
+            <circle
+              cx={x}
+              cy={y}
+              r="17"
+              fill="transparent"
+              stroke={selectedId === satellite.sat_id ? chartColors.improved : 'transparent'}
+            />
             <circle
               cx={x}
               cy={y}

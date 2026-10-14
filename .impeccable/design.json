@@ -1,0 +1,617 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-14T06:43:52.272313+00:00",
+  "title": "Design System: GNSS Workbench",
+  "extensions": {
+    "colorMeta": {
+      "canvas": {
+        "role": "neutral",
+        "displayName": "工作底",
+        "tonalRamp": [
+          "oklch(15% 0.0035 219.53)",
+          "oklch(26.43% 0.0035 219.53)",
+          "oklch(37.86% 0.0035 219.53)",
+          "oklch(49.29% 0.0035 219.53)",
+          "oklch(60.71% 0.0035 219.53)",
+          "oklch(72.14% 0.0035 219.53)",
+          "oklch(83.57% 0.0035 219.53)",
+          "oklch(95% 0.0035 219.53)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "数据纸面",
+        "tonalRamp": [
+          "oklch(15% 0.0000 0.00)",
+          "oklch(26.43% 0.0000 0.00)",
+          "oklch(37.86% 0.0000 0.00)",
+          "oklch(49.29% 0.0000 0.00)",
+          "oklch(60.71% 0.0000 0.00)",
+          "oklch(72.14% 0.0000 0.00)",
+          "oklch(83.57% 0.0000 0.00)",
+          "oklch(95% 0.0000 0.00)"
+        ]
+      },
+      "surface-subtle": {
+        "role": "neutral",
+        "displayName": "辅助浅底",
+        "tonalRamp": [
+          "oklch(15% 0.0025 228.78)",
+          "oklch(26.43% 0.0025 228.78)",
+          "oklch(37.86% 0.0025 228.78)",
+          "oklch(49.29% 0.0025 228.78)",
+          "oklch(60.71% 0.0025 228.78)",
+          "oklch(72.14% 0.0025 228.78)",
+          "oklch(83.57% 0.0025 228.78)",
+          "oklch(95% 0.0025 228.78)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "正文墨色",
+        "tonalRamp": [
+          "oklch(15% 0.0278 236.27)",
+          "oklch(26.43% 0.0278 236.27)",
+          "oklch(37.86% 0.0278 236.27)",
+          "oklch(49.29% 0.0278 236.27)",
+          "oklch(60.71% 0.0278 236.27)",
+          "oklch(72.14% 0.0278 236.27)",
+          "oklch(83.57% 0.0278 236.27)",
+          "oklch(95% 0.0278 236.27)"
+        ]
+      },
+      "secondary": {
+        "role": "neutral",
+        "displayName": "辅助文字",
+        "tonalRamp": [
+          "oklch(15% 0.0272 236.50)",
+          "oklch(26.43% 0.0272 236.50)",
+          "oklch(37.86% 0.0272 236.50)",
+          "oklch(49.29% 0.0272 236.50)",
+          "oklch(60.71% 0.0272 236.50)",
+          "oklch(72.14% 0.0272 236.50)",
+          "oklch(83.57% 0.0272 236.50)",
+          "oklch(95% 0.0272 236.50)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "弱化文字",
+        "tonalRamp": [
+          "oklch(15% 0.0258 238.02)",
+          "oklch(26.43% 0.0258 238.02)",
+          "oklch(37.86% 0.0258 238.02)",
+          "oklch(49.29% 0.0258 238.02)",
+          "oklch(60.71% 0.0258 238.02)",
+          "oklch(72.14% 0.0258 238.02)",
+          "oklch(83.57% 0.0258 238.02)",
+          "oklch(95% 0.0258 238.02)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "面板分界",
+        "tonalRamp": [
+          "oklch(15% 0.0112 225.99)",
+          "oklch(26.43% 0.0112 225.99)",
+          "oklch(37.86% 0.0112 225.99)",
+          "oklch(49.29% 0.0112 225.99)",
+          "oklch(60.71% 0.0112 225.99)",
+          "oklch(72.14% 0.0112 225.99)",
+          "oklch(83.57% 0.0112 225.99)",
+          "oklch(95% 0.0112 225.99)"
+        ]
+      },
+      "line-soft": {
+        "role": "neutral",
+        "displayName": "内部细分界",
+        "tonalRamp": [
+          "oklch(15% 0.0060 223.46)",
+          "oklch(26.43% 0.0060 223.46)",
+          "oklch(37.86% 0.0060 223.46)",
+          "oklch(49.29% 0.0060 223.46)",
+          "oklch(60.71% 0.0060 223.46)",
+          "oklch(72.14% 0.0060 223.46)",
+          "oklch(83.57% 0.0060 223.46)",
+          "oklch(95% 0.0060 223.46)"
+        ]
+      },
+      "navy": {
+        "role": "neutral",
+        "displayName": "石墨框架",
+        "tonalRamp": [
+          "oklch(15% 0.0354 238.36)",
+          "oklch(26.43% 0.0354 238.36)",
+          "oklch(37.86% 0.0354 238.36)",
+          "oklch(49.29% 0.0354 238.36)",
+          "oklch(60.71% 0.0354 238.36)",
+          "oklch(72.14% 0.0354 238.36)",
+          "oklch(83.57% 0.0354 238.36)",
+          "oklch(95% 0.0354 238.36)"
+        ]
+      },
+      "on-navy": {
+        "role": "neutral",
+        "displayName": "框架主字",
+        "tonalRamp": [
+          "oklch(15% 0.0050 228.82)",
+          "oklch(26.43% 0.0050 228.82)",
+          "oklch(37.86% 0.0050 228.82)",
+          "oklch(49.29% 0.0050 228.82)",
+          "oklch(60.71% 0.0050 228.82)",
+          "oklch(72.14% 0.0050 228.82)",
+          "oklch(83.57% 0.0050 228.82)",
+          "oklch(95% 0.0050 228.82)"
+        ]
+      },
+      "on-navy-muted": {
+        "role": "neutral",
+        "displayName": "框架辅字",
+        "tonalRamp": [
+          "oklch(15% 0.0250 234.50)",
+          "oklch(26.43% 0.0250 234.50)",
+          "oklch(37.86% 0.0250 234.50)",
+          "oklch(49.29% 0.0250 234.50)",
+          "oklch(60.71% 0.0250 234.50)",
+          "oklch(72.14% 0.0250 234.50)",
+          "oklch(83.57% 0.0250 234.50)",
+          "oklch(95% 0.0250 234.50)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "操作青色",
+        "tonalRamp": [
+          "oklch(15% 0.0878 205.19)",
+          "oklch(26.43% 0.0878 205.19)",
+          "oklch(37.86% 0.0878 205.19)",
+          "oklch(49.29% 0.0878 205.19)",
+          "oklch(60.71% 0.0878 205.19)",
+          "oklch(72.14% 0.0878 205.19)",
+          "oklch(83.57% 0.0878 205.19)",
+          "oklch(95% 0.0878 205.19)"
+        ]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "操作深青",
+        "tonalRamp": [
+          "oklch(15% 0.0747 208.88)",
+          "oklch(26.43% 0.0747 208.88)",
+          "oklch(37.86% 0.0747 208.88)",
+          "oklch(49.29% 0.0747 208.88)",
+          "oklch(60.71% 0.0747 208.88)",
+          "oklch(72.14% 0.0747 208.88)",
+          "oklch(83.57% 0.0747 208.88)",
+          "oklch(95% 0.0747 208.88)"
+        ]
+      },
+      "accent-soft": {
+        "role": "primary",
+        "displayName": "选择浅青",
+        "tonalRamp": [
+          "oklch(15% 0.0127 196.94)",
+          "oklch(26.43% 0.0127 196.94)",
+          "oklch(37.86% 0.0127 196.94)",
+          "oklch(49.29% 0.0127 196.94)",
+          "oklch(60.71% 0.0127 196.94)",
+          "oklch(72.14% 0.0127 196.94)",
+          "oklch(83.57% 0.0127 196.94)",
+          "oklch(95% 0.0127 196.94)"
+        ]
+      },
+      "success": {
+        "role": "secondary",
+        "displayName": "有效绿",
+        "tonalRamp": [
+          "oklch(15% 0.0867 162.17)",
+          "oklch(26.43% 0.0867 162.17)",
+          "oklch(37.86% 0.0867 162.17)",
+          "oklch(49.29% 0.0867 162.17)",
+          "oklch(60.71% 0.0867 162.17)",
+          "oklch(72.14% 0.0867 162.17)",
+          "oklch(83.57% 0.0867 162.17)",
+          "oklch(95% 0.0867 162.17)"
+        ]
+      },
+      "success-soft": {
+        "role": "secondary",
+        "displayName": "有效浅底",
+        "tonalRamp": [
+          "oklch(15% 0.0132 159.91)",
+          "oklch(26.43% 0.0132 159.91)",
+          "oklch(37.86% 0.0132 159.91)",
+          "oklch(49.29% 0.0132 159.91)",
+          "oklch(60.71% 0.0132 159.91)",
+          "oklch(72.14% 0.0132 159.91)",
+          "oklch(83.57% 0.0132 159.91)",
+          "oklch(95% 0.0132 159.91)"
+        ]
+      },
+      "warning": {
+        "role": "secondary",
+        "displayName": "警告棕",
+        "tonalRamp": [
+          "oklch(15% 0.1122 62.71)",
+          "oklch(26.43% 0.1122 62.71)",
+          "oklch(37.86% 0.1122 62.71)",
+          "oklch(49.29% 0.1122 62.71)",
+          "oklch(60.71% 0.1122 62.71)",
+          "oklch(72.14% 0.1122 62.71)",
+          "oklch(83.57% 0.1122 62.71)",
+          "oklch(95% 0.1122 62.71)"
+        ]
+      },
+      "warning-soft": {
+        "role": "secondary",
+        "displayName": "警告浅底",
+        "tonalRamp": [
+          "oklch(15% 0.0214 76.54)",
+          "oklch(26.43% 0.0214 76.54)",
+          "oklch(37.86% 0.0214 76.54)",
+          "oklch(49.29% 0.0214 76.54)",
+          "oklch(60.71% 0.0214 76.54)",
+          "oklch(72.14% 0.0214 76.54)",
+          "oklch(83.57% 0.0214 76.54)",
+          "oklch(95% 0.0214 76.54)"
+        ]
+      },
+      "danger": {
+        "role": "secondary",
+        "displayName": "失效红",
+        "tonalRamp": [
+          "oklch(15% 0.1544 26.63)",
+          "oklch(26.43% 0.1544 26.63)",
+          "oklch(37.86% 0.1544 26.63)",
+          "oklch(49.29% 0.1544 26.63)",
+          "oklch(60.71% 0.1544 26.63)",
+          "oklch(72.14% 0.1544 26.63)",
+          "oklch(83.57% 0.1544 26.63)",
+          "oklch(95% 0.1544 26.63)"
+        ]
+      },
+      "danger-soft": {
+        "role": "secondary",
+        "displayName": "失效浅底",
+        "tonalRamp": [
+          "oklch(15% 0.0165 26.65)",
+          "oklch(26.43% 0.0165 26.65)",
+          "oklch(37.86% 0.0165 26.65)",
+          "oklch(49.29% 0.0165 26.65)",
+          "oklch(60.71% 0.0165 26.65)",
+          "oklch(72.14% 0.0165 26.65)",
+          "oklch(83.57% 0.0165 26.65)",
+          "oklch(95% 0.0165 26.65)"
+        ]
+      },
+      "baseline": {
+        "role": "secondary",
+        "displayName": "普通解暖橙",
+        "tonalRamp": [
+          "oklch(15% 0.1296 62.39)",
+          "oklch(26.43% 0.1296 62.39)",
+          "oklch(37.86% 0.1296 62.39)",
+          "oklch(49.29% 0.1296 62.39)",
+          "oklch(60.71% 0.1296 62.39)",
+          "oklch(72.14% 0.1296 62.39)",
+          "oklch(83.57% 0.1296 62.39)",
+          "oklch(95% 0.1296 62.39)"
+        ]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "键盘焦点",
+        "tonalRamp": [
+          "oklch(15% 0.0878 205.19)",
+          "oklch(26.43% 0.0878 205.19)",
+          "oklch(37.86% 0.0878 205.19)",
+          "oklch(49.29% 0.0878 205.19)",
+          "oklch(60.71% 0.0878 205.19)",
+          "oklch(72.14% 0.0878 205.19)",
+          "oklch(83.57% 0.0878 205.19)",
+          "oklch(95% 0.0878 205.19)"
+        ]
+      },
+      "clock": {
+        "role": "secondary",
+        "displayName": "钟差蓝",
+        "tonalRamp": [
+          "oklch(15% 0.1023 255.97)",
+          "oklch(26.43% 0.1023 255.97)",
+          "oklch(37.86% 0.1023 255.97)",
+          "oklch(49.29% 0.1023 255.97)",
+          "oklch(60.71% 0.1023 255.97)",
+          "oklch(72.14% 0.1023 255.97)",
+          "oklch(83.57% 0.1023 255.97)",
+          "oklch(95% 0.1023 255.97)"
+        ]
+      },
+      "chart-muted": {
+        "role": "neutral",
+        "displayName": "天空图刻度",
+        "tonalRamp": [
+          "oklch(15% 0.0177 236.78)",
+          "oklch(26.43% 0.0177 236.78)",
+          "oklch(37.86% 0.0177 236.78)",
+          "oklch(49.29% 0.0177 236.78)",
+          "oklch(60.71% 0.0177 236.78)",
+          "oklch(72.14% 0.0177 236.78)",
+          "oklch(83.57% 0.0177 236.78)",
+          "oklch(95% 0.0177 236.78)"
+        ]
+      },
+      "nav-active": {
+        "role": "neutral",
+        "displayName": "当前导航底",
+        "tonalRamp": [
+          "oklch(15% 0.0406 235.98)",
+          "oklch(26.43% 0.0406 235.98)",
+          "oklch(37.86% 0.0406 235.98)",
+          "oklch(49.29% 0.0406 235.98)",
+          "oklch(60.71% 0.0406 235.98)",
+          "oklch(72.14% 0.0406 235.98)",
+          "oklch(83.57% 0.0406 235.98)",
+          "oklch(95% 0.0406 235.98)"
+        ]
+      },
+      "nav-indicator": {
+        "role": "neutral",
+        "displayName": "当前导航线",
+        "tonalRamp": [
+          "oklch(15% 0.0777 197.83)",
+          "oklch(26.43% 0.0777 197.83)",
+          "oklch(37.86% 0.0777 197.83)",
+          "oklch(49.29% 0.0777 197.83)",
+          "oklch(60.71% 0.0777 197.83)",
+          "oklch(72.14% 0.0777 197.83)",
+          "oklch(83.57% 0.0777 197.83)",
+          "oklch(95% 0.0777 197.83)"
+        ]
+      },
+      "nav-focus": {
+        "role": "neutral",
+        "displayName": "框架焦点",
+        "tonalRamp": [
+          "oklch(15% 0.0727 199.15)",
+          "oklch(26.43% 0.0727 199.15)",
+          "oklch(37.86% 0.0727 199.15)",
+          "oklch(49.29% 0.0727 199.15)",
+          "oklch(60.71% 0.0727 199.15)",
+          "oklch(72.14% 0.0727 199.15)",
+          "oklch(83.57% 0.0727 199.15)",
+          "oklch(95% 0.0727 199.15)"
+        ]
+      },
+      "metric-surface": {
+        "role": "neutral",
+        "displayName": "指标浅底",
+        "tonalRamp": [
+          "oklch(15% 0.0011 197.14)",
+          "oklch(26.43% 0.0011 197.14)",
+          "oklch(37.86% 0.0011 197.14)",
+          "oklch(49.29% 0.0011 197.14)",
+          "oklch(60.71% 0.0011 197.14)",
+          "oklch(72.14% 0.0011 197.14)",
+          "oklch(83.57% 0.0011 197.14)",
+          "oklch(95% 0.0011 197.14)"
+        ]
+      },
+      "replay-surface": {
+        "role": "neutral",
+        "displayName": "回放浅底",
+        "tonalRamp": [
+          "oklch(15% 0.0025 228.78)",
+          "oklch(26.43% 0.0025 228.78)",
+          "oklch(37.86% 0.0025 228.78)",
+          "oklch(49.29% 0.0025 228.78)",
+          "oklch(60.71% 0.0025 228.78)",
+          "oklch(72.14% 0.0025 228.78)",
+          "oklch(83.57% 0.0025 228.78)",
+          "oklch(95% 0.0025 228.78)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "brand": {
+        "displayName": "brand",
+        "purpose": "Compact product identifier, not a display headline."
+      },
+      "title": {
+        "displayName": "title",
+        "purpose": "Panel headings."
+      },
+      "body": {
+        "displayName": "body",
+        "purpose": "Default interface text."
+      },
+      "control": {
+        "displayName": "control",
+        "purpose": "Buttons and compact actions."
+      },
+      "detail": {
+        "displayName": "detail",
+        "purpose": "Tables, coordinates and supporting explanation."
+      },
+      "label": {
+        "displayName": "label",
+        "purpose": "Field labels and metadata."
+      },
+      "measurement": {
+        "displayName": "measurement",
+        "purpose": "Tabular metric numerals."
+      },
+      "measurement-detail": {
+        "displayName": "measurement-detail",
+        "purpose": "Tabular position and satellite values."
+      }
+    },
+    "shadows": [
+      {
+        "name": "advanced-popover",
+        "value": "0 12px 40px #172b382b, 0 2px 6px #172b3817",
+        "purpose": "高级设置浮层；普通数据面板无阴影。"
+      }
+    ],
+    "motion": [
+      {
+        "name": "button-background",
+        "value": "background 140ms ease-out",
+        "purpose": "按钮背景反馈。"
+      },
+      {
+        "name": "navigation-feedback",
+        "value": "color 140ms, background 140ms",
+        "purpose": "导航悬浮和选择反馈。"
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition: none; scroll-behavior: auto",
+        "purpose": "prefers-reduced-motion: reduce 时应用；图表始终 animation: false。"
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "wide-desktop-min",
+        "value": "1600px"
+      },
+      {
+        "name": "compact-desktop-max",
+        "value": "1150px"
+      },
+      {
+        "name": "flow-layout-max-width",
+        "value": "900px"
+      },
+      {
+        "name": "flow-layout-max-height",
+        "value": "620px"
+      },
+      {
+        "name": "mobile-max",
+        "value": "600px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "主要按钮",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "实际按钮库的 primary 变体；尺寸、焦点与禁用规则一致。",
+      "html": "<button class=\"ds-button ds-primary\">开始运行</button>",
+      "css": ".ds-button { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:34px; padding:7px 13px; border:1px solid transparent; border-radius:4px; font-family:var(--ui-font, sans-serif); font-size:13px; font-weight:500; white-space:nowrap; cursor:pointer; transition:background 140ms ease-out; } .ds-button:focus-visible { outline:2px solid var(--focus, #087882); outline-offset:3px; } .ds-button:disabled { opacity:.5; cursor:not-allowed; } @media (max-width:600px) { .ds-button { min-height:40px; } } @media (prefers-reduced-motion:reduce) { .ds-button { transition:none; } } .ds-primary { background:var(--accent, #087882); color:var(--surface, #ffffff); } .ds-primary:hover:not(:disabled) { background:var(--accent-hover, #055e69); }"
+    },
+    {
+      "name": "描边按钮",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "实际按钮库的 outline 变体；尺寸、焦点与禁用规则一致。",
+      "html": "<button class=\"ds-button ds-outline\">停止运行</button>",
+      "css": ".ds-button { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:34px; padding:7px 13px; border:1px solid transparent; border-radius:4px; font-family:var(--ui-font, sans-serif); font-size:13px; font-weight:500; white-space:nowrap; cursor:pointer; transition:background 140ms ease-out; } .ds-button:focus-visible { outline:2px solid var(--focus, #087882); outline-offset:3px; } .ds-button:disabled { opacity:.5; cursor:not-allowed; } @media (max-width:600px) { .ds-button { min-height:40px; } } @media (prefers-reduced-motion:reduce) { .ds-button { transition:none; } } .ds-outline { background:var(--surface, #ffffff); color:var(--ink, #23333d); border-color:var(--line, #d6dfe3); } .ds-outline:hover:not(:disabled) { background:var(--surface-subtle, #f6f8f9); }"
+    },
+    {
+      "name": "幽灵按钮",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "实际按钮库的 ghost 变体；尺寸、焦点与禁用规则一致。",
+      "html": "<button class=\"ds-button ds-ghost\">查看结果</button>",
+      "css": ".ds-button { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:34px; padding:7px 13px; border:1px solid transparent; border-radius:4px; font-family:var(--ui-font, sans-serif); font-size:13px; font-weight:500; white-space:nowrap; cursor:pointer; transition:background 140ms ease-out; } .ds-button:focus-visible { outline:2px solid var(--focus, #087882); outline-offset:3px; } .ds-button:disabled { opacity:.5; cursor:not-allowed; } @media (max-width:600px) { .ds-button { min-height:40px; } } @media (prefers-reduced-motion:reduce) { .ds-button { transition:none; } } .ds-ghost { background:transparent; color:var(--accent, #087882); } .ds-ghost:hover:not(:disabled) { background:var(--surface-subtle, #f6f8f9); }"
+    },
+    {
+      "name": "危险按钮",
+      "kind": "button",
+      "refersTo": "button-danger",
+      "description": "实际按钮库的 danger 变体；尺寸、焦点与禁用规则一致。",
+      "html": "<button class=\"ds-button ds-danger\">危险操作</button>",
+      "css": ".ds-button { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:34px; padding:7px 13px; border:1px solid transparent; border-radius:4px; font-family:var(--ui-font, sans-serif); font-size:13px; font-weight:500; white-space:nowrap; cursor:pointer; transition:background 140ms ease-out; } .ds-button:focus-visible { outline:2px solid var(--focus, #087882); outline-offset:3px; } .ds-button:disabled { opacity:.5; cursor:not-allowed; } @media (max-width:600px) { .ds-button { min-height:40px; } } @media (prefers-reduced-motion:reduce) { .ds-button { transition:none; } } .ds-danger { background:var(--danger, #b43e38); color:var(--surface, #ffffff); }"
+    },
+    {
+      "name": "表单字段",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "标签置顶的紧凑输入，保留可见焦点和青色光标。",
+      "html": "<label class=\"ds-field\">回放间隔（秒）<input type=\"number\" value=\"0.02\" step=\"0.01\"></label>",
+      "css": ".ds-field { display:flex; flex-direction:column; gap:6px; color:var(--secondary, #52636e); font-family:var(--ui-font, sans-serif); font-size:12px; } .ds-field input { min-height:34px; padding:6px 8px; border:1px solid var(--line, #d6dfe3); border-radius:4px; color:var(--ink, #23333d); background:var(--surface, #ffffff); font:13px var(--ui-font, sans-serif); caret-color:var(--accent, #087882); } .ds-field input:focus-visible { outline:2px solid var(--focus, #087882); outline-offset:3px; } .ds-field input:disabled { opacity:.5; cursor:not-allowed; }"
+    },
+    {
+      "name": "顶部导航",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "石墨顶栏、文字导航、底部选中线；手机保留文字。",
+      "html": "<nav class=\"ds-nav\" aria-label=\"工作页面\"><button class=\"ds-nav-item ds-active\" aria-current=\"page\">实时定位</button><button class=\"ds-nav-item\">逐星诊断</button><button class=\"ds-nav-item\">实验设计</button><button class=\"ds-nav-item\">运行记录</button></nav>",
+      "css": ".ds-nav { display:flex; height:52px; gap:6px; padding:0 18px; background:var(--navy, #172b38); font-family:var(--ui-font, sans-serif); } .ds-nav-item { padding:0 15px; border:0; border-bottom:2px solid transparent; background:transparent; color:var(--on-navy-muted, #b7c9d4); font:13px var(--ui-font, sans-serif); white-space:nowrap; cursor:pointer; transition:color 140ms, background 140ms; } .ds-nav-item:hover, .ds-nav-item.ds-active { background:var(--nav-active, #243d4c); color:var(--surface, #ffffff); } .ds-nav-item.ds-active { border-bottom-color:var(--nav-indicator, #8cdbdd); } .ds-nav-item:focus-visible { outline:2px solid var(--nav-focus, #91dadd); outline-offset:-4px; } @media (max-width:600px) { .ds-nav { height:50px; gap:0; padding:0 12px; } .ds-nav-item { padding:0 9px; font-size:12px; } } @media (prefers-reduced-motion:reduce) { .ds-nav-item { transition:none; } }"
+    },
+    {
+      "name": "处置状态",
+      "kind": "chip",
+      "refersTo": "status",
+      "description": "状态圆点、文字与语义底色共同表达处置结果。",
+      "html": "<span class=\"ds-status\"><span class=\"ds-dot\" aria-hidden=\"true\"></span>已剔除异常卫星</span>",
+      "css": ".ds-status { display:inline-flex; align-items:center; gap:5px; padding:2px 6px; border-radius:3px; color:var(--accent, #087882); background:var(--accent-soft, #e8f4f4); font:500 12px var(--ui-font, sans-serif); white-space:nowrap; } .ds-dot { width:5px; height:5px; border-radius:50%; background:currentColor; }"
+    },
+    {
+      "name": "连接面板",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "直角浅色容器，以共享分隔线连接，普通面板没有投影。",
+      "html": "<section class=\"ds-panel\"><header class=\"ds-panel-heading\"><h2>解算状态</h2></header><p class=\"ds-panel-note\">正在查看历史历元</p></section>",
+      "css": ".ds-panel { min-width:0; background:var(--surface, #ffffff); color:var(--ink, #23333d); border-radius:0; font-family:var(--ui-font, sans-serif); } .ds-panel-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 16px 8px; } .ds-panel-heading h2 { margin:0; font-size:14px; font-weight:600; line-height:1.5; } .ds-panel-note { margin:0 16px; padding-bottom:12px; border-bottom:1px solid var(--line-soft, #e8edef); font-size:12px; color:var(--secondary, #52636e); line-height:1.6; }"
+    },
+    {
+      "name": "全程评价指标",
+      "kind": "custom",
+      "refersTo": "metric",
+      "description": "数值范围直接可见；缺少评价数据时使用缺省符号，示例不填造精度。",
+      "html": "<div class=\"ds-metric\" tabindex=\"0\" title=\"有匹配真值的完整运行结束后计算\"><div class=\"ds-metric-title\">水平误差 P95</div><div class=\"ds-metric-value\">—<small>m</small></div><p class=\"ds-metric-scope\">仿真 · 全程</p></div>",
+      "css": ".ds-metric { display:flex; flex-direction:column; gap:1px; min-width:0; background:var(--metric-surface, #fbfcfc); color:var(--ink, #23333d); font-family:var(--ui-font, sans-serif); } .ds-metric-title { font-size:11px; color:var(--secondary, #52636e); } .ds-metric-value { font:500 16px/1.5 var(--data-font, monospace); font-variant-numeric:tabular-nums; } .ds-metric-value small { margin-left:5px; font:11px var(--ui-font, sans-serif); color:var(--secondary, #52636e); } .ds-metric-scope { margin:2px 0 0; font-size:11px; line-height:1.4; color:var(--secondary, #52636e); } .ds-metric:focus-visible { outline:2px solid var(--focus, #087882); outline-offset:3px; } @media (max-width:600px) { .ds-metric-title { font-size:10px; } .ds-metric-value { font-size:15px; } .ds-metric-value small { font-size:10px; margin-left:3px; } }"
+    },
+    {
+      "name": "共享历元时间轴",
+      "kind": "custom",
+      "refersTo": "replay",
+      "description": "回放底色、状态区段和滑块统一服务于历元选择；片段展示控制外观。",
+      "html": "<section class=\"ds-replay\" aria-label=\"历元回放\"><label class=\"ds-replay-label\">状态回放<select><option>选择定位状态区段</option></select></label><input class=\"ds-slider\" aria-label=\"历元时间轴\" type=\"range\" min=\"0\" max=\"100\" value=\"35\"></section>",
+      "css": ".ds-replay { display:grid; gap:3px; padding:8px 18px 7px; border-top:1px solid var(--line, #d6dfe3); background:var(--replay-surface, #f9fbfc); color:var(--secondary, #52636e); font-family:var(--ui-font, sans-serif); } .ds-replay-label { display:flex; align-items:center; gap:8px; min-height:30px; font-size:11px; } .ds-replay-label select { flex:1; min-width:0; max-width:390px; height:28px; padding:2px 6px; border:1px solid var(--line, #d6dfe3); border-radius:4px; background:var(--surface, #ffffff); color:var(--ink, #23333d); font:12px var(--ui-font, sans-serif); } .ds-slider { width:100%; height:16px; margin:0; accent-color:var(--accent, #087882); cursor:pointer; } .ds-replay :focus-visible { outline:2px solid var(--focus, #087882); outline-offset:3px; } @media (max-width:600px) { .ds-replay { padding:12px; gap:8px; } .ds-replay-label select { min-height:40px; } .ds-slider { height:24px; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "专业分析工作区",
+    "overview": "以“专业分析工作区”为视觉北极星：石墨蓝顶栏提供稳定定位，冷白连接面板把空间交给轨迹、观测和检验证据。中文标签简短明确，数值密集但保持对齐；青色表示操作与当前关注对象，其他色彩承担具体数据或状态语义。\n\n本系统来自用户已授权的 Emlid、Felt、Foxglove 竞品式方向及实际实现。参考其紧凑操作、联动面板和统一回放的工作方式，保留 GNSS Workbench 名称；不采用产品商标或截图。新页面沿用平实的工具界面，不再引入展示性大标题、宽大侧栏或彼此悬浮的卡片海。",
+    "keyCharacteristics": [
+      "浅色连接面板与细分隔线，桌面充分利用可视区域。",
+      "面板、时间与卫星选择联动；数值、单位及数据范围就近呈现。",
+      "操作和状态以文字、图形与颜色共同表达。"
+    ],
+    "rules": [
+      {
+        "name": "The Semantic Color Rule",
+        "body": "普通解、改进解、钟差和失效状态的颜色在图例、图表、表格与检查区保持对应；普通解同时使用虚线。",
+        "section": "colors"
+      },
+      {
+        "name": "The Measurement Type Rule",
+        "body": "测量值使用等宽字体和等宽数字，单位就近呈现；导航、标题与解释使用界面字体。",
+        "section": "typography"
+      },
+      {
+        "name": "The Connected Surface Rule",
+        "body": "数据面板以共享细分隔线建立层级，不用阴影把每个区块变成悬浮卡片；只有高级设置浮层具有投影。",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do 使用共享语义色、实虚线差异、状态文字与明确的选中边界。",
+      "Do 保持 ENU 横纵轴每像素对应相同米数，在容器变化后重新计算范围。",
+      "Do 将“水平误差 P95”与可见的“仿真 · 全程”放在同一指标内；没有匹配真值时保留缺省值。",
+      "Do 保留短桌面的检查区独立滚动，以及手机表格自身的横向滚动。",
+      "Do 保持键盘焦点、空数据、禁用、异常、暂停与过期位置可见。"
+    ],
+    "donts": [
+      "Don't 用过去的深色解算卡、展示性大标题、大圆角面板或手机底栏替换当前结构。",
+      "Don't 以平滑、跨失效历元连线、历史坐标或装饰填补无效解。",
+      "Don't 把双解距离或 ENU 位移命名为真值误差；不得发明底图、地理位置或绝对精度。",
+      "Don't 让当前历元指标与整次运行评价共享含糊标签，也不要把评价范围仅藏在悬浮提示中。",
+      "Don't 为选中但当前历元缺失的卫星代入另一颗卫星或旧数值。"
+    ]
+  }
+}
