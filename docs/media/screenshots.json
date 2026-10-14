@@ -1,0 +1,18 @@
+{
+  "workbench.jpg": {
+    "origin": "Actual local browser screenshot of GNSS Workbench at http://127.0.0.1:8000",
+    "viewport": "1440x900",
+    "dataset": "D03_sim_demo",
+    "selected_epoch": 120,
+    "run_id": "940462388eb54b0da18bfb9a3e473c02",
+    "date": "2026-10-14",
+    "method": "CUA IAB screenshot; no image generation"
+  },
+  "advanced-diagnostics.png": {
+    "origin": "Actual Chromium Playwright screenshot from web/e2e/workbench.spec.ts import/research-algorithm test",
+    "viewport": "1440x1000",
+    "scenario": "Single epoch with G03 +85m, G20 -90m; adaptive_gnc",
+    "date": "2026-10-14",
+    "method": "Browser screenshot; no image generation"
+  }
+}

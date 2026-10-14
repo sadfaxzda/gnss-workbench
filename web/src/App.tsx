@@ -216,6 +216,8 @@ export default function App() {
   const trajectoryOption = useMemo<EChartsOption>(
     () => ({
       ...chartBase,
+      color: [chartColors.plotBaseline, chartColors.plotImproved],
+      textStyle: { ...chartBase.textStyle, color: chartColors.plotText },
       grid: { left: 58, right: 28, top: 30, bottom: 45, outerBoundsMode: 'none' },
       tooltip: { trigger: 'item', confine: true, formatter: '{a}<br/>{c}' },
       xAxis: {
@@ -224,15 +226,17 @@ export default function App() {
         nameLocation: 'middle',
         nameGap: 26,
         scale: true,
-        axisLabel: { showMinLabel: false, showMaxLabel: false },
-        splitLine: { lineStyle: { color: chartColors.grid } },
+        axisLabel: { showMinLabel: false, showMaxLabel: false, color: chartColors.plotText },
+        axisLine: { lineStyle: { color: chartColors.plotAxis } },
+        splitLine: { lineStyle: { color: chartColors.plotGrid } },
       },
       yAxis: {
         type: 'value',
         name: '北 / m',
         scale: true,
-        axisLabel: { showMinLabel: false, showMaxLabel: false },
-        splitLine: { lineStyle: { color: chartColors.grid } },
+        axisLabel: { showMinLabel: false, showMaxLabel: false, color: chartColors.plotText },
+        axisLine: { lineStyle: { color: chartColors.plotAxis } },
+        splitLine: { lineStyle: { color: chartColors.plotGrid } },
       },
       series: [
         {
@@ -255,7 +259,7 @@ export default function App() {
           name: '选中历元',
           type: 'scatter',
           symbolSize: 10,
-          itemStyle: { color: chartColors.improved, borderColor: '#fff', borderWidth: 2 },
+          itemStyle: { color: chartColors.plotSelected, borderColor: '#242c27', borderWidth: 2 },
           data: selected?.view.improved_enu ? [selected.view.improved_enu.slice(0, 2)] : [],
           tooltip: { show: false },
         },
@@ -263,7 +267,7 @@ export default function App() {
           name: '历元',
           type: 'scatter',
           symbolSize: 16,
-          itemStyle: { color: chartColors.improved, opacity: 0 },
+          itemStyle: { color: chartColors.plotImproved, opacity: 0 },
           emphasis: { itemStyle: { opacity: 0.65 } },
           data: epochs.map((e) => e.view.improved_enu?.slice(0, 2) ?? [null, null]),
           tooltip: {

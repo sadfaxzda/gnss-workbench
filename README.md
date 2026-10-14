@@ -34,6 +34,8 @@ uv run gnss serve
 
 开发时另开终端运行 `pnpm --dir web dev`，访问 **http://127.0.0.1:5173**；Vite 将 API 和 WebSocket 转发给 8000 端口。运行数据保存在 `runtime/`，不提交到 Git。`GNSS_RUNTIME_ROOT` 可指定其他目录。
 
+演示机需安装 **微软雅黑（中文）与 Times New Roman（英文、数字）**。网页与图表使用本机字体；缺少时会回退。字体来源、Mac 粗体兼容处理及配色调研见 [界面调研与字体规则](docs/interface-research.md)。仓库不附带字体二进制。
+
 命令行解算使用同一计算核心：
 
 ```bash
@@ -115,7 +117,7 @@ uv run --group research gnss cross-check --out runtime/cross-check.json
 ## 界面与交付完善
 
 - 按已接收的实际状态生成回放区段，可直接定位故障、四星、少星、无观测与恢复的起点。
-- 统一石墨蓝、冷白与青蓝界面；普通/改进轨迹同时以线型和颜色区分；手机保留文字导航。
+- 按 Leica、Topcon、Trimble 实际软件界面重构颜色角色：灰色操作面板、深色轨迹区、白色数据表与设备黄主要动作；普通/改进轨迹同时以线型和颜色区分，手机保留文字导航。
 - CLI 遇到不可恢复的坏帧，保存此前已经完成的两份CSV、诊断日志与失败manifest，并以非零状态退出。`solve --out` 要求空目录，避免覆盖证据或混入旧评价结果。
 - [界面规范](DESIGN.md) · [现场演示与答辩准备](docs/demo-guide.md)。
 

@@ -11,6 +11,7 @@ import {
 import { CanvasRenderer } from 'echarts/renderers'
 import type { EChartsOption } from 'echarts'
 import { equalAxisBounds } from '../lib/chartTheme'
+import { loadWorkbenchFonts } from '../lib/fonts'
 
 echarts.use([
   LineChart,
@@ -42,8 +43,18 @@ export function Chart({
   const container = useRef<HTMLDivElement>(null)
   const chart = useRef<echarts.ECharts | null>(null)
   const [size, setSize] = useState({ width: 0, height: 0 })
+  const [fontReady, setFontReady] = useState(false)
   useEffect(() => {
-    if (!container.current) return
+    let mounted = true
+    void loadWorkbenchFonts().then(() => {
+      if (mounted) setFontReady(true)
+    })
+    return () => {
+      mounted = false
+    }
+  }, [])
+  useEffect(() => {
+    if (!fontReady || !container.current) return
     chart.current = echarts.init(container.current, undefined, { renderer: 'canvas' })
     const observer = new ResizeObserver(([entry]) => {
       chart.current?.resize()
@@ -55,8 +66,9 @@ export function Chart({
       chart.current?.dispose()
       chart.current = null
     }
-  }, [])
+  }, [fontReady])
   useEffect(() => {
+    if (!fontReady || !container.current) return
     const bounds = equalScalePoints
       ? equalAxisBounds(equalScalePoints, size.width - 86, size.height - 75)
       : null
@@ -67,8 +79,17 @@ export function Chart({
           yAxis: { ...option.yAxis, min: bounds.yMin, max: bounds.yMax },
         }
       : option
-    chart.current?.setOption(scaled, { notMerge: true, lazyUpdate: true })
-  }, [option, equalScalePoints, size])
+    const fontFamily = getComputedStyle(container.current).fontFamily
+    const tooltip = Array.isArray(scaled.tooltip) ? scaled.tooltip[0] : scaled.tooltip
+    chart.current?.setOption(
+      {
+        ...scaled,
+        textStyle: { ...scaled.textStyle, fontFamily },
+        tooltip: { ...tooltip, textStyle: { ...tooltip?.textStyle, fontFamily } },
+      },
+      { notMerge: true, lazyUpdate: true },
+    )
+  }, [option, equalScalePoints, size, fontReady])
   useEffect(() => {
     const instance = chart.current
     if (!instance || !onPointSelect) return
@@ -82,7 +103,7 @@ export function Chart({
     return () => {
       if (!instance.isDisposed()) instance.off('click', select)
     }
-  }, [onPointSelect])
+  }, [onPointSelect, fontReady])
   useEffect(() => {
     const instance = chart.current
     if (!instance || !onCategorySelect) return
@@ -96,7 +117,7 @@ export function Chart({
     return () => {
       if (!instance.isDisposed()) instance.getZr().off('click', select)
     }
-  }, [onCategorySelect])
+  }, [onCategorySelect, fontReady])
   return (
     <div
       className="data-chart"

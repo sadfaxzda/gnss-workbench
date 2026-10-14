@@ -1,0 +1,36 @@
+/* User requirement: Chinese Microsoft YaHei, Latin and digits Times New Roman.
+   Resolve installed fonts locally; font binaries are not redistributed in the repo. */
+@font-face {
+  font-family: 'GNSS Course Font';
+  src: local('Times New Roman'), local('TimesNewRomanPSMT');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-2E7F, U+A000-F8FF;
+}
+@font-face {
+  font-family: 'GNSS Course Font';
+  src: local('Times New Roman Bold'), local('TimesNewRomanPS-BoldMT');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  unicode-range: U+0000-2E7F, U+A000-F8FF;
+}
+@font-face {
+  font-family: 'GNSS Course Font';
+  src: local('Microsoft YaHei'), local('MicrosoftYaHei'), local('微软雅黑');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  unicode-range:
+    U+2E80-33FF, U+3400-9FFF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-2FA1F;
+}
+@font-face {
+  font-family: 'GNSS Course Font';
+  src: local('MicrosoftYaHei-Bold'), local('Microsoft YaHei Bold'), local('微软雅黑 Bold');
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  unicode-range:
+    U+2E80-33FF, U+3400-9FFF, U+F900-FAFF, U+FE10-FE1F, U+FE30-FE4F, U+FF00-FFEF, U+20000-2FA1F;
+}

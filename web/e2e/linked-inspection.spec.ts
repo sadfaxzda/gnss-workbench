@@ -47,8 +47,9 @@ test('epoch and satellite selection stay linked, and invalid epochs clear the po
     { width: 390, height: 844 },
   ]) {
     await page.setViewportSize(viewport)
-    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(
-      viewport.width,
-    )
+    // ECharts resizes its canvas through ResizeObserver after the viewport changes.
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.scrollWidth))
+      .toBeLessThanOrEqual(viewport.width)
   }
 })

@@ -1,31 +1,38 @@
 @import 'tailwindcss';
 
 :root {
-  --canvas: #f1f4f5;
-  --surface: #ffffff;
-  --surface-subtle: #f6f8f9;
-  --ink: #23333d;
-  --secondary: #52636e;
-  --muted: #62727d;
-  --line: #d6dfe3;
-  --line-soft: #e8edef;
-  --navy: #172b38;
-  --on-navy: #f4f8fa;
-  --on-navy-muted: #b7c9d4;
-  --accent: #087882;
-  --accent-hover: #055e69;
-  --accent-soft: #e8f4f4;
-  --success: #236b4d;
-  --success-soft: #eaf4ee;
-  --warning: #915409;
-  --warning-soft: #fff5e7;
-  --danger: #b43e38;
-  --danger-soft: #fff0ee;
-  --baseline: #b86e1b;
-  --focus: #087882;
-  --ui-font:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --data-font: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --canvas: #dadcd6;
+  --surface: #fdfdfb;
+  --surface-subtle: #eceee8;
+  --ink: #292e2a;
+  --secondary: #505951;
+  --muted: #636b63;
+  --line: #bdc3b9;
+  --line-soft: #e0e4dc;
+  --control-border: #74806d;
+  --navy: #343c36;
+  --on-navy: #f4f5ef;
+  --on-navy-muted: #c5cec3;
+  --accent: #365f71;
+  --accent-hover: #294a59;
+  --accent-soft: #e5ece8;
+  --success: #365f43;
+  --success-soft: #e8eee5;
+  --warning: #806018;
+  --warning-soft: #f5ecd7;
+  --danger: #a33f34;
+  --danger-soft: #f5e8e3;
+  --baseline: #98763b;
+  --focus: #8a6a1b;
+  --action: #d7b65c;
+  --action-hover: #c8a347;
+  --action-border: #957328;
+  --on-action: #292e2a;
+  --plot: #242c27;
+  --plot-text: #cbd5c8;
+  --plot-grid: #47534a;
+  --ui-font: 'GNSS Course Font', 'Times New Roman', 'Microsoft YaHei', '微软雅黑', serif;
+  --data-font: var(--ui-font);
   font-family: var(--ui-font);
   font-size: 14px;
   line-height: 1.5;
@@ -44,7 +51,7 @@ body {
 }
 ::selection {
   color: var(--ink);
-  background: #c9e9ea;
+  background: #ede2b6;
 }
 button,
 input,
@@ -148,7 +155,7 @@ dd {
   flex-shrink: 0;
 }
 .brand > svg {
-  color: #82cdd1;
+  color: #d7b65c;
 }
 .brand strong {
   font-size: 16px;
@@ -182,15 +189,15 @@ dd {
 }
 .nav-item:hover {
   color: white;
-  background: #243d4c;
+  background: #4a524b;
 }
 .nav-item.active {
-  border-bottom-color: #8cdbdd;
+  border-bottom-color: #d7b65c;
   color: white;
-  background: #243d4c;
+  background: #4a524b;
 }
 .app-header :focus-visible {
-  outline-color: #91dadd;
+  outline-color: #e9cb77;
   outline-offset: -4px;
 }
 .workspace-state {
@@ -211,10 +218,10 @@ dd {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #b7c9d4;
+  background: #c5cec3;
 }
 .connection-dot.online {
-  background: #90d5b3;
+  background: #a8c193;
 }
 .main {
   flex: 1;
@@ -235,7 +242,7 @@ dd {
   gap: 18px;
   min-height: 65px;
   padding: 8px 18px;
-  background: var(--surface);
+  background: var(--surface-subtle);
   border-bottom: 1px solid var(--line);
 }
 .control-source {
@@ -257,8 +264,8 @@ dd {
   max-width: 100%;
   font-size: 13px;
   color: var(--ink);
-  background: var(--surface-subtle);
-  border: 1px solid var(--line);
+  background: var(--surface);
+  border: 1px solid var(--control-border);
   padding: 3px 8px;
   border-radius: 4px;
 }
@@ -290,16 +297,17 @@ dd {
   transition: background 140ms ease-out;
 }
 .button-primary {
-  background: var(--accent);
-  color: white;
+  background: var(--action);
+  color: var(--on-action);
+  border-color: var(--action-border);
 }
 .button-primary:hover:not(:disabled) {
-  background: var(--accent-hover);
+  background: var(--action-hover);
 }
 .button-outline {
   background: white;
   color: var(--ink);
-  border-color: var(--line);
+  border-color: var(--control-border);
 }
 .button-outline:hover:not(:disabled),
 .button-ghost:hover:not(:disabled) {
@@ -324,6 +332,8 @@ dd {
   gap: 12px;
   padding: 12px 16px;
   flex-shrink: 0;
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--line);
 }
 .panel-heading h2 small {
   margin-left: 5px;
@@ -388,7 +398,7 @@ dd {
   padding: 8px 16px;
   gap: 24px;
   border-block: 1px solid var(--line-soft);
-  background: #fbfcfc;
+  background: #eef0e9;
   flex-shrink: 0;
 }
 .metric-card {
@@ -422,6 +432,12 @@ dd {
   position: relative;
   flex: 1;
   min-height: 140px;
+  background: var(--plot);
+}
+.data-chart {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
 }
 .chart-empty {
   position: absolute;
@@ -431,7 +447,8 @@ dd {
   justify-content: center;
   flex-direction: column;
   gap: 10px;
-  background: #ffffffee;
+  background: var(--plot);
+  color: var(--plot-text);
   padding: 24px;
   text-align: center;
 }
@@ -440,10 +457,10 @@ dd {
   font-weight: 500;
 }
 .chart-empty svg {
-  color: var(--accent);
+  color: var(--action);
 }
 .chart-empty span {
-  color: var(--secondary);
+  color: var(--plot-text);
   font-size: 13px;
 }
 .trajectory-footer {
@@ -488,7 +505,7 @@ dd {
 }
 .solution-panel {
   overflow-y: auto;
-  scrollbar-color: #b2c0c7 var(--surface-subtle);
+  scrollbar-color: #acb5a7 var(--surface-subtle);
 }
 .metric-scope {
   color: var(--secondary);
@@ -670,7 +687,7 @@ dd {
   flex-shrink: 0;
   padding: 8px 18px 7px;
   border-top: 1px solid var(--line);
-  background: #f9fbfc;
+  background: #e9ece4;
   display: grid;
   grid-template-columns: minmax(280px, 1fr) auto;
   gap: 3px 24px;
@@ -695,7 +712,7 @@ dd {
   min-width: 0;
   max-width: 390px;
   height: 28px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--control-border);
   background: white;
   border-radius: 4px;
   font-size: 12px;
@@ -713,7 +730,7 @@ dd {
   height: 28px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--line);
+  border: 1px solid var(--control-border);
   background: white;
   border-radius: 4px;
   color: var(--secondary);
@@ -746,7 +763,7 @@ dd {
   outline-offset: 1px;
 }
 .segment-good {
-  background: #699382;
+  background: #799073;
 }
 .segment-accent {
   background: var(--accent);
@@ -890,7 +907,7 @@ dd {
 }
 .table-scroll {
   overflow: auto;
-  scrollbar-color: #b2c0c7 var(--surface-subtle);
+  scrollbar-color: #acb5a7 var(--surface-subtle);
   min-height: 0;
 }
 table {
@@ -933,7 +950,7 @@ tbody tr:hover {
   background: var(--accent-soft);
 }
 .selected-row.excluded-row {
-  background: #f8efd9;
+  background: #f1e7c8;
 }
 .satellite-select {
   font: inherit;
@@ -1092,7 +1109,7 @@ tbody tr:hover {
   max-width: 100%;
   min-height: 34px;
   background: white;
-  border: 1px solid var(--line);
+  border: 1px solid var(--control-border);
   border-radius: 4px;
   padding: 6px 8px;
   color: var(--ink);
@@ -1177,7 +1194,7 @@ tbody tr:hover {
   align-items: center;
   gap: 6px;
   padding: 6px 8px;
-  border: 1px solid var(--line);
+  border: 1px solid var(--control-border);
   border-radius: 4px;
   font-size: 12px;
   color: var(--secondary);
@@ -1204,8 +1221,8 @@ tbody tr:hover {
   background: white;
   border-radius: 8px;
   box-shadow:
-    0 12px 40px #172b382b,
-    0 2px 6px #172b3817;
+    0 12px 40px #343c362b,
+    0 2px 6px #343c3617;
 }
 .advanced-controls .explanation {
   padding: 0;
