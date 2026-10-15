@@ -51,5 +51,15 @@
     "dataset": "D03_sim_demo",
     "method": "Browser screenshot; no image generation",
     "sha256": "77b7f9e5cf7f07711d760c8527300abd21e80e3f4fe6c6263c0e0e8b210688d0"
+  },
+  "property-inspector.jpg": {
+    "origin": "Actual Codex browser screenshot",
+    "date": "2026-10-15",
+    "viewport": "1414x749",
+    "view": "实时定位，当前历元解算属性",
+    "dataset": "D03_sim_demo",
+    "selected_epoch": 599,
+    "method": "Browser screenshot; no image generation",
+    "sha256": "ffa7340b09540833783d8d8815ecbf5cab69413968e49e2214d320c816a3eaa0"
   }
 }

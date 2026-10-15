@@ -115,7 +115,6 @@ small {
   color: var(--muted);
 }
 .mono,
-.metric-value,
 dd {
   font-family: var(--data-font);
   font-variant-numeric: tabular-nums;
@@ -409,41 +408,6 @@ dd {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.metrics-grid {
-  display: flex;
-  padding: 8px var(--panel-inset);
-  gap: 24px;
-  border-block: 1px solid var(--line-soft);
-  background: var(--surface-subtle);
-  flex-shrink: 0;
-}
-.metric-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-}
-.metric-title {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 11px;
-  color: var(--secondary);
-}
-.metric-title svg {
-  display: none;
-}
-.metric-value {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.5;
-}
-.metric-value small {
-  font: 11px var(--ui-font);
-  color: var(--secondary);
-  margin-left: 5px;
-}
 .chart-container {
   position: relative;
   flex: 1;
@@ -523,12 +487,6 @@ dd {
   overflow-y: auto;
   scrollbar-color: #a6adb3 var(--surface-subtle);
 }
-.metric-scope {
-  color: var(--secondary);
-  font-size: 11px;
-  line-height: 1.4;
-  margin-top: 2px;
-}
 .solution-panel .panel-heading {
   padding-bottom: 8px;
 }
@@ -606,25 +564,6 @@ dd {
 .position-details.stale dd {
   text-decoration: line-through;
   color: var(--muted);
-}
-.correction {
-  margin: 0 var(--panel-inset);
-  padding-top: 8px;
-  border-top: 1px solid var(--line-soft);
-}
-.correction > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  font-size: 12px;
-}
-.correction strong {
-  font-family: var(--data-font);
-  font-weight: 500;
-}
-.correction-icon {
-  display: none;
 }
 .inspector-sky {
   border-top: 1px solid var(--line);
@@ -1218,10 +1157,6 @@ tbody tr:hover {
   .solution-panel {
     overflow: visible;
   }
-  .metrics-grid {
-    flex-wrap: wrap;
-    gap: 8px 20px;
-  }
   .diagnostic-layout {
     grid-template-columns: minmax(0, 1fr) 255px;
     grid-template-rows: auto auto;
@@ -1330,23 +1265,6 @@ tbody tr:hover {
     flex-direction: column;
     gap: 8px;
   }
-  .metrics-grid {
-    gap: 12px;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    padding-inline: 12px;
-  }
-  .metric-title {
-    font-size: 10px;
-    white-space: nowrap;
-  }
-  .metric-value {
-    font-size: 15px;
-  }
-  .metric-value small {
-    font-size: 10px;
-    margin-left: 3px;
-  }
   .chart-container {
     height: 300px;
   }
@@ -1364,15 +1282,6 @@ tbody tr:hover {
   }
   .solution-panel {
     display: block;
-  }
-  .position-details {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 18px;
-  }
-  .position-details > div {
-    flex-wrap: wrap;
-    gap: 3px;
   }
   .inspector-sky .skyplot {
     height: 240px;
@@ -1498,34 +1407,12 @@ select:not([multiple]) {
   }
 }
 
-/* Instrument workspace: quiet surfaces, a shared readout, explicit plot tools. */
+/* Instrument workspace: connected plots and an epoch property inspector. */
 .live-workspace {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
-}
-.live-workspace > .metrics-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding: 10px var(--panel-inset);
-  gap: 24px;
-  background: var(--surface);
-  border-top: 0;
-  border-bottom: 1px solid var(--line);
-}
-.live-workspace .metric-card {
-  display: grid;
-  grid-template-columns: auto auto 1fr;
-  align-items: baseline;
-  column-gap: 12px;
-}
-.live-workspace .metric-value {
-  font-size: 20px;
-}
-.live-workspace .metric-scope {
-  margin: 0;
-  font-size: 10px;
 }
 .plot-workspace {
   grid-template-columns: minmax(400px, 43%) minmax(0, 1fr);
@@ -1646,9 +1533,6 @@ select:not([multiple]) {
   grid-template-rows: minmax(0, 1fr);
 }
 @media (max-width: 1100px), (max-height: 620px) {
-  .live-workspace .metric-card {
-    display: flex;
-  }
   .signal-tray {
     grid-template-columns: 1fr;
     grid-template-rows: 290px 240px;
@@ -1664,19 +1548,6 @@ select:not([multiple]) {
   }
 }
 @media (max-width: 600px) {
-  .live-workspace > .metrics-grid {
-    gap: 12px;
-    padding-block: 10px;
-  }
-  .live-workspace .metric-value {
-    font-size: 18px;
-  }
-  .live-workspace .metric-title {
-    font-size: 10px;
-  }
-  .live-workspace .metric-scope {
-    font-size: 10px;
-  }
   .signal-tray {
     grid-template-rows: 300px 250px;
   }
@@ -1881,31 +1752,6 @@ select:not([multiple]) {
   font-size: 11px;
   margin-top: 2px;
 }
-.live-workspace > .metrics-grid {
-  padding-block: 7px;
-  gap: 0;
-  background: #fff;
-}
-.live-workspace .metric-card {
-  grid-template-columns: auto auto 1fr;
-  gap: 8px;
-  padding-inline: 14px;
-  border-right: 1px solid var(--line-soft);
-}
-.live-workspace .metric-card:first-child {
-  padding-left: 0;
-}
-.live-workspace .metric-card:last-child {
-  border-right: 0;
-}
-.live-workspace .metric-value {
-  font-size: 15px;
-  line-height: 1.3;
-  white-space: nowrap;
-}
-.live-workspace .metric-scope {
-  justify-self: end;
-}
 .position-details,
 .satellite-values {
   margin: 0;
@@ -1952,9 +1798,80 @@ select:not([multiple]) {
 .satellite-inspector {
   padding-bottom: 0;
 }
-.correction {
-  margin-block: 0;
-  padding-block: 8px;
+/* Epoch properties use a fixed value/unit column; run-wide statistics are separate. */
+.solution-panel > .panel-heading {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.solution-panel > .panel-heading > span {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.property-group-heading,
+.property-disclosure summary {
+  margin: 0;
+  padding: 6px 12px;
+  background: var(--surface-subtle);
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  font-weight: 600;
+}
+.property-group-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.property-group-heading span,
+.property-disclosure summary > span {
+  color: var(--secondary);
+  font-size: 11px;
+  font-weight: 400;
+}
+.solution-properties .position-details {
+  grid-template-columns: minmax(0, 1fr);
+}
+.solution-properties .position-details > div {
+  grid-template-columns: 46% minmax(0, 1fr);
+}
+.solution-properties .position-details dd {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 20px;
+  column-gap: 6px;
+  text-align: right;
+}
+.solution-properties .position-details small {
+  margin: 0;
+  text-align: left;
+}
+.property-disclosure summary {
+  cursor: pointer;
+  min-height: 32px;
+  font-weight: 400;
+}
+.property-disclosure summary > span {
+  float: right;
+}
+.property-disclosure summary:hover {
+  background: var(--accent-soft);
+}
+.property-disclosure summary:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+.solution-panel > .solution-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin: 0;
+  padding: 8px 12px;
+}
+.solution-panel > .solution-status p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
 }
 /* All result tables share the same row and column rules. */
 table th,
@@ -2280,13 +2197,6 @@ tbody th {
   .control-source {
     min-width: 160px;
   }
-  .live-workspace .metric-card {
-    grid-template-columns: auto 1fr;
-  }
-  .live-workspace .metric-scope {
-    grid-column: 1 / -1;
-    justify-self: start;
-  }
 }
 @media (max-width: 1100px), (max-height: 620px) {
   .app-header {
@@ -2309,9 +2219,6 @@ tbody th {
   }
   .evidence-panel .panel-heading > div {
     display: block;
-  }
-  .live-workspace .metric-card {
-    display: grid;
   }
   .app-statusbar {
     margin-top: auto;
@@ -2358,18 +2265,6 @@ tbody th {
   .exports {
     right: auto;
     left: 0;
-  }
-  .live-workspace > .metrics-grid {
-    padding: 8px 12px;
-    gap: 0;
-  }
-  .live-workspace .metric-card {
-    display: flex;
-    padding-inline: 8px;
-    gap: 3px;
-  }
-  .live-workspace .metric-value {
-    font-size: 15px;
   }
   .grid-toolbar {
     flex-wrap: wrap;

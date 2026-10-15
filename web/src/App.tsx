@@ -19,7 +19,6 @@ import {
   ShieldCheck,
   Square,
   TriangleAlert,
-  Waves,
 } from 'lucide-react'
 import type { EChartsOption } from 'echarts'
 import { RunHistory } from './components/RunHistory'
@@ -30,6 +29,7 @@ import { SatelliteTable } from './components/SatelliteTable'
 import { Skyplot } from './components/Skyplot'
 import { SatelliteInspector } from './components/SatelliteInspector'
 import { StatusReplay } from './components/StatusReplay'
+import { SolutionProperties } from './components/SolutionProperties'
 import { chartBase, chartColors } from './lib/chartTheme'
 import { fullRange, residualSeries, type ZoomRange } from './lib/chartSeries'
 import { algorithmLabels, solutionSummary } from './lib/presentation'
@@ -59,36 +59,6 @@ const initialScenario: Scenario = {
   bias_m: 80,
   ramp: false,
   keep_satellites: 3,
-}
-
-function Metric({
-  title,
-  value,
-  unit,
-  note,
-  scope,
-  icon: Icon,
-}: {
-  title: string
-  value: string
-  unit?: string
-  note: string
-  scope?: string
-  icon: typeof Satellite
-}) {
-  return (
-    <div className="metric-card" title={note} tabIndex={0}>
-      <div className="metric-title">
-        {title}
-        <Icon size={16} />
-      </div>
-      <div className="metric-value">
-        {value}
-        <small>{unit}</small>
-      </div>
-      {scope && <span className="metric-scope">{scope}</span>}
-    </div>
-  )
 }
 
 export default function App() {
@@ -768,42 +738,6 @@ export default function App() {
 
           {page === 'live' && (
             <div className="live-workspace">
-              <div className="metrics-grid" aria-label="当前解算指标">
-                <Metric
-                  title="参与解算卫星"
-                  value={solution ? String(solution.n_used) : '—'}
-                  unit="颗"
-                  note="当前历元参与解算的卫星数"
-                  icon={Satellite}
-                />
-                <Metric
-                  title="位置精度因子"
-                  value={format(solution?.pdop)}
-                  unit="PDOP"
-                  note="由未加权卫星几何矩阵计算"
-                  icon={Orbit}
-                />
-                <Metric
-                  title="后验残差"
-                  value={format(solution?.residual_rms_m)}
-                  unit="m"
-                  note="实际参与解算观测的 RMS"
-                  icon={Waves}
-                />
-                <Metric
-                  title="水平误差 P95"
-                  scope="仿真 · 全程"
-                  value={format(metrics?.improved.h_p95_m)}
-                  unit="m"
-                  note={
-                    metrics
-                      ? `仿真评价 · 有效解比例 ${format((metrics.improved.availability_on_required ?? 0) * 100, 1)}%`
-                      : '运行结束后按参考真值计算'
-                  }
-                  icon={ShieldCheck}
-                />
-              </div>
-
               <div className="workbench-grid" data-focus={focusedPlot ?? undefined}>
                 <div className="plot-workspace">
                   <section className="panel trajectory-panel">
@@ -971,65 +905,14 @@ export default function App() {
                 </div>
                 <section className="panel solution-panel">
                   <div className="panel-heading">
-                    <div>
-                      <h2>解算状态</h2>
-                      <p>
-                        {selectedIndex == null ? '最新历元' : `历元 ${selected?.epoch_id ?? '—'}`}
-                      </p>
-                    </div>
+                    <h2>解算属性</h2>
+                    <span className="muted">历元 {selected?.epoch_id ?? '—'}</span>
                   </div>
                   <div className="solution-status">
                     <Status value={stale ? 'TRANSPORT_STALE' : solution?.status} />
                     {summary && <p>{summary}</p>}
                   </div>
-                  <dl className={stale ? 'position-details stale' : 'position-details'}>
-                    <div>
-                      <dt>纬度</dt>
-                      <dd>
-                        {format(selected?.view.latitude_deg, 7)}
-                        <small>°</small>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>经度</dt>
-                      <dd>
-                        {format(selected?.view.longitude_deg, 7)}
-                        <small>°</small>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>椭球高</dt>
-                      <dd>
-                        {format(selected?.view.height_m, 3)}
-                        <small>m</small>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>接收机钟差</dt>
-                      <dd>
-                        {format(solution?.clock_bias_m, 3)}
-                        <small>m</small>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>单历元计算</dt>
-                      <dd>
-                        {format(solution?.processing_ms, 2)}
-                        <small>ms</small>
-                      </dd>
-                    </div>
-                  </dl>
-                  <div className="correction">
-                    <div>
-                      <span>三维解差</span>
-                      <strong>
-                        {format(selected?.view.correction_m, 3)} <small>m</small>
-                      </strong>
-                    </div>
-                    <span className="correction-icon">
-                      <ArrowRight size={19} />
-                    </span>
-                  </div>
+                  <SolutionProperties epoch={selected} stale={stale} evaluation={metrics} />
                   <div className="inspector-sky">
                     <div className="inspector-heading">
                       <h3>卫星分布</h3>
