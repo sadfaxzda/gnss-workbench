@@ -1,0 +1,59 @@
+{
+  "archive": "GNSS_Workbench_iteration8_candidate.zip",
+  "sha256": "8a3437ca0de0ea9eaae598035fbf4c4b1cf4c1d2b749374f536c1980844a68da",
+  "bytes": 7527398,
+  "source_verification": {
+    "files_verified": 497,
+    "source_files": 476,
+    "source_identity": "snapshot-sha256:8d1e0c9a79127e43bf63faae44e83748bc67966988ccd85a4a5cf165afd501bc"
+  },
+  "workspace_matches_archive": true,
+  "default_coherent_proposals": false,
+  "explicit_experiment_flag": "--enable-coherent-proposals",
+  "pytest": 160,
+  "vitest": 16,
+  "playwright": 16,
+  "new_validation_epochs": 51923,
+  "public_default_regression": {
+    "D01_real_excerpt": {
+      "epochs": 20,
+      "matches_iteration7_except_processing_ms": true
+    },
+    "D02_sim_clean": {
+      "epochs": 600,
+      "matches_iteration7_except_processing_ms": true
+    },
+    "D03_sim_demo": {
+      "epochs": 600,
+      "matches_iteration7_except_processing_ms": true
+    },
+    "D03_sim_demo_ablation": {
+      "epochs": 600,
+      "matches_iteration7_except_processing_ms": true
+    }
+  },
+  "extracted_install": "uv sync --locked --offline succeeded with existing dependency cache",
+  "extracted_d03_replay": "600 baseline/improved rows identical to packaged results, excluding processing_ms",
+  "startup": {
+    "health": {
+      "status": "ok",
+      "version": "0.2.0",
+      "schema_version": "gnss-stream/1"
+    },
+    "packaged_frontend_assets": [
+      "/assets/index-DLy7RySo.js",
+      "/assets/charts-yszRoUbe.js",
+      "/assets/index-BPRoxl4D.css"
+    ],
+    "dataset_count": 3,
+    "loopback_port": 59629,
+    "source": "/Users/chenxi/Desktop/GNSS编程作业/gnss-workbench-main/runtime/diagnosis-iteration8/extracted/gnss-workbench"
+  },
+  "report_pages": 6,
+  "remaining": [
+    "六星首历元及部分换星/集合变化、四五星故障精度仍失败",
+    "额外高噪声仍失败；新提议出现一例名义新增失败，因此默认关闭",
+    "实际分工和个人核验尚未确定",
+    "未执行教师隐藏验收或现场答辩"
+  ]
+}
