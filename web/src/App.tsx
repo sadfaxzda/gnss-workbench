@@ -22,6 +22,8 @@ import {
 } from 'lucide-react'
 import type { EChartsOption } from 'echarts'
 import { RunHistory } from './components/RunHistory'
+import { HypothesisEvidence } from './components/HypothesisEvidence'
+import { adoptedCandidate } from './lib/hypothesisEvidence'
 import { Status } from './components/Status'
 import { Button } from './components/Button'
 import { Chart } from './components/Chart'
@@ -141,6 +143,8 @@ export default function App() {
   const configuredAlgorithm = run?.configuration.algorithm ?? algorithm
   const hasHypothesisSearch =
     solution && ['SUSPECT', 'FAULT_EXCLUDED', 'FAULT_MITIGATED'].includes(solution.status)
+  const gncTrace =
+    solution?.algorithm_trace?.filter((entry) => typeof entry.depth === 'number') ?? []
   const satellite =
     solution?.diagnostics?.find((item) => item.sat_id === satelliteId) ??
     (satelliteId
@@ -924,7 +928,11 @@ export default function App() {
                       onSelect={setSatelliteId}
                     />
                   </div>
-                  <SatelliteInspector satellite={satellite} selectedId={inspectedSatelliteId} />
+                  <SatelliteInspector
+                    satellite={satellite}
+                    selectedId={inspectedSatelliteId}
+                    provisional={solution?.status === 'SUSPECT'}
+                  />
                 </section>
               </div>
             </div>
@@ -945,6 +953,7 @@ export default function App() {
                 </div>
                 <SatelliteTable
                   satellites={solution?.diagnostics ?? []}
+                  provisional={solution?.status === 'SUSPECT'}
                   selectedId={inspectedSatelliteId}
                   onSelect={setSatelliteId}
                 />
@@ -961,16 +970,20 @@ export default function App() {
                   selectedId={inspectedSatelliteId}
                   onSelect={setSatelliteId}
                 />
-                <SatelliteInspector satellite={satellite} selectedId={inspectedSatelliteId} />
+                <SatelliteInspector
+                  satellite={satellite}
+                  selectedId={inspectedSatelliteId}
+                  provisional={solution?.status === 'SUSPECT'}
+                />
                 <p className="explanation">
                   {algorithmLabels[configuredAlgorithm] ?? configuredAlgorithm} ·{' '}
                   {hasHypothesisSearch
                     ? `检验 ${solution.candidate_scores?.length ?? 0} 个假设 · 搜索${solution.search_complete === false ? '未完成' : '完成'}`
                     : '假设检验未执行'}
                 </p>
-                {!!solution?.algorithm_trace?.length && (
+                {!!gncTrace.length && (
                   <details>
-                    <summary>GNC 搜索轨迹 · {solution.algorithm_trace.length} 个提议</summary>
+                    <summary>GNC 搜索轨迹 · {gncTrace.length} 个提议</summary>
                     <div className="table-scroll">
                       <table>
                         <thead>
@@ -982,7 +995,7 @@ export default function App() {
                           </tr>
                         </thead>
                         <tbody>
-                          {solution.algorithm_trace.map((raw, index) => {
+                          {gncTrace.map((raw, index) => {
                             const trace = raw as {
                               depth: number
                               annealing_rate: number
@@ -1052,13 +1065,21 @@ export default function App() {
                 <details className="method-note">
                   <summary>诊断方法</summary>
                   <p>
-                    按最少剔星数检验候选解。候选唯一、残差与几何检验通过且保留验证冗余时，剔除对应观测。
+                    按最少剔星数检验候选解。剔除后必须通过当前历元的残差与几何检验，并保留验证冗余。
+                    多个单星候选通过时，多假设算法比较当前及近期已接收历元的相对似然；证据不足时保留可疑状态。
+                    暂定剔除可提供条件位置估计，但不代表已确认故障身份；换星证据会重置历史。
                   </p>
                   <p>
                     诊断范围：{configuredAlgorithm === 'single_fde' ? '单星' : '单星与双星'}
                     假设。观测共同偏差计入接收机钟差。
                   </p>
                 </details>
+                {!!solution?.candidate_scores?.length && solution.reason && (
+                  <p className="explanation" aria-label="本历元处置依据">
+                    {solution.reason}
+                  </p>
+                )}
+                {solution && <HypothesisEvidence solution={solution} />}
                 {!!solution?.candidate_scores?.length && (
                   <div className="table-scroll hypothesis-table">
                     <table aria-label="候选假设检验">
@@ -1067,7 +1088,9 @@ export default function App() {
                           <th>排除卫星</th>
                           <th className="numeric">检验统计量</th>
                           <th className="numeric">检验阈值</th>
+                          <th className="numeric">水平解差 / m</th>
                           <th>判定</th>
+                          <th>处置</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -1077,18 +1100,34 @@ export default function App() {
                             statistic: number | null
                             threshold: number | null
                             passed: boolean
+                            selected?: boolean
+                            selection_method?: string
+                            candidate_horizontal_separation_m?: number | null
                           }
                           return (
                             <tr key={c.sat_id}>
                               <th scope="row">{c.sat_id}</th>
                               <td className="numeric">{format(c.statistic)}</td>
                               <td className="numeric">{format(c.threshold)}</td>
+                              <td className="numeric">
+                                {format(c.candidate_horizontal_separation_m)}
+                              </td>
                               <td>{c.passed ? '通过' : '未通过'}</td>
+                              <td>
+                                {adoptedCandidate(solution, raw)
+                                  ? solution.status === 'SUSPECT'
+                                    ? '暂定剔除（待确认）'
+                                    : '采用并剔除'
+                                  : '—'}
+                              </td>
                             </tr>
                           )
                         })}
                       </tbody>
                     </table>
+                    <p className="explanation" aria-label="候选水平解差说明">
+                      水平解差以本历元采用解为参照，不是真值误差或保护水平。
+                    </p>
                   </div>
                 )}
               </section>
