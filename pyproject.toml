@@ -32,7 +32,9 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
-extend-exclude = ["fixtures", "runtime", "web/node_modules", "web/dist"]
+# Frozen experiment sources are evidence covered by their original SHA256 inventory.
+# Keep their bytes intact; lint the maintained implementation, scripts and tests.
+extend-exclude = ["fixtures", "runtime", "web/node_modules", "web/dist", "docs/experiments/**/development-source"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
