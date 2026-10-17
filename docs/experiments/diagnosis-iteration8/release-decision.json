@@ -1,0 +1,16 @@
+{
+  "frozen_candidate_solver_unchanged": true,
+  "deployment_default": "coherent_proposals=False",
+  "explicit_opt_in": "--enable-coherent-proposals",
+  "validation_command_selects_both_configs_explicitly": true,
+  "changed_files_after_freeze": [
+    "src/gnss_workbench/core/models.py (default off)",
+    "src/gnss_workbench/cli.py (explicit opt-in)",
+    "scripts/validate_six_satellite.py (new=True explicitly)",
+    "tests/test_coherent_proposal.py (CLI opt-in regression tests)"
+  ],
+  "epochs": 51923,
+  "new_case_failures": [
+    "irregular: set23-random_switch"
+  ]
+}

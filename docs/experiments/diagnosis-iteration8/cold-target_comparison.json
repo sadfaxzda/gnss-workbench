@@ -1,0 +1,54 @@
+{
+  "isolated": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": null,
+      "clean_status_false_alarm": null,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "all": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": null,
+      "clean_status_false_alarm": null,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "observations_6": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": null,
+      "clean_status_false_alarm": null,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "first10_after_onset": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": null,
+      "clean_status_false_alarm": null,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  }
+}

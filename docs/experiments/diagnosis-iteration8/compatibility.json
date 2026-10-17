@@ -1,0 +1,14 @@
+{
+  "course_files": 26,
+  "changed_course": [],
+  "baseline_physics_ast_identical": true,
+  "default_configuration_preserved_except_disabled_experiment": true,
+  "api_sha256": {
+    "web/src/generated/api.d.ts": "9d2376934bf5ddf7f91b322ee5fbb5bb61ca3cdd2ab64b761d36ccdf732899e7",
+    "web/src/generated/openapi.json": "c4fbdb2994444d1cc9fc49aed020a5a8699703d358ce3b0b5c4d013efca1dc68"
+  },
+  "pytest": 160,
+  "vitest": 16,
+  "playwright": 16,
+  "report_pages": 6
+}

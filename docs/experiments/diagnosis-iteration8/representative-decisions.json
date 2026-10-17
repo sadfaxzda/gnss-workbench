@@ -1,0 +1,34 @@
+{
+  "success": {
+    "case": "set20-03-step",
+    "epoch_id": 13,
+    "fault_satellite": "G28",
+    "bias_m": 85.80101934896003,
+    "default_excluded": [
+      "G20"
+    ],
+    "experimental_excluded": [
+      "G28"
+    ],
+    "default_error_m": 198.32355565555912,
+    "experimental_error_m": 3.240048602123039,
+    "status": "SUSPECT"
+  },
+  "failure": [
+    {
+      "case": "set23-random_switch",
+      "epoch_id": 31,
+      "fault_satellite": "G19",
+      "bias_m": -35.72115767615902,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 0.43122934699653825,
+      "experimental_error_m": 22.05124850327236,
+      "status": "SUSPECT"
+    }
+  ]
+}

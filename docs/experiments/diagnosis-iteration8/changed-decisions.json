@@ -1,0 +1,1540 @@
+{
+  "continuous": [
+    {
+      "case": "set15-06-rapid",
+      "epoch_id": 56,
+      "fault_satellite": "G20",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 35.782794261540104,
+      "experimental_error_m": 1.570048139111099,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set15-06-rapid",
+      "epoch_id": 58,
+      "fault_satellite": "G20",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G11"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 44.006066334292925,
+      "experimental_error_m": 2.7624226090211983,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set16-06-rapid",
+      "epoch_id": 31,
+      "fault_satellite": "G20",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G08"
+      ],
+      "default_error_m": 39.62226518780379,
+      "experimental_error_m": 33.54191889305668,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set22-05-switch",
+      "epoch_id": 45,
+      "fault_satellite": "G19",
+      "bias_m": 38.27012865897066,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 29.352502636394533,
+      "experimental_error_m": 0.7341444680004845,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set22-05-switch",
+      "epoch_id": 46,
+      "fault_satellite": "G19",
+      "bias_m": 38.27012865897066,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 28.181161123089606,
+      "experimental_error_m": 0.9241725322370886,
+      "status": "SUSPECT"
+    }
+  ],
+  "irregular": [
+    {
+      "case": "set08-random_switch",
+      "epoch_id": 91,
+      "fault_satellite": "G03",
+      "bias_m": -108.94008106465434,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 1.4683727388633532,
+      "experimental_error_m": 57.80607508802725,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set23-random_switch",
+      "epoch_id": 31,
+      "fault_satellite": "G19",
+      "bias_m": -35.72115767615902,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 0.43122934699653825,
+      "experimental_error_m": 22.05124850327236,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set25-nonlinear_bias",
+      "epoch_id": 16,
+      "fault_satellite": "G19",
+      "bias_m": 45.52320117902733,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 28.19948252982123,
+      "experimental_error_m": 1.3390138088043975,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set25-nonlinear_bias",
+      "epoch_id": 17,
+      "fault_satellite": "G19",
+      "bias_m": 42.25787480800458,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 26.07757767288422,
+      "experimental_error_m": 1.45362536059289,
+      "status": "SUSPECT"
+    }
+  ],
+  "stress": [
+    {
+      "case": "set00-02-cold_stream",
+      "epoch_id": 5,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 17.069686090887142,
+      "experimental_error_m": 13.886581478408536,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set00-06-rapid",
+      "epoch_id": 45,
+      "fault_satellite": "G11",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 13.719115927400251,
+      "experimental_error_m": 14.30570907493616,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set01-06-rapid",
+      "epoch_id": 6,
+      "fault_satellite": "G08",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G08"
+      ],
+      "default_error_m": 123.45831582034099,
+      "experimental_error_m": 6.988271689351658,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set01-06-rapid",
+      "epoch_id": 7,
+      "fault_satellite": "G08",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G08"
+      ],
+      "default_error_m": 157.27225876545225,
+      "experimental_error_m": 7.437992587416966,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set01-06-rapid",
+      "epoch_id": 9,
+      "fault_satellite": "G08",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G08"
+      ],
+      "default_error_m": 132.4562984246956,
+      "experimental_error_m": 7.544655373041676,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set02-06-rapid",
+      "epoch_id": 21,
+      "fault_satellite": "G28",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 72.42548834710925,
+      "experimental_error_m": 5.624628586922792,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set02-06-rapid",
+      "epoch_id": 22,
+      "fault_satellite": "G28",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 89.02837837648022,
+      "experimental_error_m": 2.416610118747692,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set02-06-rapid",
+      "epoch_id": 39,
+      "fault_satellite": "G03",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 17.637016155670043,
+      "experimental_error_m": 4.62197960320959,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set03-06-rapid",
+      "epoch_id": 32,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 20.41294784092877,
+      "experimental_error_m": 3.237096145505465,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set03-06-rapid",
+      "epoch_id": 42,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 19.60506641853318,
+      "experimental_error_m": 2.594204261203224,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-02-cold_stream",
+      "epoch_id": 10,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 46.51519058243461,
+      "experimental_error_m": 2.8678095809018234,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-02-cold_stream",
+      "epoch_id": 14,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 42.40757528101663,
+      "experimental_error_m": 2.415702316356717,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-02-cold_stream",
+      "epoch_id": 28,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 29.552804762900298,
+      "experimental_error_m": 5.744717814311494,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-02-cold_stream",
+      "epoch_id": 29,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 6.822007960114264,
+      "experimental_error_m": 2.4728864632519847,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-02-cold_stream",
+      "epoch_id": 30,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 42.66047380531035,
+      "experimental_error_m": 5.759187651577128,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-02-cold_stream",
+      "epoch_id": 41,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 50.219033792599014,
+      "experimental_error_m": 4.1082551147070605,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-06-rapid",
+      "epoch_id": 21,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 48.58580080284098,
+      "experimental_error_m": 3.6329608703400953,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-06-rapid",
+      "epoch_id": 22,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 31.471865701690643,
+      "experimental_error_m": 6.659842956422642,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-06-rapid",
+      "epoch_id": 24,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 48.22323018323249,
+      "experimental_error_m": 1.5721205400402791,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-06-rapid",
+      "epoch_id": 25,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 47.2576410290259,
+      "experimental_error_m": 5.6000971720402,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-06-rapid",
+      "epoch_id": 26,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 39.29806313153933,
+      "experimental_error_m": 2.423808184910348,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set05-06-rapid",
+      "epoch_id": 27,
+      "fault_satellite": "G11",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 50.46184000727009,
+      "experimental_error_m": 7.8743915321986515,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-00-clean",
+      "epoch_id": 2,
+      "fault_satellite": "",
+      "bias_m": 0.0,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 9.095528794656307,
+      "experimental_error_m": 5.528445096603266,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-01-common",
+      "epoch_id": 5,
+      "fault_satellite": "",
+      "bias_m": 0.0,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G24"
+      ],
+      "default_error_m": 1.214664991215875,
+      "experimental_error_m": 1.3268480911408223,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-02-cold_stream",
+      "epoch_id": 8,
+      "fault_satellite": "G03",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 24.71375566751676,
+      "experimental_error_m": 3.0546887364592847,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-02-cold_stream",
+      "epoch_id": 18,
+      "fault_satellite": "G03",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 17.417154554712162,
+      "experimental_error_m": 5.1019892364760135,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-02-cold_stream",
+      "epoch_id": 37,
+      "fault_satellite": "G03",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 14.040753853082064,
+      "experimental_error_m": 10.381658528384948,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-02-cold_stream",
+      "epoch_id": 40,
+      "fault_satellite": "G03",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 13.204495093660482,
+      "experimental_error_m": 7.233305049329292,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-02-cold_stream",
+      "epoch_id": 41,
+      "fault_satellite": "G03",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 16.23624230902407,
+      "experimental_error_m": 8.372417855381833,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-02-cold_stream",
+      "epoch_id": 42,
+      "fault_satellite": "G03",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 26.98032558506655,
+      "experimental_error_m": 2.192463734990064,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-02-cold_stream",
+      "epoch_id": 43,
+      "fault_satellite": "G03",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 28.87020869859138,
+      "experimental_error_m": 5.383832339182343,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-03-step",
+      "epoch_id": 17,
+      "fault_satellite": "G20",
+      "bias_m": -56.60174239580996,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 91.45448760620663,
+      "experimental_error_m": 2.836399583595152,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-03-step",
+      "epoch_id": 18,
+      "fault_satellite": "G20",
+      "bias_m": -56.60174239580996,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 93.82067370066932,
+      "experimental_error_m": 3.1997773592143015,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set06-05-switch",
+      "epoch_id": 33,
+      "fault_satellite": "G07",
+      "bias_m": 35.4844391522936,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 58.836117588406246,
+      "experimental_error_m": 1.8099040238573845,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set07-01-common",
+      "epoch_id": 4,
+      "fault_satellite": "",
+      "bias_m": 0.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 5.854587475750924,
+      "experimental_error_m": 6.431326082518824,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set07-02-cold_stream",
+      "epoch_id": 5,
+      "fault_satellite": "G28",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 18.42627508550934,
+      "experimental_error_m": 4.917514443038661,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set08-02-cold_stream",
+      "epoch_id": 19,
+      "fault_satellite": "G07",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 32.0460243916378,
+      "experimental_error_m": 3.9243461353823825,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set08-02-cold_stream",
+      "epoch_id": 20,
+      "fault_satellite": "G07",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 33.75607914866823,
+      "experimental_error_m": 21.06888983301666,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set08-02-cold_stream",
+      "epoch_id": 30,
+      "fault_satellite": "G07",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 34.232004317097974,
+      "experimental_error_m": 10.12739137487054,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set08-04-ramp",
+      "epoch_id": 45,
+      "fault_satellite": "G07",
+      "bias_m": -44.06318643348363,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 46.64053150172614,
+      "experimental_error_m": 3.695087867380281,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set08-04-ramp",
+      "epoch_id": 46,
+      "fault_satellite": "G07",
+      "bias_m": -45.28716383441373,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 51.08207690403392,
+      "experimental_error_m": 11.491147410883901,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set11-02-cold_stream",
+      "epoch_id": 47,
+      "fault_satellite": "G07",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 49.07476104552494,
+      "experimental_error_m": 4.586298670609508,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set11-02-cold_stream",
+      "epoch_id": 48,
+      "fault_satellite": "G07",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 40.36473040408558,
+      "experimental_error_m": 5.91544293735596,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set11-02-cold_stream",
+      "epoch_id": 49,
+      "fault_satellite": "G07",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 41.1954661080024,
+      "experimental_error_m": 8.845986072142525,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set11-02-cold_stream",
+      "epoch_id": 50,
+      "fault_satellite": "G07",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 49.14869531332294,
+      "experimental_error_m": 0.2659490347052824,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set11-02-cold_stream",
+      "epoch_id": 51,
+      "fault_satellite": "G07",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 52.19470180644736,
+      "experimental_error_m": 4.060002580078727,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set12-05-switch",
+      "epoch_id": 57,
+      "fault_satellite": "G28",
+      "bias_m": 50.182260508221106,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 119.80993130663559,
+      "experimental_error_m": 0.5737295266139883,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set12-05-switch",
+      "epoch_id": 58,
+      "fault_satellite": "G28",
+      "bias_m": 50.182260508221106,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 123.08576390973167,
+      "experimental_error_m": 2.9125570550986892,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set13-04-ramp",
+      "epoch_id": 16,
+      "fault_satellite": "G07",
+      "bias_m": -12.48535685579632,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 8.632188990710244,
+      "experimental_error_m": 1.0466203607821758,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set13-04-ramp",
+      "epoch_id": 17,
+      "fault_satellite": "G07",
+      "bias_m": -14.268979263767223,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 12.673875989325111,
+      "experimental_error_m": 2.9533801998319795,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set13-05-switch",
+      "epoch_id": 62,
+      "fault_satellite": "G07",
+      "bias_m": 91.70120398032905,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 54.188061031523546,
+      "experimental_error_m": 4.787833620805991,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set13-05-switch",
+      "epoch_id": 64,
+      "fault_satellite": "G07",
+      "bias_m": 91.70120398032905,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 58.047622507496534,
+      "experimental_error_m": 3.014288751201736,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set15-04-ramp",
+      "epoch_id": 40,
+      "fault_satellite": "G20",
+      "bias_m": -34.87747027764257,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 45.033854113953666,
+      "experimental_error_m": 19.489482252214682,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set15-04-ramp",
+      "epoch_id": 43,
+      "fault_satellite": "G20",
+      "bias_m": -38.252709336769264,
+      "default_excluded": [
+        "G11"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 72.22850538331174,
+      "experimental_error_m": 11.971795911584644,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set15-04-ramp",
+      "epoch_id": 47,
+      "fault_satellite": "G20",
+      "bias_m": -42.753028082271534,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 63.57687202484967,
+      "experimental_error_m": 15.023067315454476,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set15-04-ramp",
+      "epoch_id": 53,
+      "fault_satellite": "G20",
+      "bias_m": -49.50350620052493,
+      "default_excluded": [
+        "G11"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 79.98820042456714,
+      "experimental_error_m": 34.97783375769444,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set16-06-rapid",
+      "epoch_id": 6,
+      "fault_satellite": "G20",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 35.67875433391178,
+      "experimental_error_m": 9.501192180204015,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set16-06-rapid",
+      "epoch_id": 52,
+      "fault_satellite": "G20",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 11.72776824164328,
+      "experimental_error_m": 45.95173709024482,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set16-06-rapid",
+      "epoch_id": 54,
+      "fault_satellite": "G20",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G08"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 38.015141703712466,
+      "experimental_error_m": 41.443287215619726,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set17-02-cold_stream",
+      "epoch_id": 21,
+      "fault_satellite": "G03",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 15.669034434003292,
+      "experimental_error_m": 3.5073650537231242,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set18-02-cold_stream",
+      "epoch_id": 20,
+      "fault_satellite": "G20",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 32.31840929208313,
+      "experimental_error_m": 3.512722147989536,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set18-02-cold_stream",
+      "epoch_id": 36,
+      "fault_satellite": "G20",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 37.24593794653441,
+      "experimental_error_m": 21.195135736092944,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set18-05-switch",
+      "epoch_id": 9,
+      "fault_satellite": "G03",
+      "bias_m": 116.20221909840593,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 55.07047415415399,
+      "experimental_error_m": 36.481141586760515,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set18-05-switch",
+      "epoch_id": 10,
+      "fault_satellite": "G03",
+      "bias_m": 116.20221909840593,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 57.1979477637456,
+      "experimental_error_m": 9.31302047335261,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set18-05-switch",
+      "epoch_id": 19,
+      "fault_satellite": "G03",
+      "bias_m": 116.20221909840593,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 60.017605940087506,
+      "experimental_error_m": 1.9846093360332138,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set18-05-switch",
+      "epoch_id": 25,
+      "fault_satellite": "G03",
+      "bias_m": 116.20221909840593,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G24"
+      ],
+      "default_error_m": 18.445697407388636,
+      "experimental_error_m": 62.405992161744045,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set18-05-switch",
+      "epoch_id": 26,
+      "fault_satellite": "G03",
+      "bias_m": 116.20221909840593,
+      "default_excluded": [
+        "G03"
+      ],
+      "experimental_excluded": [
+        "G24"
+      ],
+      "default_error_m": 5.278949624940715,
+      "experimental_error_m": 61.389224734337645,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set20-03-step",
+      "epoch_id": 13,
+      "fault_satellite": "G28",
+      "bias_m": 85.80101934896003,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 198.32355565555912,
+      "experimental_error_m": 3.240048602123039,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set20-04-ramp",
+      "epoch_id": 43,
+      "fault_satellite": "G03",
+      "bias_m": -62.86320557231311,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 15.875323149363233,
+      "experimental_error_m": 2.3893836089014275,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set20-04-ramp",
+      "epoch_id": 44,
+      "fault_satellite": "G03",
+      "bias_m": -64.7121233832635,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 16.701290437829705,
+      "experimental_error_m": 2.8598495139251647,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set20-04-ramp",
+      "epoch_id": 45,
+      "fault_satellite": "G03",
+      "bias_m": -66.56104119421389,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 18.243259385860398,
+      "experimental_error_m": 4.8897101330350194,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set20-04-ramp",
+      "epoch_id": 62,
+      "fault_satellite": "G03",
+      "bias_m": -97.99264398037043,
+      "default_excluded": [
+        "G19"
+      ],
+      "experimental_excluded": [
+        "G03"
+      ],
+      "default_error_m": 20.439839605361446,
+      "experimental_error_m": 2.1013259929768573,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set20-05-switch",
+      "epoch_id": 21,
+      "fault_satellite": "G20",
+      "bias_m": 50.04284576158679,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 68.02517265207436,
+      "experimental_error_m": 4.0380451042921015,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set20-05-switch",
+      "epoch_id": 37,
+      "fault_satellite": "G24",
+      "bias_m": -50.04284576158679,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 7.257721618112501,
+      "experimental_error_m": 62.77291914911144,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set20-05-switch",
+      "epoch_id": 38,
+      "fault_satellite": "G24",
+      "bias_m": -50.04284576158679,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 1.38476549692276,
+      "experimental_error_m": 63.59507393137757,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set21-06-rapid",
+      "epoch_id": 6,
+      "fault_satellite": "G19",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 22.557860101057436,
+      "experimental_error_m": 3.3848480480408307,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set21-06-rapid",
+      "epoch_id": 7,
+      "fault_satellite": "G19",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 21.23980881411617,
+      "experimental_error_m": 5.129895278908105,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set21-06-rapid",
+      "epoch_id": 10,
+      "fault_satellite": "G19",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 22.504646231793366,
+      "experimental_error_m": 8.751084779479399,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set21-06-rapid",
+      "epoch_id": 11,
+      "fault_satellite": "G19",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G24"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 23.638872858974278,
+      "experimental_error_m": 6.8035380119367845,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set22-06-rapid",
+      "epoch_id": 69,
+      "fault_satellite": "",
+      "bias_m": 0.0,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 9.41338982820384,
+      "experimental_error_m": 23.942269032599683,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set23-03-step",
+      "epoch_id": 38,
+      "fault_satellite": "G07",
+      "bias_m": -58.63096095394633,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 58.07688478385174,
+      "experimental_error_m": 3.6112274109442444,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set24-02-cold_stream",
+      "epoch_id": 14,
+      "fault_satellite": "G24",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G24"
+      ],
+      "default_error_m": 80.13412622015242,
+      "experimental_error_m": 9.81144988423143,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set24-04-ramp",
+      "epoch_id": 24,
+      "fault_satellite": "G20",
+      "bias_m": 29.7727108033101,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 41.20797044927233,
+      "experimental_error_m": 2.3644782376680005,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set24-04-ramp",
+      "epoch_id": 25,
+      "fault_satellite": "G20",
+      "bias_m": 31.75755819019744,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 39.72801590750103,
+      "experimental_error_m": 3.8893388848785997,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set25-04-ramp",
+      "epoch_id": 17,
+      "fault_satellite": "G07",
+      "bias_m": 10.668911930037442,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G07"
+      ],
+      "default_error_m": 16.734402525711424,
+      "experimental_error_m": 2.2194314478860147,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set26-01-common",
+      "epoch_id": 4,
+      "fault_satellite": "",
+      "bias_m": 0.0,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 3.8300465567022806,
+      "experimental_error_m": 5.438565522952039,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set26-04-ramp",
+      "epoch_id": 36,
+      "fault_satellite": "G19",
+      "bias_m": 51.374348780806024,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 29.09044794154918,
+      "experimental_error_m": 2.5143112295294885,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set26-04-ramp",
+      "epoch_id": 37,
+      "fault_satellite": "G19",
+      "bias_m": 53.277102439354394,
+      "default_excluded": [
+        "G07"
+      ],
+      "experimental_excluded": [
+        "G19"
+      ],
+      "default_error_m": 28.03775143538071,
+      "experimental_error_m": 3.5216031009180915,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set27-06-rapid",
+      "epoch_id": 10,
+      "fault_satellite": "G20",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 37.73012640629366,
+      "experimental_error_m": 8.554982316636162,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set27-06-rapid",
+      "epoch_id": 12,
+      "fault_satellite": "G20",
+      "bias_m": -30.0,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G20"
+      ],
+      "default_error_m": 40.211635999758684,
+      "experimental_error_m": 1.9600461984818156,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set27-06-rapid",
+      "epoch_id": 26,
+      "fault_satellite": "G28",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 63.115977882399434,
+      "experimental_error_m": 4.234221372067638,
+      "status": "SUSPECT"
+    },
+    {
+      "case": "set27-06-rapid",
+      "epoch_id": 27,
+      "fault_satellite": "G28",
+      "bias_m": 30.0,
+      "default_excluded": [
+        "G20"
+      ],
+      "experimental_excluded": [
+        "G28"
+      ],
+      "default_error_m": 53.81477394628046,
+      "experimental_error_m": 4.652517585270346,
+      "status": "SUSPECT"
+    }
+  ],
+  "eight": [
+    {
+      "case": "set00-42-ramp",
+      "epoch_id": 13,
+      "fault_satellite": "G11",
+      "bias_m": 5.675780112370873,
+      "default_excluded": [
+        "G28"
+      ],
+      "experimental_excluded": [
+        "G11"
+      ],
+      "default_error_m": 2.719619453012739,
+      "experimental_error_m": 0.42915681955472584,
+      "status": "SUSPECT"
+    }
+  ]
+}

@@ -1,0 +1,5098 @@
+{
+  "set00-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set00-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set01-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set01-06-rapid/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set02-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set02-02-cold_stream/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set02-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set02-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set03-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-03-step/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set04-03-step/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set04-04-ramp/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set04-04-ramp/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set04-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set04-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set05-02-cold_stream/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set05-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set05-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set06-05-switch/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set06-05-switch/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set06-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set06-06-rapid/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set07-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set07-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set08-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set09-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set09-06-rapid/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set10-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set10-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set10-06-rapid/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set11-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set11-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set12-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set13-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set13-06-rapid/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set14-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set14-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-04-ramp/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set15-04-ramp/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set15-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set15-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set15-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set16-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set16-06-rapid/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set17-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set17-02-cold_stream/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set17-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set17-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set17-06-rapid/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set18-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set18-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set19-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set20-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set21-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set22-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set22-06-rapid/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set23-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set23-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-04-ramp/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set24-04-ramp/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": false,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set24-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set24-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set25-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set26-06-rapid/previous": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set26-06-rapid/new": {
+    "checks": {
+      "h_p95": false,
+      "availability": true,
+      "success10": false,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": false
+  },
+  "set27-00-clean/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-00-clean/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-01-common/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-01-common/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": null,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": true
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-02-cold_stream/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-02-cold_stream/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-03-step/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-03-step/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-04-ramp/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-04-ramp/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-05-switch/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-05-switch/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-06-rapid/previous": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  },
+  "set27-06-rapid/new": {
+    "checks": {
+      "h_p95": true,
+      "availability": true,
+      "success10": true,
+      "fault_recall": true,
+      "clean_false_alarm": true,
+      "clean_status_false_alarm": true,
+      "special_states": null,
+      "common_clock": null
+    },
+    "all_measured_targets_met": true
+  }
+}
