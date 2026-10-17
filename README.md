@@ -79,6 +79,18 @@ pnpm --dir web exec openapi-typescript src/generated/openapi.json -o src/generat
 
 GitHub Actions 对 Python 的 macOS/Windows/Linux 运行检查，在 Linux 上执行前端检查与 Chromium/WebKit 浏览器测试。
 
+若本机默认端口被其他项目占用，开发/浏览器测试支持独立端口；已有应用可继续运行：
+
+```bash
+uv run gnss serve --port 18000
+# 开发前端（另一个终端）
+GNSS_API_PORT=18000 GNSS_WEB_PORT=15173 pnpm --dir web dev
+# 完整浏览器测试自行管理本项目服务
+GNSS_API_PORT=18000 GNSS_WEB_PORT=15173 pnpm --dir web test:e2e
+```
+
+构建后的界面可直接在API端口打开，无须另起开发前端。
+
 | 公开数据 | 普通解水平 P95 | 改进解水平 P95 | 说明 |
 |---|---:|---:|---|
 | D02 无故障模拟 | 1.59 m | 1.59 m | 600 历元，未触发误报 |
@@ -99,7 +111,25 @@ React / TypeScript / Vite / Tailwind / Radix primitives / TanStack Query / EChar
 
 ![双星故障诊断与GNC证据](docs/media/advanced-diagnostics.png)
 
-默认 `consensus`：先检验单星假设，若没有候选通过才检验双星；最小故障数存在多个可行候选时返回 SUSPECT。`single_fde` 保留旧版，`adaptive_gnc` 为论文启发的实验路径。关闭 FDE 始终得到独立等权基线。
+默认 `consensus`：先检验单星假设，若没有候选通过才检验双星。多个单星候选通过时，比较当前及至多16个已接收历元的残差相对似然；达到20:1且当前残差/几何检验通过才考虑确认身份。历史最优被当前检验否定、出现明确换星证据、时间或观测集合不连续时清空历史。证据不足及双星归因不唯一时保留 SUSPECT。`single_fde` 保留旧版，`adaptive_gnc` 为论文启发的实验路径。关闭 FDE 始终得到独立等权基线。
+
+当前增加带符号故障幅度的变化检验，并区分暂定位置与确认身份。多个单星候选通过、身份仍有歧义时，可暂定剔除相对似然领先的一星并重算当前位置，但状态保持`SUSPECT`、界面标为“待确认”。当前与历史最优一致才允许历史确认；不把全部候选都标记为故障。暂定模式提高定位覆盖，同时可能增加误选，需连同错误确认数和全部误选数报告。
+
+**最新结果见 [第八轮算法取舍与选择证据](docs/diagnosis-iteration8.md)**：新增51,923个输入历元的同输入验证；历史条件提议使高噪声P95从26.366m降至24.504m、错剔1137→1063，但新增一个不规则案例失败，因此默认关闭，仅通过`--enable-coherent-proposals`开启实验。新增选择来源、历元数与证据门槛展示，修复旧单星记录的采用行。160项pytest、16项Vitest、16项双浏览器流程及构建通过；失败完整保留。
+
+[第六轮算法改进与45,283历元验证](docs/diagnosis-iteration6.md)继续有效：已修正历史证据的噪声尺度、增加候选水平解差、覆盖完整换星边界。六星孤立首历元P95仍32.840m，部分冷启动、换星星组、可见集合变化及四/五星故障精度仍失败。八星通过不覆盖这些限制。
+
+历史快照见 [第一轮](docs/low-redundancy-validation.md)、[第二轮](docs/six-satellite-iteration2.md)、[第三轮](docs/diagnosis-iteration3.md)、[第四轮](docs/diagnosis-iteration4.md)、[第五轮](docs/diagnosis-iteration5.md)；当前默认行为及验证以第六轮记录为准。
+
+```bash
+uv run python scripts/validate_six_satellite.py --comparison iteration6 --suite continuous --seed 624291 --out runtime/six-validation-v6
+uv run python scripts/validate_six_satellite.py --comparison iteration6 --suite stress --seed 624294 --out runtime/six-stress-v6
+uv run python scripts/validate_six_satellite.py --comparison ablation --suite eight --seed 625308 --out runtime/eight-validation-v7
+# 同输入关闭本轮尺度修正，对照第五轮默认方法：
+uv run gnss solve --input YOUR_INPUT.jsonl --out runtime/previous-method --disable-history-rescaling
+# 独立等权普通解消融：
+uv run gnss solve --input YOUR_INPUT.jsonl --out runtime/no-fde --disable-fde
+```
 
 ```bash
 uv run gnss solve --input fixtures/course/data/D03_sim_demo.jsonl --out runtime/gnc-demo --algorithm adaptive_gnc
@@ -110,7 +140,7 @@ uv run --group research gnss cross-check --out runtime/cross-check.json
 
 网页“算法与自定义数据”支持导入 JSONL 与可选星历（最多5000历元/16MiB），未给星历则用课程周1316星历；更长输入使用 CLI。参数、输入和逐星决策可完整导出。
 
-[教师要求矩阵](docs/requirements-matrix.md) · [技术报告草稿](docs/report.pdf) · [预设实验设计](docs/algorithm-plan.md) · [保留种子完整结果](docs/experiments/holdout-report.md) · [原始实验归档](docs/experiments/holdout-evidence.zip)
+[教师要求矩阵](docs/requirements-matrix.md) · [第六轮6页实验报告](docs/report.pdf) · [预设实验设计](docs/algorithm-plan.md) · [保留种子完整结果](docs/experiments/holdout-report.md) · [原始实验归档](docs/experiments/holdout-evidence.zip)
 
 保留种子20261016，每类84历元：双星故障的10m内成功率由旧版单星FDE的1.2%提升到95.2%，水平P95由78.24m降至3.47m；正常/单星/渐变回归保持通过。GNC最终精度相同、耗时更高，保留实验选项。重尾与sigma失配仍出现失败和错剔，不能据此宣称真实环境领先。
 
@@ -123,11 +153,21 @@ uv run --group research gnss cross-check --out runtime/cross-check.json
 - CLI 遇到不可恢复的坏帧，保存此前已经完成的两份CSV、诊断日志与失败manifest，并以非零状态退出。`solve --out` 要求空目录，避免覆盖证据或混入旧评价结果。
 - [界面规范](DESIGN.md) · [现场演示与答辩准备](docs/demo-guide.md)。
 
-从已提交、工作区干净的仓库制作可核验交付包：
+从已提交、工作区干净的Git仓库制作可核验交付包：
 
 ```bash
 pnpm --dir web build
 uv run python scripts/package_submission.py --out ../GNSS_Workbench_submission.zip
 ```
 
-包内包含源码、锁文件、构建前端、6页报告、D01/D02/D03新运行结果与D03消融，以及逐文件SHA256清单。解压后无需Node构建即可 `uv sync --locked`、`uv run gnss serve`；首次安装Python依赖仍需网络。打包不包含本机运行历史、Git凭证或虚拟环境。小组真实贡献和最终答辩仍需成员核验。
+本目录是下载的源码副本，没有Git元数据。使用显式快照模式（不会虚构提交号）：
+
+```bash
+uv run python scripts/package_submission.py --source-snapshot --out ../GNSS_Workbench_iteration8_candidate.zip
+# 解压后进入gnss-workbench目录，验证所有交付文件
+python scripts/verify_submission.py --root .
+```
+
+包内包含源码、锁文件、构建前端、6页报告、D01/D02/D03新运行结果与D03消融，以及逐文件SHA256清单。结果从本次封存的源码运行生成，运行记录保留同一源码身份。解压后无需Node构建即可 `uv sync --locked`、`uv run gnss serve`；首次安装Python依赖仍需网络。打包不包含本机运行历史、Git凭证、虚拟环境或node_modules；校验用于检测改动，不是数字签名。输出ZIP必须不存在。
+
+报告已更新到第八轮，已记录马晨曦、张淳贺、刘芸睿；实际分工与个人核验待确定，见[演示与分工表](docs/demo-guide.md)。重新生成：`uv run --group research python scripts/build_iteration8_report.py`；早期报告脚本保留作为历史记录。
