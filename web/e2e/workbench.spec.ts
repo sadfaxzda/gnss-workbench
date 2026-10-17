@@ -2,6 +2,100 @@ import { test, expect } from '@playwright/test'
 import { readFile } from 'node:fs/promises'
 import { once } from 'node:events'
 
+test('six-satellite diagnosis explains causal selection among passing candidates', async ({
+  page,
+}, testInfo) => {
+  const lines = (await readFile('../fixtures/course/data/D02_sim_clean.jsonl', 'utf8'))
+    .trim()
+    .split('\n')
+  const frames = lines.slice(1, 36).map((line) => {
+    const frame = JSON.parse(line)
+    frame.observations = frame.observations.slice(0, 6)
+    frame.observations.find((o: { sat_id: string }) => o.sat_id === 'G07').pseudorange_m -= 30
+    return JSON.stringify(frame)
+  })
+  await page.goto('/')
+  const imported = await page.request.post('/api/datasets', {
+    data: { name: '六星连续故障验证', jsonl: [lines[0], ...frames].join('\n') },
+  })
+  expect(imported.ok()).toBeTruthy()
+  const dataset = await imported.json()
+  const created = await page.request.post('/api/runs', {
+    data: { dataset_id: dataset.id, interval_seconds: 0 },
+  })
+  expect(created.ok()).toBeTruthy()
+  const run = await created.json()
+  await expect
+    .poll(async () => (await (await page.request.get(`/api/runs/${run.id}`)).json()).status)
+    .toBe('completed')
+  const records = await (await page.request.get(`/api/runs/${run.id}/epochs`)).json()
+  const index = records.findIndex(
+    (e: { improved: { candidate_scores: { selection_method?: string }[] } }) =>
+      e.improved.candidate_scores.some((c) => c.selection_method === 'causal_likelihood'),
+  )
+  expect(index).toBeGreaterThanOrEqual(0)
+  await page.evaluate((id) => localStorage.setItem('gnss.lastRun', id), run.id)
+  await page.reload()
+  await expect(page.getByLabel('历元时间轴')).toHaveAttribute('max', '34')
+  await page.getByLabel('历元时间轴').fill(String(index))
+  await page.getByRole('button', { name: '逐星诊断', exact: true }).click()
+  await expect(page.getByLabel('本历元处置依据')).toContainText('相对似然比达到 20:1')
+  await expect(page.getByLabel('本历元处置依据')).toContainText('当前历元独立重算')
+  const selectionEvidence = page.getByLabel('本次选择证据', { exact: true })
+  await selectionEvidence.locator('summary').click()
+  await expect(selectionEvidence).toContainText('历史残差证据')
+  await expect(selectionEvidence).toContainText('不是故障正确概率')
+  const hypotheses = page.getByRole('table', { name: '候选假设检验' })
+  await expect(hypotheses.getByRole('row').filter({ hasText: 'G07' })).toContainText('采用并剔除')
+  const passingCount = records[index].improved.candidate_scores.filter(
+    (candidate: { passed: boolean }) => candidate.passed,
+  ).length
+  expect(passingCount).toBeGreaterThan(1)
+  await expect(hypotheses.getByRole('cell', { name: '通过', exact: true })).toHaveCount(
+    passingCount,
+  )
+  await expect(hypotheses.getByRole('cell', { name: '采用并剔除', exact: true })).toHaveCount(1)
+  const manifest = await (
+    await page.request.get(`/api/runs/${run.id}/download/manifest.json`)
+  ).json()
+  expect(manifest.solver.fde_history_epochs).toBe(16)
+  expect(manifest.solver.resolve_ambiguity).toBe(true)
+  expect(manifest.solver.provisional_fde).toBe(true)
+  expect(manifest.solver.fde_change_detection).toBe(true)
+  await page.screenshot({ path: testInfo.outputPath('six-satellite-evidence.png'), fullPage: true })
+  await page.getByLabel('历元时间轴').fill('0')
+  await expect(page.getByLabel('本历元处置依据')).toContainText('身份尚未确认')
+  await expect(selectionEvidence).toContainText('暂定，身份未确认')
+  await expect(selectionEvidence).toContainText('当前历元残差')
+  await expect(hypotheses.getByRole('row').filter({ hasText: 'G20' })).toContainText(
+    '暂定剔除（待确认）',
+  )
+  await expect(hypotheses.getByRole('cell', { name: '采用并剔除', exact: true })).toHaveCount(0)
+  await expect(hypotheses.getByRole('columnheader', { name: '水平解差 / m' })).toBeVisible()
+  await expect(page.getByLabel('候选水平解差说明')).toContainText('以本历元采用解为参照')
+  const selectedCandidate = records[0].improved.candidate_scores.find(
+    (candidate: { selected?: boolean }) => candidate.selected,
+  )
+  expect(selectedCandidate.candidate_horizontal_separation_m).toBe(0)
+  const alternate = records[0].improved.candidate_scores.find(
+    (candidate: { sat_id: string }) => candidate.sat_id === 'G07',
+  )
+  expect(alternate.candidate_horizontal_separation_m).toBeGreaterThan(10)
+  await expect(hypotheses.getByRole('row').filter({ hasText: 'G07' })).toContainText(
+    alternate.candidate_horizontal_separation_m.toFixed(2),
+  )
+  await expect(
+    page.getByRole('table', { name: '卫星观测表' }).getByRole('row').filter({ hasText: 'G20' }),
+  ).toContainText('暂定剔除')
+  await expect(page.getByRole('region', { name: '选中卫星详情' })).toContainText(
+    '暂定剔除（待确认）',
+  )
+  await page.screenshot({
+    path: testInfo.outputPath('six-satellite-provisional.png'),
+    fullPage: true,
+  })
+})
+
 test('run actual observations, inspect evidence, reload history and export', async ({
   page,
 }, testInfo) => {
