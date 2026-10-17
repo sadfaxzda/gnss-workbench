@@ -21,7 +21,7 @@ def source_revision(root: Path = PROJECT_ROOT) -> str:
     submission = root / "SUBMISSION.txt"
     if submission.is_file():
         match = re.search(
-            r"^Source revision: ([0-9a-f]{40})$",
+            r"^Source revision: ([0-9a-f]{40}|snapshot-sha256:[0-9a-f]{64})$",
             submission.read_text(encoding="utf-8"),
             re.MULTILINE,
         )

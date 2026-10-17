@@ -32,10 +32,38 @@ def solve(
     disable_fde: bool = False,
     algorithm: Literal["single_fde", "consensus", "adaptive_gnc"] = "consensus",
     noise_sigma_m: float = 1.0,
+    disable_ambiguity_resolution: bool = False,
+    fde_history_epochs: int = 16,
+    disable_provisional_fde: bool = False,
+    disable_fde_change_detection: bool = False,
+    disable_adaptive_noise: bool = False,
+    disable_strict_fde_confirmation: bool = False,
+    disable_unconfirmed_history: bool = False,
+    disable_temporal_parity: bool = False,
+    disable_algebraic_recovery: bool = False,
+    disable_sequential_change_detection: bool = False,
+    disable_complete_geometry_diagnosis: bool = False,
+    disable_history_rescaling: bool = False,
+    enable_coherent_proposals: bool = False,
 ) -> None:
     """Solve a JSONL stream, save both solutions and complete diagnosis evidence."""
     config = SolverConfig(
-        enable_fde=not disable_fde, algorithm=algorithm, noise_sigma_m=noise_sigma_m
+        enable_fde=not disable_fde,
+        algorithm=algorithm,
+        noise_sigma_m=noise_sigma_m,
+        resolve_ambiguity=not disable_ambiguity_resolution,
+        fde_history_epochs=fde_history_epochs,
+        provisional_fde=not disable_provisional_fde,
+        fde_change_detection=not disable_fde_change_detection,
+        adaptive_noise=not disable_adaptive_noise,
+        strict_fde_confirmation=not disable_strict_fde_confirmation,
+        use_unconfirmed_history=not disable_unconfirmed_history,
+        temporal_parity=not disable_temporal_parity,
+        algebraic_recovery=not disable_algebraic_recovery,
+        sequential_change_detection=not disable_sequential_change_detection,
+        complete_geometry_diagnosis=not disable_complete_geometry_diagnosis,
+        rescale_history=not disable_history_rescaling,
+        coherent_proposals=enable_coherent_proposals,
     )
     engine = PositioningEngine(navigation_from(navigation), config)
     baseline, improved = [], []
