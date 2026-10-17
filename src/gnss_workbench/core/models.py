@@ -65,16 +65,60 @@ class SolverConfig:
     algorithm: Literal["single_fde", "consensus", "adaptive_gnc"] = "consensus"
     max_faults: int = 2
     max_hypotheses: int = 600
+    resolve_ambiguity: bool = True
+    fde_likelihood_ratio: float = 20.0
+    fde_history_epochs: int = 16
+    fde_history_max_gap_s: float = 5.0
+    provisional_fde: bool = True
+    fde_change_detection: bool = True
+    adaptive_noise: bool = True
+    strict_fde_confirmation: bool = True
+    use_unconfirmed_history: bool = True
+    temporal_parity: bool = True
+    algebraic_recovery: bool = True
+    sequential_change_detection: bool = True
+    complete_geometry_diagnosis: bool = True
+    rescale_history: bool = True
+    coherent_proposals: bool = False
 
     def __post_init__(self) -> None:
         if self.algorithm not in {"single_fde", "consensus", "adaptive_gnc"}:
             raise ValueError("Unknown diagnosis algorithm")
-        if not 1 <= self.max_faults <= 2 or not 1 <= self.max_hypotheses <= 1000:
+        if (
+            any(
+                isinstance(v, bool) or not isinstance(v, int)
+                for v in (self.max_faults, self.max_hypotheses)
+            )
+            or not 1 <= self.max_faults <= 2
+            or not 1 <= self.max_hypotheses <= 1000
+        ):
             raise ValueError("Bounded diagnosis supports one or two faults and 1..1000 hypotheses")
+        if (
+            isinstance(self.max_iterations, bool)
+            or not isinstance(self.max_iterations, int)
+            or self.max_iterations < 1
+        ):
+            raise ValueError("max_iterations must be a positive integer")
+        if not isfinite(self.convergence_m) or self.convergence_m <= 0:
+            raise ValueError("convergence_m must be finite and positive")
+        if not isfinite(self.elevation_mask_deg) or not 0 <= self.elevation_mask_deg < 90:
+            raise ValueError("elevation_mask_deg must be finite and in [0, 90)")
+        if not isfinite(self.pdop_warning) or self.pdop_warning <= 0:
+            raise ValueError("pdop_warning must be finite and positive")
         if not isfinite(self.noise_sigma_m) or self.noise_sigma_m <= 0:
             raise ValueError("noise_sigma_m must be positive")
         if not 0 < self.false_alarm_probability < 0.1:
             raise ValueError("false_alarm_probability must be in (0, 0.1)")
+        if not isfinite(self.fde_likelihood_ratio) or self.fde_likelihood_ratio <= 1:
+            raise ValueError("fde_likelihood_ratio must be finite and greater than one")
+        if (
+            isinstance(self.fde_history_epochs, bool)
+            or not isinstance(self.fde_history_epochs, int)
+            or not 1 <= self.fde_history_epochs <= 32
+        ):
+            raise ValueError("fde_history_epochs must be an integer in 1..32")
+        if not isfinite(self.fde_history_max_gap_s) or self.fde_history_max_gap_s <= 0:
+            raise ValueError("fde_history_max_gap_s must be finite and positive")
 
 
 @dataclass
