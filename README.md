@@ -121,7 +121,7 @@ React / TypeScript / Vite / Tailwind / Radix primitives / TanStack Query / EChar
 
 [第六轮算法改进与45,283历元验证](docs/diagnosis-iteration6.md)继续有效：已修正历史证据的噪声尺度、增加候选水平解差、覆盖完整换星边界。六星孤立首历元P95仍32.840m，部分冷启动、换星星组、可见集合变化及四/五星故障精度仍失败。八星通过不覆盖这些限制。
 
-历史快照见 [第一轮](docs/low-redundancy-validation.md)、[第二轮](docs/six-satellite-iteration2.md)、[第三轮](docs/diagnosis-iteration3.md)、[第四轮](docs/diagnosis-iteration4.md)、[第五轮](docs/diagnosis-iteration5.md)；当前默认行为及验证以第六轮记录为准。
+历史快照见 [第一轮](docs/low-redundancy-validation.md)、[第二轮](docs/six-satellite-iteration2.md)、[第三轮](docs/diagnosis-iteration3.md)、[第四轮](docs/diagnosis-iteration4.md)、[第五轮](docs/diagnosis-iteration5.md)；当前默认行为见第八轮记录，本次独立复核见 [提交审查](docs/submission-review-2026-10-17.md)。
 
 ```bash
 uv run python scripts/validate_six_satellite.py --comparison iteration6 --suite continuous --seed 624291 --out runtime/six-validation-v6
@@ -142,7 +142,7 @@ uv run --group research gnss cross-check --out runtime/cross-check.json
 
 网页“算法与自定义数据”支持导入 JSONL 与可选星历（最多5000历元/16MiB），未给星历则用课程周1316星历；更长输入使用 CLI。参数、输入和逐星决策可完整导出。
 
-[教师要求矩阵](docs/requirements-matrix.md) · [第六轮6页实验报告](docs/report.pdf) · [预设实验设计](docs/algorithm-plan.md) · [保留种子完整结果](docs/experiments/holdout-report.md) · [原始实验归档](docs/experiments/holdout-evidence.zip)
+[教师要求矩阵](docs/requirements-matrix.md) · [六页课程报告](docs/report.pdf) · [预设实验设计](docs/algorithm-plan.md) · [保留种子完整结果](docs/experiments/holdout-report.md) · [原始实验归档](docs/experiments/holdout-evidence.zip)
 
 保留种子20261016，每类84历元：双星故障的10m内成功率由旧版单星FDE的1.2%提升到95.2%，水平P95由78.24m降至3.47m；正常/单星/渐变回归保持通过。GNC最终精度相同、耗时更高，保留实验选项。重尾与sigma失配仍出现失败和错剔，不能据此宣称真实环境领先。
 
@@ -162,16 +162,16 @@ pnpm --dir web build
 uv run python scripts/package_submission.py --out ../GNSS_Workbench_submission.zip
 ```
 
-本目录是下载的源码副本，没有Git元数据。使用显式快照模式（不会虚构提交号）：
+如果使用的是不含 Git 元数据的下载源码副本，可用显式快照模式：
 
 ```bash
-uv run python scripts/package_submission.py --source-snapshot --out ../GNSS_Workbench_iteration8_candidate.zip
+uv run python scripts/package_submission.py --source-snapshot --out ../GNSS_Workbench_submission_snapshot.zip
 # 解压后进入gnss-workbench目录，验证所有交付文件
 python scripts/verify_submission.py --root .
 ```
 
 包内包含源码、锁文件、构建前端、6页报告、D01/D02/D03新运行结果与D03消融，以及逐文件SHA256清单。结果从本次封存的源码运行生成，运行记录保留同一源码身份。解压后无需Node构建即可 `uv sync --locked`、`uv run gnss serve`；首次安装Python依赖仍需网络。打包不包含本机运行历史、Git凭证、虚拟环境或node_modules；校验用于检测改动，不是数字签名。输出ZIP必须不存在。
 
-报告已更新到第八轮，已记录马晨曦、张淳贺、刘芸睿；实际分工与个人核验待确定，见[演示与分工表](docs/demo-guide.md)。重新生成：`uv run --group research python scripts/build_iteration8_report.py`；早期报告脚本保留作为历史记录。
+报告已记录马晨曦、张淳贺、刘芸睿；实际分工与个人核验按小组要求暂留空，见 [演示与分工表](docs/demo-guide.md)。
 
 当前报告由 `uv run --group research python scripts/build_submission_report.py` 生成，读取本次封存指标及 `docs/team.json`。本机安装微软雅黑和 Times New Roman；其他系统可通过 `GNSS_REPORT_CHINESE_FONT`、`GNSS_REPORT_ENGLISH_FONT` 指定已安装字体。交付 PDF 已嵌入字形，阅读报告无需安装字体。此前各轮报告脚本仅用于重建历史版本。
