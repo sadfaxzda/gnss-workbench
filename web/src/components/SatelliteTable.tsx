@@ -3,9 +3,15 @@ import type { components } from '../generated/api'
 import { format } from '../lib/api'
 import { DataGrid, type GridColumn } from './DataGrid'
 
-type Satellite = components['schemas']['SatelliteDiagnostic']
+type Satellite = components['schemas']['SatelliteDiagnostic'] & { provisional?: boolean }
 const disposition = (sat: Satellite) =>
-  sat.excluded ? '异常剔除' : sat.weight > 0 ? '参与定位' : '未参与定位'
+  sat.excluded
+    ? sat.provisional
+      ? '暂定剔除'
+      : '异常剔除'
+    : sat.weight > 0
+      ? '参与定位'
+      : '未参与定位'
 const columns: GridColumn<Satellite>[] = [
   { id: 'satellite', label: '卫星', width: 86, value: (s) => s.sat_id },
   {
@@ -60,16 +66,21 @@ export function SatelliteTable({
   satellites,
   selectedId,
   onSelect,
+  provisional = false,
 }: {
   satellites: Satellite[]
   selectedId?: string
   onSelect: (id: string) => void
+  provisional?: boolean
 }) {
   const [filter, setFilter] = useState('all')
-  const rows = satellites.filter(
-    (sat) =>
-      filter === 'all' || (filter === 'excluded' ? sat.excluded : !sat.excluded && sat.weight > 0),
-  )
+  const rows = satellites
+    .map((sat) => ({ ...sat, provisional }))
+    .filter(
+      (sat) =>
+        filter === 'all' ||
+        (filter === 'excluded' ? sat.excluded : !sat.excluded && sat.weight > 0),
+    )
   return (
     <DataGrid
       rows={rows}

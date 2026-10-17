@@ -6,9 +6,11 @@ type Diagnostic = components['schemas']['SatelliteDiagnostic']
 export function SatelliteInspector({
   satellite,
   selectedId,
+  provisional = false,
 }: {
   satellite?: Diagnostic
   selectedId?: string
+  provisional?: boolean
 }) {
   return (
     <section className="satellite-inspector" aria-label="选中卫星详情">
@@ -16,7 +18,13 @@ export function SatelliteInspector({
         <h3>{satellite?.sat_id ?? selectedId ?? '卫星详情'}</h3>
         {satellite && (
           <span className={satellite.excluded ? 'warning-text' : 'muted'}>
-            {satellite.excluded ? '已剔除' : satellite.weight > 0 ? '参与定位' : '未参与定位'}
+            {satellite.excluded
+              ? provisional
+                ? '暂定剔除（待确认）'
+                : '已剔除'
+              : satellite.weight > 0
+                ? '参与定位'
+                : '未参与定位'}
           </span>
         )}
       </div>
