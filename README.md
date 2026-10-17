@@ -4,6 +4,8 @@ GPS 单点定位与可解释故障诊断工作台。Mac、Windows 和 Linux 共�
 
 当前版本 **v0.2.0**：真实计算、独立基线、单星/双星诊断、GNC 实验、自定义导入、文件/TCP 输入、运行记录与导出已实现。设计与边界见 [架构](docs/architecture.md)，后续计划见 [路线图](docs/roadmap.md)。
 
+**2026-10-17 提交审查**：[逐项要求、修复与复现记录](docs/submission-review-2026-10-17.md) · [六页课程报告](docs/report.pdf) · [新种子逐例指标](docs/experiments/submission-20261017/summary.json)。公开 D02/D03 通过；新八星 83 例、七星 56 例通过本次所检查的建议线，六星 196 例中仍有 24 例未全部达标。分工按小组要求暂留空，教师隐藏案例与个人答辩尚未验收。
+
 ![工作台](docs/media/property-inspector.jpg)
 
 队友加入与提交流程见 [小组协作说明](CONTRIBUTING.md)。受邀成员接受 GitHub 邀请后即可参与开发。
@@ -171,3 +173,5 @@ python scripts/verify_submission.py --root .
 包内包含源码、锁文件、构建前端、6页报告、D01/D02/D03新运行结果与D03消融，以及逐文件SHA256清单。结果从本次封存的源码运行生成，运行记录保留同一源码身份。解压后无需Node构建即可 `uv sync --locked`、`uv run gnss serve`；首次安装Python依赖仍需网络。打包不包含本机运行历史、Git凭证、虚拟环境或node_modules；校验用于检测改动，不是数字签名。输出ZIP必须不存在。
 
 报告已更新到第八轮，已记录马晨曦、张淳贺、刘芸睿；实际分工与个人核验待确定，见[演示与分工表](docs/demo-guide.md)。重新生成：`uv run --group research python scripts/build_iteration8_report.py`；早期报告脚本保留作为历史记录。
+
+当前报告由 `uv run --group research python scripts/build_submission_report.py` 生成，读取本次封存指标及 `docs/team.json`。本机安装微软雅黑和 Times New Roman；其他系统可通过 `GNSS_REPORT_CHINESE_FONT`、`GNSS_REPORT_ENGLISH_FONT` 指定已安装字体。交付 PDF 已嵌入字形，阅读报告无需安装字体。此前各轮报告脚本仅用于重建历史版本。

@@ -25,9 +25,11 @@ def test_experimental_proposals_require_explicit_opt_in_and_are_recorded(tmp_pat
         arguments.append("--enable-coherent-proposals")
     result = CliRunner().invoke(app, arguments)
     assert result.exit_code == 0, result.output
-    manifest = json.loads((tmp_path / "manifest.json").read_text())
+    manifest = json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["configuration"]["coherent_proposals"] is enabled
-    row = json.loads((tmp_path / "diagnostics.jsonl").read_text().splitlines()[44])["improved"]
+    row = json.loads((tmp_path / "diagnostics.jsonl").read_text(encoding="utf-8").splitlines()[44])[
+        "improved"
+    ]
     assert row["status"] == "SUSPECT"
     selected = next(c for c in row["candidate_scores"] if c["selected"])
     assert (selected.get("provisional_source") == "coherent_proposal") is enabled

@@ -1,0 +1,116 @@
+{
+  "suite": "variable",
+  "comparison": "ablation",
+  "seed": 2026101704,
+  "configurations": {
+    "previous": {
+      "noise_sigma_m": 1.0,
+      "false_alarm_probability": 0.001,
+      "max_iterations": 20,
+      "convergence_m": 0.0001,
+      "elevation_mask_deg": 3.0,
+      "pdop_warning": 30.0,
+      "enable_fde": false,
+      "algorithm": "consensus",
+      "max_faults": 2,
+      "max_hypotheses": 600,
+      "resolve_ambiguity": true,
+      "fde_likelihood_ratio": 20.0,
+      "fde_history_epochs": 16,
+      "fde_history_max_gap_s": 5.0,
+      "provisional_fde": true,
+      "fde_change_detection": true,
+      "adaptive_noise": true,
+      "strict_fde_confirmation": true,
+      "use_unconfirmed_history": true,
+      "temporal_parity": true,
+      "algebraic_recovery": true,
+      "sequential_change_detection": true,
+      "complete_geometry_diagnosis": true,
+      "rescale_history": true,
+      "coherent_proposals": false
+    },
+    "new": {
+      "noise_sigma_m": 1.0,
+      "false_alarm_probability": 0.001,
+      "max_iterations": 20,
+      "convergence_m": 0.0001,
+      "elevation_mask_deg": 3.0,
+      "pdop_warning": 30.0,
+      "enable_fde": true,
+      "algorithm": "consensus",
+      "max_faults": 2,
+      "max_hypotheses": 600,
+      "resolve_ambiguity": true,
+      "fde_likelihood_ratio": 20.0,
+      "fde_history_epochs": 16,
+      "fde_history_max_gap_s": 5.0,
+      "provisional_fde": true,
+      "fde_change_detection": true,
+      "adaptive_noise": true,
+      "strict_fde_confirmation": true,
+      "use_unconfirmed_history": true,
+      "temporal_parity": true,
+      "algebraic_recovery": true,
+      "sequential_change_detection": true,
+      "complete_geometry_diagnosis": true,
+      "rescale_history": true,
+      "coherent_proposals": false
+    }
+  },
+  "scope": "Forward-simulated new positions, trajectories, clock, noise and fault sequences. Shares supplied navigation and physical primitives; no D02 observations and no field/hidden-test claim.",
+  "navigation_sha256": "dccfb696c406bdb2ecef9f6a44cc40c113045d85d57817742aecc4ef7f580e7e",
+  "code_sha256": {
+    "src/gnss_workbench/core/ephemeris.py": "a283b2ea265fcb17baea35d3dc09ddbde2759081ef6cf5fcd8ba922425e145f1",
+    "src/gnss_workbench/core/temporal.py": "9e30432f10b470db1074ddca0ac8071ae40ce4dbda768345adb23dbbd232e36d",
+    "src/gnss_workbench/core/solver.py": "17cc6df712cecdfb609d5908ada040df0dd6a727f51f5037aa4491b60a7b3cc0",
+    "src/gnss_workbench/core/models.py": "bc08b19c89aa3c529d9b09d3dfd79c58803716724c5a4f6f932b98ed7db214a0",
+    "src/gnss_workbench/core/__init__.py": "af0fcfb75e7753a2ad0f1e998d2fa6fc68bfc09234709c1a107176398c9813e4",
+    "src/gnss_workbench/core/diagnosis.py": "173ff23f3b2d6e62b6e166fb3152d76f1e6c89136825ce72e0edfe34b3e49d4c",
+    "src/gnss_workbench/core/initialization.py": "47526dea9768beba9d5d11f9936ee8375952ee5e1102d50994a38ab01a8b3798",
+    "src/gnss_workbench/core/noise.py": "09ba862c7b531c163b93cba0253a9013793989dfecb619cd60c95d644a13c142",
+    "src/gnss_workbench/core/atmosphere.py": "ed6e5c9eaf1ba64889e0e3ea9e3c99dc0ff5d78e575781cda89c3fadb97b55f2",
+    "src/gnss_workbench/core/coordinates.py": "38045c44ee1084eb8b8a2c4135145107bcecbfad71398fe4bf0eaa9cb5f32b2c",
+    "scripts/validate_six_satellite.py": "f5e64127cb7d31b419ad3b4786785da0f8505c02738487d7624d729f3dec6cf0"
+  },
+  "inputs": {
+    "set00-00-clean": {
+      "sha256": "048401a4405b3f03d77eb2e0d697c2762f6949408bdc4b9b4e6b81c391086352",
+      "visibility_draws": 1,
+      "noise_sigma_m": 0.8
+    },
+    "set00-01-common": {
+      "sha256": "6e5b5eafe78b4a2dff6fb9388c4f59d5e71edab54e5b5009d912c2daaa5a6e3d",
+      "visibility_draws": 2,
+      "noise_sigma_m": 0.8
+    },
+    "set00-02-cold_stream": {
+      "sha256": "eeeaee40a4eddbb434724d9c3d553cb94b0caefe002c15782bdf6f23e2e401e0",
+      "visibility_draws": 1,
+      "noise_sigma_m": 0.8
+    },
+    "set00-03-step": {
+      "sha256": "ceb5d7a3a1cdf207a7c701fa35b8cc0b04e7732856a38d651567bbd6ab3503b2",
+      "visibility_draws": 1,
+      "noise_sigma_m": 0.8
+    },
+    "set00-04-ramp": {
+      "sha256": "b6b870f79201cf495121b659681f663e3e76bd3d8408a9dc8c489182b4f607e0",
+      "visibility_draws": 2,
+      "noise_sigma_m": 0.8
+    },
+    "set00-05-switch": {
+      "sha256": "b73b89b302bda299b82be84332b0fb27a3119d23365527b75729ce6ce3b35f88",
+      "visibility_draws": 1,
+      "noise_sigma_m": 0.8
+    },
+    "set00-06-rapid": {
+      "sha256": "9b52dbb11c88f60fc5fbc25ac1795c83a403adb5f2f134bfb0429e023293a8c6",
+      "visibility_draws": 1,
+      "noise_sigma_m": 0.8
+    }
+  },
+  "cases": 7,
+  "max_baseline_numeric_difference": 2.118104021064937e-07,
+  "course_contract_violations": 0
+}

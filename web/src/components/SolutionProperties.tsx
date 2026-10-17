@@ -62,18 +62,18 @@ export function SolutionProperties({
       </section>
       <section aria-label="当前历元位置">
         <h3 className="property-group-heading">
-          位置坐标 <span>WGS 84</span>
+          位置与钟差 <span>WGS 84</span>
         </h3>
         <dl className={currentValues}>
           <Property label="纬度" value={format(epoch?.view.latitude_deg, 7)} unit="°" />
           <Property label="经度" value={format(epoch?.view.longitude_deg, 7)} unit="°" />
           <Property label="椭球高" value={format(epoch?.view.height_m, 3)} unit="m" />
+          <Property label="接收机钟差" value={format(solution?.clock_bias_m, 3)} unit="m" />
         </dl>
       </section>
       <details className="property-disclosure">
         <summary>更多解算参数</summary>
         <dl className={currentValues}>
-          <Property label="接收机钟差" value={format(solution?.clock_bias_m, 3)} unit="m" />
           <Property label="三维解差" value={format(epoch?.view.correction_m, 3)} unit="m" />
           <Property label="单历元计算" value={format(solution?.processing_ms, 2)} unit="ms" />
         </dl>

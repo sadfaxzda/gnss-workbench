@@ -129,6 +129,10 @@ def build_archive(destination: Path, *, source_snapshot: bool = False) -> None:
     files: dict[str, bytes] = snapshot_inventory(ROOT) if source_snapshot else {}
     if not source_snapshot:
         for name in git("ls-files", "-z").split("\0"):
+            # Earlier hand-in archives are release outputs, not the current source.
+            # Keep them in Git history without nesting stale software in a new hand-in.
+            if name.startswith("deliverables/"):
+                continue
             path = ROOT / name
             if path.is_symlink():
                 raise SystemExit(f"Source entry must not be a symlink: {name}")
