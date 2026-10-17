@@ -38,7 +38,9 @@ def test_history_can_reach_records_older_than_one_hundred(tmp_path):
         assert client.get("/api/runs?offset=-1").status_code == 422
 
 
-def test_failed_worker_seals_partial_results_and_manifest(tmp_path):
+def test_failed_worker_seals_partial_results_and_manifest(tmp_path, monkeypatch):
+    # This test checks manifest propagation, independently of a Git checkout.
+    monkeypatch.setattr("gnss_workbench.worker.source_revision", lambda: "a" * 40)
     frame = (
         (COURSE_ROOT / "data/D01_real_excerpt.jsonl").read_text(encoding="utf-8").splitlines()[1]
     )
@@ -67,7 +69,7 @@ def test_failed_worker_seals_partial_results_and_manifest(tmp_path):
         == hashlib.sha256((output / "input.jsonl").read_bytes()).hexdigest()
     )
     assert len((output / "improved.csv").read_text(encoding="utf-8").splitlines()) == 2
-    assert len(manifest["git_revision"]) == 40
+    assert manifest["git_revision"] == "a" * 40
 
 
 def test_sealed_distribution_keeps_its_source_revision(tmp_path: Path):

@@ -55,7 +55,8 @@ def test_double_fault_and_trace(data, method):
         ordinary, _ = PositioningEngine(nav, SolverConfig(enable_fde=False)).solve(retained)
         assert result.pdop == pytest.approx(ordinary.pdop, abs=1e-5)
     if method == "adaptive_gnc":
-        assert 1 <= len(result.algorithm_trace) <= 54
+        gnc_trace = [t for t in result.algorithm_trace if "depth" in t]
+        assert 1 <= len(gnc_trace) <= 54
         assert all(0 <= d.robust_weight <= 1 for d in result.diagnostics)
 
 

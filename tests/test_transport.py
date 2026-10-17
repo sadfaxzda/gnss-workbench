@@ -93,3 +93,45 @@ def test_file_and_fragmented_tcp_use_identical_solutions():
             tcp_row.pop("processing_ms")
             assert file_row == tcp_row
     thread.join(timeout=1)
+
+
+def test_causal_diagnosis_depends_on_gpst_not_packet_timing():
+    from dataclasses import replace
+
+    from gnss_workbench.core.models import Epoch
+    from gnss_workbench.core.solver import PositioningEngine
+    from gnss_workbench.io import navigation_from
+
+    nav = navigation_from(COURSE_ROOT / "data/navigation.json")
+    source = list(read_epochs(COURSE_ROOT / "data/D02_sim_clean.jsonl"))[:30]
+    epochs = [
+        replace(
+            e,
+            observations=tuple(
+                replace(o, pseudorange_m=o.pseudorange_m - (30 if o.sat_id == "G07" else 0))
+                for o in e.observations[:6]
+            ),
+        )
+        for e in source
+    ]
+    payload = (
+        "\n".join(json.dumps({"type": "epoch", **asdict(e)}) for e in epochs)
+        + '\n{"type":"end","epochs_sent":30}\n'
+    ).encode()
+    port, thread = server_sends([payload[:73], payload[73:800], payload[800:]])
+    batch, live = PositioningEngine(nav), PositioningEngine(nav)
+    received = [
+        Epoch.from_dict(f) for f in tcp_frames(port, threading.Event()) if f["type"] == "epoch"
+    ]
+    accumulated = False
+    for left, right in zip(epochs, received, strict=True):
+        for a, b in zip(batch.solve(left), live.solve(right), strict=True):
+            first, second = a.to_dict(), b.to_dict()
+            first.pop("processing_ms")
+            second.pop("processing_ms")
+            assert first == second
+            accumulated |= any(
+                c.get("selection_method") == "causal_likelihood" for c in a.candidate_scores
+            )
+    assert accumulated
+    thread.join(timeout=1)
