@@ -43,6 +43,8 @@ def read_epochs(path: Path) -> Iterator[Epoch]:
 
 
 def validate_navigation(nav: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(nav, dict):
+        raise ValueError("Navigation must be a JSON object")
     if nav.get("schema") != "GNSS-COURSE-NAV-1.0":
         raise ValueError("Unsupported navigation schema")
     try:
