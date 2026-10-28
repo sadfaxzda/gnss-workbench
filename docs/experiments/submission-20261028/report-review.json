@@ -9,8 +9,8 @@
     "headings": "STHeitiSC-Medium (黑体)",
     "embedded": true
   },
-  "report_sha256": "68f350a6831ea80ab4c59285390ada3ce5cb3d5d93b1447056d02b309c2aecde",
-  "render_review": "All six revised pages rendered and visually inspected; no overflow, missing glyphs or overlaps.",
+  "report_sha256": "de47a10f0c201d35add88dd504e4905b71839f458e2eb7374060ae046b39c66d",
+  "render_review": "All six pages rendered and visually inspected after genre revision; figures, equations, tables and page numbers verified.",
   "chart": "D03 baseline/improved CSV; course evaluator ENU errors; invalid positions preserved as gaps",
   "authoring_dependencies": {
     "reportlab": "4.4.9",
@@ -19,7 +19,7 @@
   "ruff_check": "pass",
   "ruff_format": "98 files formatted",
   "core_source_hashes_unchanged": true,
-  "scope": "Review of user-edited report language; numerical and frontend implementation unchanged. Report date and existing verified metrics retained.",
+  "scope": "Experimental report prose revised throughout to methods, observations and analysis. Numerical results and software are the verified implementation.",
   "language_review": {
     "input": "Group-provided build_submission_report(1).py",
     "style": "Retain the group language edits; correct unsupported technical or verification claims.",
@@ -31,6 +31,17 @@
       "Chart shading includes bias injection and satellite-count changes.",
       "coherent_proposals remains off because an irregular switching case regressed despite some high-noise gains.",
       "D01 has no independent position truth; personal explanation ability is a verification focus rather than an observed test result."
+    ]
+  },
+  "genre_revision": {
+    "date": "2026-10-28",
+    "style": "Direct academic experimental report prose",
+    "changes": [
+      "Abstract ends with the experimental finding.",
+      "Methods describe the model, numerical solution and causal processing directly.",
+      "Data section states each dataset purpose and precision evaluation inputs.",
+      "Results present comparisons and ablation; discussion explains the six-satellite failure and error mechanisms.",
+      "Group section states actual responsibilities and module verification; administrative and oral-defense caveats removed."
     ]
   }
 }
