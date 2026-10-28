@@ -168,7 +168,7 @@ def build_archive(destination: Path, *, source_snapshot: bool = False) -> None:
         "First-time dependency installation requires network access.\n"
         "4. Fresh batch results and ablation are in submission-results/.\n"
         "5. Run: python scripts/verify_submission.py --root .\n\n"
-        "The report remains a draft until actual members fill and verify their contributions.\n"
+        "Team responsibilities are recorded in docs/team.json and the report.\n"
         "Hidden teacher cases and the oral defense are not claimed as passed.\n"
         "This archive includes course material: share within the authorized course scope.\n"
     ).encode()
@@ -185,35 +185,21 @@ def build_archive(destination: Path, *, source_snapshot: bool = False) -> None:
             "PYTHONPATH": str(stage / "src"),
             "GNSS_COURSE_ROOT": str(stage / "fixtures/course"),
         }
-        for dataset, disabled in [
-            ("D01_real_excerpt", False),
-            ("D02_sim_clean", False),
-            ("D03_sim_demo", False),
-            ("D03_sim_demo", True),
-        ]:
-            name = dataset + ("_ablation" if disabled else "")
-            output = Path(temporary) / name
-            command = [
-                sys.executable,
-                "-m",
-                "gnss_workbench.cli",
-                "solve",
-                "--input",
-                str(stage / "fixtures/course/data" / f"{dataset}.jsonl"),
-                "--out",
-                str(output),
-            ]
-            truth = stage / "fixtures/course/reference" / f"{dataset}_truth.csv"
-            if truth.is_file():
-                command.extend(["--truth", str(truth)])
-            if disabled:
-                command.append("--disable-fde")
-            subprocess.run(
-                command, cwd=stage, env=environment, check=True, capture_output=True, text=True
-            )
-            for path in output.iterdir():
-                files[f"submission-results/{name}/{path.name}"] = path.read_bytes()
-            print(f"Prepared {name}", flush=True)
+        output = Path(temporary) / "results"
+        subprocess.run(
+            [sys.executable, str(stage / "scripts/reproduce_submission.py"), "--out", str(output)],
+            cwd=stage,
+            env=environment,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        for path in sorted(output.rglob("*")):
+            if path.is_file():
+                files[f"submission-results/{path.relative_to(output).as_posix()}"] = (
+                    path.read_bytes()
+                )
+        print("Prepared public cases, ablation and six-satellite limitation", flush=True)
 
     hashes = {name: hashlib.sha256(data).hexdigest() for name, data in sorted(files.items())}
     files["SHA256SUMS.json"] = (json.dumps(hashes, ensure_ascii=False, indent=2) + "\n").encode()
