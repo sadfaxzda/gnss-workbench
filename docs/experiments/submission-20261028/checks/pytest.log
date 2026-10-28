@@ -1,0 +1,140 @@
+........................................................................ [ 43%]
+........................................................................ [ 86%]
+.......FFFFF..........                                                   [100%]
+=================================== FAILURES ===================================
+_____________ test_split_packets_pause_resume_end_and_empty_epochs _____________
+
+    def test_split_packets_pause_resume_end_and_empty_epochs():
+        epochs = list(read_epochs(COURSE_ROOT / "data/D03_sim_demo.jsonl"))
+        frames = [{"type": "meta", "replay_interval_wall_s": 0.01}]
+        frames += [{"type": "epoch", **asdict(epochs[i])} for i in [1, 460, 520]]
+        data = ("\n".join(json.dumps(f) for f in frames) + "\n").encode()
+        end = b'{"type":"end","epochs_sent":3}\n'
+>       port, thread = server_sends([data[:17], data[17:49], data[49:], 3.3, end])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_transport.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payloads = [b'{"type": "meta", ', b'"replay_interval_wall_s": 0.01}\n', b'{"type": "epoch", "epoch_id": 1, "gps_week": 1316, "gps...week": 1316, "gps_sow": 518999.0, "observations": [], "data_error": null}\n', 3.3, b'{"type":"end","epochs_sent":3}\n']
+
+    def server_sends(payloads):
+        server = socket.socket()
+>       server.bind(("127.0.0.1", 0))
+E       PermissionError: [Errno 1] Operation not permitted
+
+tests/test_transport.py:16: PermissionError
+__________________ test_unexpected_disconnect_is_not_success ___________________
+
+    def test_unexpected_disconnect_is_not_success():
+>       port, thread = server_sends([b'{"type":"meta"}\n'])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_transport.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payloads = [b'{"type":"meta"}\n']
+
+    def server_sends(payloads):
+        server = socket.socket()
+>       server.bind(("127.0.0.1", 0))
+E       PermissionError: [Errno 1] Operation not permitted
+
+tests/test_transport.py:16: PermissionError
+_____________________ test_oversize_partial_frame_rejected _____________________
+
+    def test_oversize_partial_frame_rejected():
+>       port, thread = server_sends([b"x" * (MAX_LINE_BYTES + 1)])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_transport.py:62: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payloads = [b'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx']
+
+    def server_sends(payloads):
+        server = socket.socket()
+>       server.bind(("127.0.0.1", 0))
+E       PermissionError: [Errno 1] Operation not permitted
+
+tests/test_transport.py:16: PermissionError
+_____________ test_file_and_fragmented_tcp_use_identical_solutions _____________
+
+    def test_file_and_fragmented_tcp_use_identical_solutions():
+        from gnss_workbench.core.models import Epoch
+        from gnss_workbench.core.solver import PositioningEngine
+        from gnss_workbench.io import csv_row, navigation_from
+    
+        nav = navigation_from(COURSE_ROOT / "data/navigation.json")
+        file_epochs = list(read_epochs(COURSE_ROOT / "data/D03_sim_demo.jsonl"))
+        selected = [file_epochs[i] for i in [70, 170, 330, 460, 500, 520, 550]]
+        data = (
+            "\n".join(json.dumps({"type": "epoch", **asdict(epoch)}) for epoch in selected)
+            + '\n{"type":"end","epochs_sent":7}\n'
+        ).encode()
+>       port, thread = server_sends([data[:19], data[19:150], data[150:]])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_transport.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payloads = [b'{"type": "epoch", "', b'epoch_id": 70, "gps_week": 1316, "gps_sow": 518549.0, "observations": [{"sat_id": "G03", "p...d": "G28", "pseudorange_m": 21435835.4215, "cn0_dbhz": 44.52}], "data_error": null}\n{"type":"end","epochs_sent":7}\n']
+
+    def server_sends(payloads):
+        server = socket.socket()
+>       server.bind(("127.0.0.1", 0))
+E       PermissionError: [Errno 1] Operation not permitted
+
+tests/test_transport.py:16: PermissionError
+___________ test_causal_diagnosis_depends_on_gpst_not_packet_timing ____________
+
+    def test_causal_diagnosis_depends_on_gpst_not_packet_timing():
+        from dataclasses import replace
+    
+        from gnss_workbench.core.models import Epoch
+        from gnss_workbench.core.solver import PositioningEngine
+        from gnss_workbench.io import navigation_from
+    
+        nav = navigation_from(COURSE_ROOT / "data/navigation.json")
+        source = list(read_epochs(COURSE_ROOT / "data/D02_sim_clean.jsonl"))[:30]
+        epochs = [
+            replace(
+                e,
+                observations=tuple(
+                    replace(o, pseudorange_m=o.pseudorange_m - (30 if o.sat_id == "G07" else 0))
+                    for o in e.observations[:6]
+                ),
+            )
+            for e in source
+        ]
+        payload = (
+            "\n".join(json.dumps({"type": "epoch", **asdict(e)}) for e in epochs)
+            + '\n{"type":"end","epochs_sent":30}\n'
+        ).encode()
+>       port, thread = server_sends([payload[:73], payload[73:800], payload[800:]])
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_transport.py:121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payloads = [b'{"type": "epoch", "epoch_id": 0, "gps_week": 1316, "gps_sow": 518540.0, "', b'observations": [{"sat_id": "G03", "ps...": "G20", "pseudorange_m": 21590621.1912, "cn0_dbhz": 43.94}], "data_error": null}\n{"type":"end","epochs_sent":30}\n']
+
+    def server_sends(payloads):
+        server = socket.socket()
+>       server.bind(("127.0.0.1", 0))
+E       PermissionError: [Errno 1] Operation not permitted
+
+tests/test_transport.py:16: PermissionError
+=============================== warnings summary ===============================
+.venv/lib/python3.14/site-packages/fastapi/testclient.py:1
+  /Users/chenxi/Desktop/GNSS编程作业/GNSS课程作业_提交版_20261028/源代码/.venv/lib/python3.14/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_transport.py::test_split_packets_pause_resume_end_and_empty_epochs
+FAILED tests/test_transport.py::test_unexpected_disconnect_is_not_success - P...
+FAILED tests/test_transport.py::test_oversize_partial_frame_rejected - Permis...
+FAILED tests/test_transport.py::test_file_and_fragmented_tcp_use_identical_solutions
+FAILED tests/test_transport.py::test_causal_diagnosis_depends_on_gpst_not_packet_timing
+5 failed, 161 passed, 1 warning in 36.13s

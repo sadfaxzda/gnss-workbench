@@ -1,0 +1,299 @@
+$ playwright test
+[WebServer] INFO:     Started server process [69782]
+[WebServer] INFO:     Waiting for application startup.
+[WebServer] INFO:     Application startup complete.
+[WebServer] INFO:     Uvicorn running on http://127.0.0.1:18328 (Press CTRL+C to quit)
+[WebServer] (node:69792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] $ vite --host 127.0.0.1
+[WebServer] (node:69810) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 16 tests using 1 worker
+
+(node:69819) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:     127.0.0.1:63635 - "WebSocket /api/runs/d7bf486448c142d2b8d83f1db77ccc36/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓   1 [chromium] › e2e/linked-inspection.spec.ts:18:1 › epoch and satellite selection stay linked, and invalid epochs clear the position (4.0s)
+[WebServer] INFO:     127.0.0.1:63664 - "WebSocket /api/runs/970ab2fba15f45fb95fbb6800b55908f/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:63666 - "WebSocket /api/runs/970ab2fba15f45fb95fbb6800b55908f/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] 12:38:03 PM [vite] ws proxy error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] 12:38:03 PM [vite] ws proxy socket error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+  ✓   2 [chromium] › e2e/workbench.spec.ts:5:1 › six-satellite diagnosis explains causal selection among passing candidates (1.8s)
+[WebServer] INFO:     127.0.0.1:63682 - "WebSocket /api/runs/f54616432ca5454c89a5ecb33bdd8e5a/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:63692 - "WebSocket /api/runs/f54616432ca5454c89a5ecb33bdd8e5a/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] 12:38:05 PM [vite] ws proxy error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] 12:38:05 PM [vite] ws proxy socket error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] INFO:     127.0.0.1:63694 - "WebSocket /api/runs/f54616432ca5454c89a5ecb33bdd8e5a/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓   3 [chromium] › e2e/workbench.spec.ts:99:1 › run actual observations, inspect evidence, reload history and export (2.7s)
+[WebServer] INFO:     127.0.0.1:63710 - "WebSocket /api/runs/26224535ba054cd0b69f89b5e85d75dc/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:63722 - "WebSocket /api/runs/30f511ab435845e1a3a8e7d88c69c867/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓   4 [chromium] › e2e/workbench.spec.ts:145:1 › controlled fault and ablation controls work on a narrow viewport (3.3s)
+[WebServer] INFO:     127.0.0.1:63743 - "WebSocket /api/runs/2b5a07c8791043e3ae436c707f8082ee/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:63764 - "WebSocket /api/runs/2b5a07c8791043e3ae436c707f8082ee/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] 12:38:11 PM [vite] ws proxy error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] 12:38:11 PM [vite] ws proxy socket error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] INFO:     127.0.0.1:63766 - "WebSocket /api/runs/2b5a07c8791043e3ae436c707f8082ee/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓   5 [chromium] › e2e/workbench.spec.ts:180:1 › import observations, select research algorithm and inspect its evidence (2.0s)
+[WebServer] INFO:     127.0.0.1:63783 - "WebSocket /api/runs/d0e7072dc89e41cbb395382b0d30643b/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:63803 - "WebSocket /api/runs/d0e7072dc89e41cbb395382b0d30643b/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] 12:38:16 PM [vite] ws proxy error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] 12:38:16 PM [vite] ws proxy socket error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] INFO:     127.0.0.1:63805 - "WebSocket /api/runs/d0e7072dc89e41cbb395382b0d30643b/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓   6 [chromium] › e2e/workbench.spec.ts:255:1 › TCP pause keeps old position stale until a new epoch is received (4.9s)
+[WebServer] INFO:     127.0.0.1:63823 - "WebSocket /api/runs/1e78fbed291b41f19d8f3bf04f3539a6/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:63840 - "WebSocket /api/runs/1e78fbed291b41f19d8f3bf04f3539a6/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] 12:38:18 PM [vite] ws proxy error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] 12:38:18 PM [vite] ws proxy socket error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] INFO:     127.0.0.1:63842 - "WebSocket /api/runs/1e78fbed291b41f19d8f3bf04f3539a6/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓   7 [chromium] › e2e/workbench.spec.ts:300:1 › history restores the saved configuration and a default experiment uses clean data (2.6s)
+[WebServer] INFO:     127.0.0.1:63857 - "WebSocket /api/runs/e36006cd17824f2a8270ca4d605f3a2f/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:63860 - "WebSocket /api/runs/e36006cd17824f2a8270ca4d605f3a2f/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:63870 - "WebSocket /api/runs/e36006cd17824f2a8270ca4d605f3a2f/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] 12:38:21 PM [vite] ws proxy error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] 12:38:21 PM [vite] ws proxy socket error:
+[WebServer] Error: write EPIPE
+[WebServer]     at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+[WebServer]     at writeGeneric (node:internal/stream_base_commons:150:3)
+[WebServer]     at Socket._writeGeneric (node:net:1171:11)
+[WebServer]     at Socket._write (node:net:1183:8)
+[WebServer]     at writeOrBuffer (node:internal/streams/writable:570:12)
+[WebServer]     at _write (node:internal/streams/writable:499:10)
+[WebServer]     at Writable.write (node:internal/streams/writable:508:10)
+[WebServer]     at Socket.ondata (node:internal/streams/readable:1012:24)
+[WebServer]     at Socket.emit (node:events:509:28)
+[WebServer]     at addChunk (node:internal/streams/readable:563:12)
+[WebServer]     at readableAddChunkPushByteMode (node:internal/streams/readable:514:3)
+[WebServer]     at Readable.push (node:internal/streams/readable:394:5)
+[WebServer]     at TCP.onStreamRead (node:internal/stream_base_commons:189:23)
+[WebServer] INFO:     127.0.0.1:63872 - "WebSocket /api/runs/e36006cd17824f2a8270ca4d605f3a2f/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓   8 [chromium] › e2e/workbench.spec.ts:330:1 › long TCP acquisition keeps original order through reload and CSV export (3.9s)
+(node:69873) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] INFO:     127.0.0.1:63908 - "WebSocket /api/runs/b121855dfd994edca5252c9708b529b4/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓   9 [webkit] › e2e/linked-inspection.spec.ts:18:1 › epoch and satellite selection stay linked, and invalid epochs clear the position (5.3s)
+[WebServer] INFO:     127.0.0.1:63995 - "WebSocket /api/runs/3eff6c89c6b64df0b22a4ea980dccbb1/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:63997 - "WebSocket /api/runs/3eff6c89c6b64df0b22a4ea980dccbb1/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓  10 [webkit] › e2e/workbench.spec.ts:5:1 › six-satellite diagnosis explains causal selection among passing candidates (1.8s)
+[WebServer] INFO:     127.0.0.1:64013 - "WebSocket /api/runs/e21bc265a2054b52a5a1c495c9d6884e/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64026 - "WebSocket /api/runs/e21bc265a2054b52a5a1c495c9d6884e/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64028 - "WebSocket /api/runs/e21bc265a2054b52a5a1c495c9d6884e/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓  11 [webkit] › e2e/workbench.spec.ts:99:1 › run actual observations, inspect evidence, reload history and export (3.3s)
+[WebServer] INFO:     127.0.0.1:64045 - "WebSocket /api/runs/45aeef51e9794c33b5551cb267b7b70e/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64051 - "WebSocket /api/runs/c72b9dd41c6e42a1a7cbe443627af375/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓  12 [webkit] › e2e/workbench.spec.ts:145:1 › controlled fault and ablation controls work on a narrow viewport (3.9s)
+[WebServer] INFO:     127.0.0.1:64068 - "WebSocket /api/runs/05a506cb4c3a41dba9f6bcc5dec9602c/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64081 - "WebSocket /api/runs/05a506cb4c3a41dba9f6bcc5dec9602c/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64083 - "WebSocket /api/runs/05a506cb4c3a41dba9f6bcc5dec9602c/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓  13 [webkit] › e2e/workbench.spec.ts:180:1 › import observations, select research algorithm and inspect its evidence (2.0s)
+[WebServer] INFO:     127.0.0.1:64097 - "WebSocket /api/runs/a03f2b7492704b4ebc4336e5984f4bbf/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64118 - "WebSocket /api/runs/a03f2b7492704b4ebc4336e5984f4bbf/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64120 - "WebSocket /api/runs/a03f2b7492704b4ebc4336e5984f4bbf/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓  14 [webkit] › e2e/workbench.spec.ts:255:1 › TCP pause keeps old position stale until a new epoch is received (4.5s)
+[WebServer] INFO:     127.0.0.1:64135 - "WebSocket /api/runs/7f0b024206074c709027632949508a63/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64150 - "WebSocket /api/runs/7f0b024206074c709027632949508a63/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64152 - "WebSocket /api/runs/7f0b024206074c709027632949508a63/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓  15 [webkit] › e2e/workbench.spec.ts:300:1 › history restores the saved configuration and a default experiment uses clean data (2.7s)
+[WebServer] INFO:     127.0.0.1:64169 - "WebSocket /api/runs/75e85af1c06c4894ab0e2c444e9a472a/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64172 - "WebSocket /api/runs/75e85af1c06c4894ab0e2c444e9a472a/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64183 - "WebSocket /api/runs/75e85af1c06c4894ab0e2c444e9a472a/stream" [accepted]
+[WebServer] INFO:     connection open
+[WebServer] INFO:     127.0.0.1:64185 - "WebSocket /api/runs/75e85af1c06c4894ab0e2c444e9a472a/stream" [accepted]
+[WebServer] INFO:     connection open
+  ✓  16 [webkit] › e2e/workbench.spec.ts:330:1 › long TCP acquisition keeps original order through reload and CSV export (3.3s)
+
+  16 passed (1.0m)
