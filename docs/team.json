@@ -1,21 +1,26 @@
 {
-  "confirmed_by": "用户在本任务中的回复",
-  "updated": "2026-10-17",
+  "confirmed_by": "小组成员在 2026-10-28 提交整理请求中确认",
+  "updated": "2026-10-28",
+  "shared_responsibility": "张淳贺、马晨曦、刘芸睿共同审查代码、实验结果与提交材料",
   "members": [
     {
-      "name": "马晨曦",
-      "actual_responsibility": null,
-      "completed_verification": null
+      "name": "张淳贺",
+      "actual_responsibility": "完成 UI 设计与实现，先行完成初版编程；参与共同审查",
+      "completed_verification": "参与三人共同审查",
+      "defense_focus": "演示双轨迹、逐星信息、状态切换与结果导出，解释界面量的含义"
     },
     {
-      "name": "张淳贺",
-      "actual_responsibility": null,
-      "completed_verification": null
+      "name": "马晨曦",
+      "actual_responsibility": "在张淳贺的初版代码基础上优化；参与共同审查",
+      "completed_verification": "参与三人共同审查",
+      "defense_focus": "解释普通解与改进解、诊断依据、消融和少星失败条件"
     },
     {
       "name": "刘芸睿",
-      "actual_responsibility": null,
-      "completed_verification": null
+      "actual_responsibility": "负责实验报告撰写与整理；参与共同审查",
+      "completed_verification": "参与三人共同审查",
+      "defense_focus": "从 CSV 与评价器核对指标、分析成功案例和方法局限，说明复现方式"
     }
-  ]
+  ],
+  "verification_note": "上列分工与共同审查由小组提供。答辩重点是建议核验方式，未将成员个人现场答辩或教师隐藏测试标为通过。"
 }
