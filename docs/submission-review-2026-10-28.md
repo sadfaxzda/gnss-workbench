@@ -48,3 +48,12 @@ D03 故障窗口水平 P95 为普通 24.450 m、改进 1.738 m。共同偏差窗
 输入、真值、输出必须属于同一案例。先比每历元编号、状态和无效空值，再比定位数值和卫星标记；耗时不做字节一致性要求。diagnostics.jsonl 每行的 baseline / improved 下的 diagnostics 是逐星数据；candidate_scores 和 algorithm_trace 是诊断依据。真值只用于求解结束后的评价。
 
 各成员按 docs/demo-guide.md 说明自己的输入、模型、输出与失败条件。个人贡献依据用户提供信息记录，自动测试不能替代成员答辩；教师隐藏案例仍待现场验收。
+
+
+## 报告与交付材料修订
+
+根据小组要求，报告署期为 2026 年 10 月 21 日，实际运行日志仍保留 2026-10-28 的核验时间。仓库经 GitHub 元数据确认现为 public，URL 不变，README 和提交说明已更新访问方式。
+
+报告采用六页实验报告结构，正文为 Songti SC（宋体），标题为 Heiti SC（黑体），字体嵌入 PDF；图表编号、三线表、公式与页码统一。新增从 D03 结果 CSV 计算的真值误差曲线，补充实验配置、评价分母、消融解释、六星残差自由度分析和统计适用边界。两张 UI 截图保留实际运行内容。排版结构参考 [Monash 工程实验报告指南](https://www.monash.edu/student-academic-success/excel-at-writing/annotated-assessment-samples/engineering/engineering-lab-report) 与 [多伦多大学工程实验报告指南](https://ecp.engineering.utoronto.ca/resources/online-handbook/types-of-documents/lab-reports/)，内容与页数仍以本课程任务书为准。
+
+本次仅修改报告生成、绘图和交付文档；算法与前端保持已核验版本。重新封装时从新封存源码复算全部五组，重新生成源码身份、逐文件清单及顶层核验记录，避免文档修订后沿用失效哈希。
