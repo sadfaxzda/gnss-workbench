@@ -1,8 +1,8 @@
 # GNSS Workbench
 
-原始 GPS L1 C1 伪距驱动的单点定位与故障诊断系统，课程提交版整理于 2026-10-28。
+原始 GPS L1 C1 伪距驱动的单点定位与故障诊断系统。实验报告署期为 2026 年 10 月 21 日；交付复核日志保留实际执行日期。
 
-仓库地址：<https://github.com/sadfaxzda/gnss-workbench>。仓库目前为私有，需要所有者或受邀协作者权限；邮件提交目录自带完整源码、课程数据、前端构建、结果与日志，运行不依赖 GitHub 访问权限。
+仓库地址：<https://github.com/sadfaxzda/gnss-workbench>。仓库已公开，无需登录即可浏览和下载。邮件提交目录自带完整源码、课程数据、前端构建、结果与日志，可独立安装运行。
 
 默认方法为 `consensus`。普通解始终为独立等权最小二乘；改进解根据残差检验、候选子集和因果历史证据诊断故障。`coherent_proposals` 是默认关闭的实验选项。本项目不声称已通过教师隐藏测试。
 
@@ -12,7 +12,8 @@
 
 | 路径 | 用途 |
 |---|---|
-| `docs/report.pdf` | 六页实验报告，含 UI 实拍、成功案例、消融、局限和分工 |
+| `docs/report.pdf` | 六页实验报告，宋体正文、黑体标题，含实际 UI、误差曲线、成功案例、消融、局限和分工 |
+| `docs/submission-guide.md` | 教师阅卷导航：结果位置、代表历元、日志字段与核验顺序 |
 | `docs/submission-review-2026-10-28.md` | 本次审查、修复、检查结果与核验方法 |
 | `submission-results/` | 邮件包中的普通/改进 CSV、逐星诊断、消融及六星局限案例 |
 | `docs/experiments/submission-20261028/` | 本次指标、分段分析与验证记录 |
@@ -27,7 +28,7 @@
 
 ## 依赖与安装
 
-- Python 3.12–3.14（项目声明 `>=3.12,<3.15`）；本次实际复核使用 Python 3.14.4。
+- Python 3.12–3.14（项目声明 `>=3.12,<3.15`）；实际复核使用 Python 3.14.4，并在 Python 3.12.14 中交叉复跑。
 - Python 依赖由 `pyproject.toml` 声明，`uv.lock` 锁定：NumPy、SciPy、FastAPI、Uvicorn、Pydantic、SQLAlchemy、Alembic、Typer；开发组含 pytest、Ruff、Pyright 和 httpx。
 - 重建 UI 需要 Node.js >=22.12、pnpm 11.25.0；`web/pnpm-lock.yaml` 锁定 React、TypeScript、Vite、ECharts 等。**邮件包包含已构建的 `web/dist`，仅运行时无需安装 Node。**
 - `uv` 可按 [官方安装说明](https://docs.astral.sh/uv/getting-started/installation/) 安装。首次安装依赖需要网络。报告已嵌入字体，阅读无需额外字体。
@@ -141,10 +142,19 @@ SHA256 用于检测文件改动，不是数字签名。原教师包任务书与�
 `docs/report.pdf` 为本次六页报告。可选重建：
 
 ```bash
-uv run --with reportlab python scripts/build_submission_report.py
+uv run --with reportlab==4.4.9 python scripts/build_submission_report.py
 ```
 
-报告需要已安装的中文及英文字体；可用 `GNSS_REPORT_CHINESE_FONT`、`GNSS_REPORT_ENGLISH_FONT` 指定。源码不分发字体二进制。报告读取本次指标和真实 UI 截图，不调用定位核心制造结果。
+报告正文使用宋体、标题使用黑体，PDF 已嵌入字体。脚本自动选择 Windows 的 SimSun/SimHei 或 macOS 的 Songti SC/Heiti SC；其他系统用 `GNSS_REPORT_SONG_FONT`、`GNSS_REPORT_HEI_FONT` 指定本机合法字体。TTC 可另设同名变量加 `_INDEX` 后缀指定子字体编号。源码不分发字体二进制。报告署期默认 2026 年 10 月 21 日，可通过 `--report-date` 指定；核验日志仍记录实际执行时间。
+
+误差图已随源码提供；如需从重新计算的 CSV 重绘，再生成报告：
+
+```bash
+uv run --with matplotlib==3.10.8 python scripts/plot_submission.py --results runtime/reproduction
+uv run --with reportlab==4.4.9 python scripts/build_submission_report.py
+```
+
+图 3 使用教师评价器的 ENU 误差定义，三星/零星用断线表示无有效解。两张 UI 图为真实浏览器运行截图，报告与绘图脚本不修改解算结果。
 
 从下载源码封装新交付 ZIP（输出路径不得已存在）：
 
@@ -155,4 +165,4 @@ uv run python scripts/package_submission.py --source-snapshot --out ../GNSS_Work
 
 脚本先封存源码和前端，再从封存字节复算所有交付实验，生成源码标识和 SHA256 清单。有 Git 元数据且工作区已提交、干净时可不传 `--source-snapshot`。
 
-数据与第三方来源见 `fixtures/course/README.md`、`data/provenance.json`、`LICENSE_RTKLIB.txt`；方法来源见 `docs/research.md`。保留课程材料的既有许可与发布范围。
+数据与第三方来源见 `fixtures/course/README.md`、`fixtures/course/data/provenance.json`、`fixtures/course/LICENSE_RTKLIB.txt`；方法来源见 `docs/research.md`。保留课程材料的既有许可与发布范围。
