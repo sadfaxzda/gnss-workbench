@@ -38,13 +38,24 @@ class Epoch:
             if len({o.sat_id for o in obs}) != len(obs):
                 raise ValueError("Duplicate satellite observations")
             for o in obs:
-                if len(o.sat_id) != 3 or o.sat_id[0] != "G" or not o.sat_id[1:].isdigit():
+                if (
+                    not isinstance(o.sat_id, str)
+                    or len(o.sat_id) != 3
+                    or o.sat_id[0] != "G"
+                    or not o.sat_id[1:].isdigit()
+                ):
                     raise ValueError("Only Gxx GPS satellite identifiers are supported")
                 if not 1 <= int(o.sat_id[1:]) <= 32:
                     raise ValueError("GPS PRN must be in 01..32")
-                if not isfinite(o.pseudorange_m) or o.pseudorange_m <= 0:
+                if (
+                    isinstance(o.pseudorange_m, bool)
+                    or not isfinite(o.pseudorange_m)
+                    or o.pseudorange_m <= 0
+                ):
                     raise ValueError("Pseudorange must be finite and positive")
-                if o.cn0_dbhz is not None and not isfinite(o.cn0_dbhz):
+                if o.cn0_dbhz is not None and (
+                    isinstance(o.cn0_dbhz, bool) or not isfinite(o.cn0_dbhz)
+                ):
                     raise ValueError("C/N0 must be finite or null")
         except (ValueError, TypeError, KeyError) as error:
             if not tolerate_observation_errors:
