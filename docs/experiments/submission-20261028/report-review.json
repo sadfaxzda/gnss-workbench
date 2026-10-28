@@ -1,0 +1,23 @@
+{
+  "review_date": "2026-10-28",
+  "report_date": "2026-10-21",
+  "repository_visibility": "public",
+  "repository": "https://github.com/sadfaxzda/gnss-workbench",
+  "report_pages": 6,
+  "fonts": {
+    "body": "STSongti-SC-Regular (宋体)",
+    "headings": "STHeitiSC-Medium (黑体)",
+    "embedded": true
+  },
+  "report_sha256": "0e80a37b88f4728daa69b90844a2f1bf7f8bcc452e8f822812599fc8a7168ea4",
+  "render_review": "All six pages rendered and visually inspected; formula glyph issue repaired; other five pages pixel-identical after repair.",
+  "chart": "D03 baseline/improved CSV; course evaluator ENU errors; invalid positions preserved as gaps",
+  "authoring_dependencies": {
+    "reportlab": "4.4.9",
+    "matplotlib": "3.10.8"
+  },
+  "ruff_check": "pass",
+  "ruff_format": "98 files formatted",
+  "core_source_hashes_unchanged": true,
+  "scope": "Report, chart and delivery documentation; numerical and frontend implementation unchanged. Execution evidence retains actual dates."
+}
