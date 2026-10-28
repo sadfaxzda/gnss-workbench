@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-28",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "python": "3.14.4",
+  "base_commit": "f51ff061e2f2be541dbfb2f3c8e61a3c384a0132",
+  "pytest_passed": 166,
+  "vitest_passed": 16,
+  "playwright_passed": 16,
+  "course_files_identical": 26,
+  "scope": "Local macOS; no teacher hidden cases; historical extended evidence not rerun",
+  "source_sha256": {
+    "src/gnss_workbench/__init__.py": "ee22035749ed31c49860530fc2fe94bc4a9c48e9fafe884397942bb17b3083fd",
+    "src/gnss_workbench/api.py": "1b5bb3714affac75c9966e465fb28b7c50a24cda86918ec27065ea0d107163a2",
+    "src/gnss_workbench/benchmark.py": "413941a0050aa036f279522dc8c0636ce92cd7545e351fe04ea9ee1fe27867e3",
+    "src/gnss_workbench/cli.py": "44f192865575dcee0dfa49f06b92660b82c62df8f8f1a679114de7dbcce006a4",
+    "src/gnss_workbench/contracts.py": "87034183c67fc564151d301897677779e534a7e39325e0423f422027a5a303cd",
+    "src/gnss_workbench/core/__init__.py": "af0fcfb75e7753a2ad0f1e998d2fa6fc68bfc09234709c1a107176398c9813e4",
+    "src/gnss_workbench/core/atmosphere.py": "ed6e5c9eaf1ba64889e0e3ea9e3c99dc0ff5d78e575781cda89c3fadb97b55f2",
+    "src/gnss_workbench/core/coordinates.py": "38045c44ee1084eb8b8a2c4135145107bcecbfad71398fe4bf0eaa9cb5f32b2c",
+    "src/gnss_workbench/core/diagnosis.py": "173ff23f3b2d6e62b6e166fb3152d76f1e6c89136825ce72e0edfe34b3e49d4c",
+    "src/gnss_workbench/core/ephemeris.py": "a283b2ea265fcb17baea35d3dc09ddbde2759081ef6cf5fcd8ba922425e145f1",
+    "src/gnss_workbench/core/initialization.py": "47526dea9768beba9d5d11f9936ee8375952ee5e1102d50994a38ab01a8b3798",
+    "src/gnss_workbench/core/models.py": "6de3b8d7557df3a831914d7386ddab8409092bdb001cb27c6b59a4e9b1e06ac6",
+    "src/gnss_workbench/core/noise.py": "09ba862c7b531c163b93cba0253a9013793989dfecb619cd60c95d644a13c142",
+    "src/gnss_workbench/core/solver.py": "17cc6df712cecdfb609d5908ada040df0dd6a727f51f5037aa4491b60a7b3cc0",
+    "src/gnss_workbench/core/temporal.py": "9e30432f10b470db1074ddca0ac8071ae40ce4dbda768345adb23dbbd232e36d",
+    "src/gnss_workbench/datasets.py": "fe401a68227f98ee3eb6e06e10d19213b8eddd98e75e8c1d7888fec38a886219",
+    "src/gnss_workbench/evaluation.py": "c95b38ca4877c6ae2514467fe24b7f31ea3c727eae38b4a18e65cd5d88ba6623",
+    "src/gnss_workbench/experiments.py": "54f74a57a8993e4cfb8e38b514e3869ca4c1def1a442953602e7cdd25d51b7a2",
+    "src/gnss_workbench/io.py": "36f2977bdef5b04f74d4c4cac2334eef27d7c6535b11cea6e846e9689b1b8983",
+    "src/gnss_workbench/persistence.py": "5a9b1e09e2c4a841c747c2e44cef06dc9b34b71bba6292780f4eb61946ad8305",
+    "src/gnss_workbench/provenance.py": "3e066e3b77454a9dbe9a6bb5da0f97a99f2e0582db274aeb78674848b00900bc",
+    "src/gnss_workbench/research_tools.py": "2afb377f6c097aa59580ef21a1c322dfeb2a2df7bb8f6f7b041c46690e7776ff",
+    "src/gnss_workbench/service.py": "81e6bdb8bcf647de85198f07d160a31a9836ddb28c0b4c0b006dc1209df0eae1",
+    "src/gnss_workbench/settings.py": "692411cc645d12e883d6680b24063569ea20f4c3831e27480c7261048aef0d54",
+    "src/gnss_workbench/worker.py": "6de2674d30a15c4735604abd9d2a214ebd8c971f91f8e440dfd4645b7d8f0ded"
+  },
+  "screenshots": {
+    "submission-workbench.png": "Chromium run actual observations test, D03 epoch 599",
+    "submission-diagnostics.png": "Chromium linked inspection test, D03 epoch 121 / G19"
+  }
+}

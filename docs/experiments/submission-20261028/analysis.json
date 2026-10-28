@@ -1,0 +1,47 @@
+{
+  "single_fault_baseline": {
+    "epochs": 60,
+    "h_p95_m": 24.449692728054114,
+    "clock_p95_m": 16.338778289480977,
+    "flagged_epochs": 0
+  },
+  "common_bias_baseline": {
+    "epochs": 60,
+    "h_p95_m": 1.394255631309065,
+    "clock_p95_m": 1.3879168134353674,
+    "flagged_epochs": 0
+  },
+  "single_fault_improved": {
+    "epochs": 60,
+    "h_p95_m": 1.7377576496545426,
+    "clock_p95_m": 1.3020939226778863,
+    "flagged_epochs": 60
+  },
+  "common_bias_improved": {
+    "epochs": 60,
+    "h_p95_m": 1.394255631309065,
+    "clock_p95_m": 1.3879168134353674,
+    "flagged_epochs": 0
+  },
+  "six_satellite_limit": {
+    "epoch0": {
+      "epoch_id": "0",
+      "gps_week": "1316",
+      "gps_sow": "518540.0",
+      "status": "SUSPECT",
+      "x_m": "-3978173.311028032",
+      "y_m": "3383463.6738524595",
+      "z_m": "3649277.4589917827",
+      "clock_bias_m": "35500.573356645335",
+      "n_used": "5",
+      "pdop": "2.512139334168808",
+      "flagged_sats": "G20",
+      "excluded_sats": "G20",
+      "residual_rms_m": "0.014860306821242052",
+      "processing_ms": "3.8162500131875277"
+    },
+    "epoch0_horizontal_error_m": 33.558884660769685,
+    "wrong_exclusions": 1,
+    "confirmed_wrong_exclusions": 0
+  }
+}
