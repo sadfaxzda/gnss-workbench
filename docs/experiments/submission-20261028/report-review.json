@@ -9,8 +9,8 @@
     "headings": "STHeitiSC-Medium (黑体)",
     "embedded": true
   },
-  "report_sha256": "0e80a37b88f4728daa69b90844a2f1bf7f8bcc452e8f822812599fc8a7168ea4",
-  "render_review": "All six pages rendered and visually inspected; formula glyph issue repaired; other five pages pixel-identical after repair.",
+  "report_sha256": "68f350a6831ea80ab4c59285390ada3ce5cb3d5d93b1447056d02b309c2aecde",
+  "render_review": "All six revised pages rendered and visually inspected; no overflow, missing glyphs or overlaps.",
   "chart": "D03 baseline/improved CSV; course evaluator ENU errors; invalid positions preserved as gaps",
   "authoring_dependencies": {
     "reportlab": "4.4.9",
@@ -19,5 +19,18 @@
   "ruff_check": "pass",
   "ruff_format": "98 files formatted",
   "core_source_hashes_unchanged": true,
-  "scope": "Report, chart and delivery documentation; numerical and frontend implementation unchanged. Execution evidence retains actual dates."
+  "scope": "Review of user-edited report language; numerical and frontend implementation unchanged. Report date and existing verified metrics retained.",
+  "language_review": {
+    "input": "Group-provided build_submission_report(1).py",
+    "style": "Retain the group language edits; correct unsupported technical or verification claims.",
+    "corrections": [
+      "Six satellites with one excluded retain one residual test degree of freedom: low redundancy, not zero redundancy.",
+      "One known failure does not establish an identification limit or performance upper bound.",
+      "FAULT_EXCLUDED can be selected from current-epoch or causal history evidence according to implemented rules.",
+      "SUSPECT may retain the original result or use a provisional subset; it does not guarantee position accuracy.",
+      "Chart shading includes bias injection and satellite-count changes.",
+      "coherent_proposals remains off because an irregular switching case regressed despite some high-noise gains.",
+      "D01 has no independent position truth; personal explanation ability is a verification focus rather than an observed test result."
+    ]
+  }
 }
